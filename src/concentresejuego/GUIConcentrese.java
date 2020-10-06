@@ -74,14 +74,14 @@ public class GUIConcentrese extends JFrame{
         pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 4),"Concentrese"));
         pAbajo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 2),""));
         
-        b1.setIcon(new ImageIcon(getClass().getResource("/imagenes/java.png")));
-        b2.setIcon(new ImageIcon(getClass().getResource("/imagenes/html.png")));
-        b3.setIcon(new ImageIcon(getClass().getResource("/imagenes/javascript.png")));
-        b4.setIcon(new ImageIcon(getClass().getResource("/imagenes/c++.png")));
-        b5.setIcon(new ImageIcon(getClass().getResource("/imagenes/python.png")));
-        b6.setIcon(new ImageIcon(getClass().getResource("/imagenes/php.png")));
-        b7.setIcon(new ImageIcon(getClass().getResource("/imagenes/css.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("/imagenes/go.png")));
+        b1.setIcon(new ImageIcon(getClass().getResource("imagenes/java.png")));
+        b2.setIcon(new ImageIcon(getClass().getResource("imagenes/html.png")));
+        b3.setIcon(new ImageIcon(getClass().getResource("imagenes/javascript.png")));
+        b4.setIcon(new ImageIcon(getClass().getResource("imagenes/c++.png")));
+        b5.setIcon(new ImageIcon(getClass().getResource("imagenes/python.png")));
+        b6.setIcon(new ImageIcon(getClass().getResource("imagenes/php.png")));
+        b7.setIcon(new ImageIcon(getClass().getResource("imagenes/css.png")));
+        b8.setIcon(new ImageIcon(getClass().getResource("imagenes/go.png")));
         
         pArriba.setLayout(new BorderLayout());
         pAMenu.setLayout(new FlowLayout(25));
