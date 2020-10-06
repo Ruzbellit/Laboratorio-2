@@ -27,7 +27,7 @@ public class ConcentreseJuego {
         
     }
     
-<<<<<<< HEAD
+//<<<<<<< HEAD
     public void destaparCasilla(int x, int y) {
         if(casillaDestapada){
             compararCasillas(casillaDestapadaX, casillaDestapadaY, x, y);
@@ -51,8 +51,32 @@ public class ConcentreseJuego {
         }
     }
 
-}
-=======
+    
+//=======
+    public String verificarJuego()
+    {   
+        if(vidas == 0)
+        {
+            return "DERROTA";
+        }
+        
+        
+        for(int i= 0; i>3; i++)
+        {
+            for(int j= 0; i>3; j++)
+            {
+               if (matrizDestapar[i][j] == false)
+               {
+                 return "DERROTA!!";  
+               }
+            }
+        }
+        
+        return "VICTORIA";
+    }
+    
+    
+    
     public String mostrarAyuda()
     {
         return "CONCENTRCE"+"\n"+"Saludos invocador, "
@@ -84,4 +108,4 @@ public class ConcentreseJuego {
     
 }   
 
->>>>>>> 6fe5b320b03eb42fbe14cb764b5ae77913b3fead
+//>>>>>>> 6fe5b320b03eb42fbe14cb764b5ae77913b3fead
