@@ -39,7 +39,12 @@ public class ConcentreseJuego {
         }
 
     }
+<<<<<<< HEAD
 
+=======
+    
+//<<<<<<< HEAD
+>>>>>>> 0b787c19c85ec14deb5f5028e77cc70db489aafd
     public void destaparCasilla(int x, int y) {
         if (!matrizDestapar[x][y]) {
             matrizDestapar[x][y] = true;
@@ -69,12 +74,44 @@ public class ConcentreseJuego {
         }
     }
 
+<<<<<<< HEAD
     public void destaparTodasCasillas() {
 
     }
 
     public String mostrarAyuda() {
         return "CONCENTRCE" + "\n" + "Saludos invocador, "
+=======
+    
+//=======
+    public String verificarJuego()
+    {   
+        if(vidas == 0)
+        {
+            return "DERROTA";
+        }
+        
+        
+        for(int i= 0; i>3; i++)
+        {
+            for(int j= 0; i>3; j++)
+            {
+               if (matrizDestapar[i][j] == false)
+               {
+                 return "DERROTA!!";  
+               }
+            }
+        }
+        
+        return "VICTORIA";
+    }
+    
+    
+    
+    public String mostrarAyuda()
+    {
+        return "CONCENTRCE"+"\n"+"Saludos invocador, "
+>>>>>>> 0b787c19c85ec14deb5f5028e77cc70db489aafd
                 + "Primero debe seleccionar la tematica del juego y presionar el botón de Iniciar Juego, "
                 + "una vez inicie se le mostrara por un tiempo de cuatro (4) segundos la distribución de las cartas "
                 + "dispondra de tres (3) intentos para encontrar todas las parejas de cartas" + "\n"
@@ -89,4 +126,8 @@ public class ConcentreseJuego {
 
     }
 
+<<<<<<< HEAD
 }
+=======
+//>>>>>>> 6fe5b320b03eb42fbe14cb764b5ae77913b3fead
+>>>>>>> 0b787c19c85ec14deb5f5028e77cc70db489aafd
