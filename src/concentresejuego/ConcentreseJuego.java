@@ -14,6 +14,15 @@ public class ConcentreseJuego {
       int vidas;
       int fallos;
       int aciertos;
+      int matriz[][] = new int[4][4];
+      boolean matrizDestapar[][] = new boolean[4][4];
+      boolean casillaDestapada = false ;
+      int casillaDestapadaX;
+      int casillaDestapadaY;
+      int juegosTotales;
+      int juegosGanados;
+      String estadisticas;
+      
     
       
 }
