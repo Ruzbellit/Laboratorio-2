@@ -208,6 +208,7 @@ public class GUIConcentrese extends JFrame {
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == bIniciar) {
                 lAciertos.setText("Aciertos: " + juego.aciertos);
+                resetearCasillas();
                 juego.iniciarJuego();
             } else if (ae.getSource() == b1) {
                 String ruta = rutaImagenesTema + juego.destaparCasilla(0, 0) + ".png";
@@ -259,6 +260,25 @@ public class GUIConcentrese extends JFrame {
                 b16.setIcon(new ImageIcon(getClass().getResource(ruta)));
             }
         }
+    }
+    
+    public void resetearCasillas(){
+        b1.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b2.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b3.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b4.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b5.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b6.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b7.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b8.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b9.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b10.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b11.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b12.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b13.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b14.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b15.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
+        b16.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
     }
 
 }

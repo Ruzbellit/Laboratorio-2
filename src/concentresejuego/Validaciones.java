@@ -13,7 +13,7 @@ public class Validaciones {
     public static int compararNumeroMatriz(int matriz[][], int x, int y, int numero){
         try{
             if(matriz[x][y] == numero){
-                return numero;
+                return 0;
             }else{
                 return 0;
             }
