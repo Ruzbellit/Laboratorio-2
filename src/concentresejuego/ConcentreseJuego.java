@@ -19,7 +19,7 @@ public class ConcentreseJuego {
     int aciertos;
     int matriz[][] = new int[4][4];
     boolean matrizDestapar[][];
-    boolean casillaDestapada = false;
+    boolean casillaDestapada;
     int casillaDestapadaX;
     int casillaDestapadaY;
     int juegosTotales;
@@ -31,55 +31,86 @@ public class ConcentreseJuego {
     }
 
     public void iniciarJuego() {
-        matrizDestapar = new boolean[4][4];
         vidas = 3;
         fallos = 0;
         aciertos = 0;
+        matrizDestapar = new boolean[4][4];
+        casillaDestapada = false;
+
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
+                matriz[x][y] = x + y;
+            }
+        }
+
+        /*
+        Random aleatorio = new Random();
         for (int numeroImagen = 1; numeroImagen <= 8; numeroImagen++) {
-            for (int c = 1; c < 3; c++) {
-                Random aleatorio = new Random();
+            for (int c = 1; c < 3; c++) { //guardar 2 veces el numero de la imagen en la matriz
                 int randomX = aleatorio.nextInt(4);
                 int randomY = aleatorio.nextInt(4);
-                while (Validaciones.compararNumeroMatriz(matriz, randomX, randomY, numeroImagen) == -1) {
+                while (Validaciones.compararNumeroMatriz(matriz, randomX, randomY) != 0) {
                     randomX = aleatorio.nextInt(4);
                     randomY = aleatorio.nextInt(4);
                 }
                 matriz[randomX][randomY] = numeroImagen;
             }
         }
+         */
     }
 
-    public int destaparCasilla(int x, int y) {
-        if (!matrizDestapar[x][y]) {
+    /**
+     *
+     * @param x
+     * @param y
+     */
+    public void destaparCasilla(int x, int y) {
+        if (!matrizDestapar[x][y]) { //ejecuta si la casilla esta en false (sin revelar)
             matrizDestapar[x][y] = true;
             if (casillaDestapada) { //verifica si ya se ha destapado otra casilla
                 compararCasillas(casillaDestapadaX, casillaDestapadaY, x, y);
-                return matriz[x][y];
             } else {
                 casillaDestapada = true;
                 casillaDestapadaX = x;
                 casillaDestapadaY = y;
-                return matriz[x][y];
             }
-        } else {
-            return 1;
         }
+    }
 
+    /**
+     *
+     * @param x fila en la matriz
+     * @param y columna en la matriz
+     * @return false - imagen si revelar, true - imagen revelada
+     */
+    public boolean estadoCasilla(int x, int y) {
+        return matrizDestapar[x][y];
+    }
+
+    /**
+     *
+     * @param x fila en la matriz
+     * @param y columna en la matriz
+     * @return el numero de la imagen
+     */
+    public int imagenCasilla(int x, int y) {
+        return matriz[x][y];
     }
 
     public void compararCasillas(int casillaX1, int casillaY1, int casillaX2, int casillaY2) {
-        if (matriz[casillaX1][casillaY1] == matriz[casillaX2][casillaY2]) {
+        if (matriz[casillaX1][casillaY1] == matriz[casillaX2][casillaY2]) { //si tienen la misma imagen, quedan reveladas
             matrizDestapar[casillaX1][casillaY1] = true;
             matrizDestapar[casillaX2][casillaY2] = true;
             aciertos++;
             //verificarJuego();
-        } else {
+        } else { //se voltean las dos casillas
             matrizDestapar[casillaX1][casillaY1] = false;
             matrizDestapar[casillaX2][casillaY2] = false;
             vidas--;
             fallos++;
             //verificarJuego();
         }
+        casillaDestapada = false;
     }
 
     public void destaparTodasCasillas() {

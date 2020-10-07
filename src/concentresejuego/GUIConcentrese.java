@@ -30,7 +30,7 @@ public class GUIConcentrese extends JFrame {
     JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16;
     JLabel lVidas, lFallos, lAciertos;
 
-    String rutaImagenesTema = "1/";
+    String rutaTemaImagenes = "1/";
 
     public GUIConcentrese() {
         pArriba = new JPanel();
@@ -74,23 +74,6 @@ public class GUIConcentrese extends JFrame {
         pAOpcion.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 1), ""));
         pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 4), "Concentrese"));
         pAbajo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 2), ""));
-
-        b1.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b2.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b3.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b4.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b5.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b6.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b7.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b9.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b10.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b11.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b12.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b13.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b14.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b15.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b16.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
 
         /*
         b1.setIcon(new ImageIcon(getClass().getResource("01/01.png")));
@@ -204,81 +187,147 @@ public class GUIConcentrese extends JFrame {
             juego = new ConcentreseJuego();
         }
 
+        public void actualizarJuego() {
+            lAciertos.setText("Aciertos: " + juego.aciertos);
+            lFallos.setText("Fallos: " + juego.fallos);
+            lVidas.setText("Vidas: " + juego.vidas);
+            if (juego.estadoCasilla(0, 0)) {
+                b1.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 0) + ".png")));
+            } else {
+                b1.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(0, 1)) {
+                b2.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 1) + ".png")));
+            } else {
+                b2.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(0, 2)) {
+                b3.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 2) + ".png")));
+            } else {
+                b3.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(0, 3)) {
+                b4.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 3) + ".png")));
+            } else {
+                b4.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(1, 0)) {
+                b5.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 0) + ".png")));
+            } else {
+                b5.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(1, 1)) {
+                b6.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 1) + ".png")));
+            } else {
+                b6.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(1, 2)) {
+                b7.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 2) + ".png")));
+            } else {
+                b7.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(1, 3)) {
+                b8.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 3) + ".png")));
+            } else {
+                b8.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(2, 0)) {
+                b9.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 0) + ".png")));
+            } else {
+                b9.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(2, 1)) {
+                b10.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 1) + ".png")));
+            } else {
+                b10.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(2, 2)) {
+                b11.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 2) + ".png")));
+            } else {
+                b11.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(2, 3)) {
+                b12.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 3) + ".png")));
+            } else {
+                b12.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(3, 0)) {
+                b13.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 0) + ".png")));
+            } else {
+                b13.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(3, 1)) {
+                b14.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 1) + ".png")));
+            } else {
+                b14.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(3, 2)) {
+                b15.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 2) + ".png")));
+            } else {
+                b15.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+            if (juego.estadoCasilla(3, 3)) {
+                b16.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 3) + ".png")));
+            } else {
+                b16.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+            }
+        }
+
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == bIniciar) {
-                lAciertos.setText("Aciertos: " + juego.aciertos);
-                resetearCasillas();
                 juego.iniciarJuego();
+                actualizarJuego();
             } else if (ae.getSource() == b1) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(0, 0) + ".png";
-                b1.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(0, 0);
+                actualizarJuego();
             } else if (ae.getSource() == b2) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(0, 1) + ".png";
-                b2.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(0, 1);
+                actualizarJuego();
             } else if (ae.getSource() == b3) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(0, 2) + ".png";
-                b3.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(0, 2);
+                actualizarJuego();
             } else if (ae.getSource() == b4) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(0, 3) + ".png";
-                b4.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(0, 3);
+                actualizarJuego();
             } else if (ae.getSource() == b5) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(1, 0) + ".png";
-                b5.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(1, 0);
+                actualizarJuego();
             } else if (ae.getSource() == b6) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(1, 1) + ".png";
-                b6.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(1, 1);
+                actualizarJuego();
             } else if (ae.getSource() == b7) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(1, 2) + ".png";
-                b7.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(1, 2);
+                actualizarJuego();
             } else if (ae.getSource() == b8) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(1, 3) + ".png";
-                b8.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(1, 3);
+                actualizarJuego();
             } else if (ae.getSource() == b9) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(2, 0) + ".png";
-                b9.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(2, 0);
+                actualizarJuego();
             } else if (ae.getSource() == b10) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(2, 1) + ".png";
-                b10.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(2, 1);
+                actualizarJuego();
             } else if (ae.getSource() == b11) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(2, 2) + ".png";
-                b11.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(2, 2);
+                actualizarJuego();
             } else if (ae.getSource() == b12) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(2, 3) + ".png";
-                b12.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(2, 3);
+                actualizarJuego();
             } else if (ae.getSource() == b13) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(3, 0) + ".png";
-                b13.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(3, 0);
+                actualizarJuego();
             } else if (ae.getSource() == b14) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(3, 1) + ".png";
-                b14.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(3, 1);
+                actualizarJuego();
             } else if (ae.getSource() == b15) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(3, 2) + ".png";
-                b15.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(3, 2);
+                actualizarJuego();
             } else if (ae.getSource() == b16) {
-                String ruta = rutaImagenesTema + juego.destaparCasilla(3, 3) + ".png";
-                b16.setIcon(new ImageIcon(getClass().getResource(ruta)));
+                juego.destaparCasilla(3, 3);
+                actualizarJuego();
             }
         }
-    }
-    
-    public void resetearCasillas(){
-        b1.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b2.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b3.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b4.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b5.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b6.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b7.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b9.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b10.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b11.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b12.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b13.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b14.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b15.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
-        b16.setIcon(new ImageIcon(getClass().getResource("1/0.png")));
     }
 
 }
