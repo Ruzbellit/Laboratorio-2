@@ -26,10 +26,10 @@ public class ConcentreseJuego {
     int juegosGanados;
     String estadisticas;
 
-    public ConcentreseJuego(){
-        
+    public ConcentreseJuego() {
+
     }
-    
+
     public void iniciarJuego() {
         matrizDestapar = new boolean[4][4];
         vidas = 3;
@@ -44,21 +44,25 @@ public class ConcentreseJuego {
                     randomX = aleatorio.nextInt(4);
                     randomY = aleatorio.nextInt(4);
                 }
-
+                matriz[randomX][randomY] = numeroImagen;
             }
         }
     }
 
-    public void destaparCasilla(int x, int y) {
+    public int destaparCasilla(int x, int y) {
         if (!matrizDestapar[x][y]) {
             matrizDestapar[x][y] = true;
             if (casillaDestapada) { //verifica si ya se ha destapado otra casilla
                 compararCasillas(casillaDestapadaX, casillaDestapadaY, x, y);
+                return matriz[x][y];
             } else {
                 casillaDestapada = true;
                 casillaDestapadaX = x;
                 casillaDestapadaY = y;
+                return matriz[x][y];
             }
+        } else {
+            return 1;
         }
 
     }
