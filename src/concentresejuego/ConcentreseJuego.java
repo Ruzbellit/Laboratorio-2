@@ -6,6 +6,7 @@
 package concentresejuego;
 
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,19 +26,27 @@ public class ConcentreseJuego {
     int juegosGanados;
     String estadisticas;
 
+    public ConcentreseJuego(){
+        
+    }
+    
     public void iniciarJuego() {
         matrizDestapar = new boolean[4][4];
+        vidas = 3;
+        fallos = 0;
+        aciertos = 0;
         for (int numeroImagen = 1; numeroImagen <= 8; numeroImagen++) {
             for (int c = 1; c < 3; c++) {
-                int randomX = 0;
-                int randomY = 0;
-                while (Validaciones.compararNumeroMatriz(matriz, randomX, randomY, numeroImagen) != -1) {
-
+                Random aleatorio = new Random();
+                int randomX = aleatorio.nextInt(4);
+                int randomY = aleatorio.nextInt(4);
+                while (Validaciones.compararNumeroMatriz(matriz, randomX, randomY, numeroImagen) == -1) {
+                    randomX = aleatorio.nextInt(4);
+                    randomY = aleatorio.nextInt(4);
                 }
 
             }
         }
-
     }
 
     public void destaparCasilla(int x, int y) {

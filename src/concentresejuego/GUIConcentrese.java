@@ -14,9 +14,9 @@ import javax.swing.*;
  *
  * @author ruzbe
  */
-public class GUIConcentrese extends JFrame{
-    
-     //componentes de la GUI
+public class GUIConcentrese extends JFrame {
+
+    //componentes de la GUI
     Container contenPPal;
     JPanel pArriba, pAMenu, pAOpcion, pCentro, pAbajo;
     JMenuBar barra;
@@ -29,15 +29,14 @@ public class GUIConcentrese extends JFrame{
     JButton bIniciar;
     JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16;
     JLabel lVidas, lFallos, lAciertos;
-    
-    public GUIConcentrese()
-    {
+
+    public GUIConcentrese() {
         pArriba = new JPanel();
         pAMenu = new JPanel();//
         pAOpcion = new JPanel();
         pCentro = new JPanel();
         pAbajo = new JPanel();
-        
+
         barra = new JMenuBar();
         menu = new JMenu("Menu");
         salirJuego = new JMenuItem("Salir del Juego");
@@ -45,7 +44,7 @@ public class GUIConcentrese extends JFrame{
         mosEstadisticas = new JMenuItem("Mostrar estadisticas");
         ayuda = new JMenuItem("Ayuda");
         listDesplegable = new JComboBox<>();
-        
+
         bIniciar = new JButton("Iniciar Juego");
         b1 = new JButton("");
         b2 = new JButton("");
@@ -63,36 +62,34 @@ public class GUIConcentrese extends JFrame{
         b14 = new JButton("");
         b15 = new JButton("");
         b16 = new JButton("");
-        
+
         lVidas = new JLabel("Vidas: ");
         lFallos = new JLabel("Fallos: ");
         lAciertos = new JLabel("Aciertos: ");
-        
-        pArriba.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 2),""));
-        pAMenu.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 1),""));
-        pAOpcion.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 1),""));
-        pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 4),"Concentrese"));
-        pAbajo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 2),""));
-        
-        b1.setIcon(new ImageIcon(getClass().getResource("imagenes/java.png")));
-        b2.setIcon(new ImageIcon(getClass().getResource("imagenes/html.png")));
-        b3.setIcon(new ImageIcon(getClass().getResource("imagenes/javascript.png")));
-        b4.setIcon(new ImageIcon(getClass().getResource("imagenes/c++.png")));
-        b5.setIcon(new ImageIcon(getClass().getResource("imagenes/python.png")));
-        b6.setIcon(new ImageIcon(getClass().getResource("imagenes/php.png")));
-        b7.setIcon(new ImageIcon(getClass().getResource("imagenes/css.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("imagenes/go.png")));
-        
+
+        pArriba.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 2), ""));
+        pAMenu.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 1), ""));
+        pAOpcion.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 1), ""));
+        pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 4), "Concentrese"));
+        pAbajo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 2), ""));
+
+        b1.setIcon(new ImageIcon(getClass().getResource("01/01.png")));
+        b2.setIcon(new ImageIcon(getClass().getResource("01/02.png")));
+        b3.setIcon(new ImageIcon(getClass().getResource("01/03.png")));
+        b4.setIcon(new ImageIcon(getClass().getResource("01/04.png")));
+        b5.setIcon(new ImageIcon(getClass().getResource("01/05.png")));
+        b6.setIcon(new ImageIcon(getClass().getResource("01/06.png")));
+        b7.setIcon(new ImageIcon(getClass().getResource("01/07.png")));
+        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
+
         pArriba.setLayout(new BorderLayout());
         pAMenu.setLayout(new FlowLayout(25));
         pAOpcion.setLayout(new GridLayout(1, 2, 5, 2));
-        pArriba.add(pAMenu,BorderLayout.NORTH);
-        pArriba.add(pAOpcion,BorderLayout.CENTER);
+        pArriba.add(pAMenu, BorderLayout.NORTH);
+        pArriba.add(pAOpcion, BorderLayout.CENTER);
         pCentro.setLayout(new GridLayout(4, 4, 2, 2));
         pAbajo.setLayout(new FlowLayout(25));
-        
-        
-       
+
         pAMenu.add(barra);
         barra.add(menu);
         menu.add(salirJuego);
@@ -104,51 +101,128 @@ public class GUIConcentrese extends JFrame{
         pAbajo.add(lVidas);
         pAbajo.add(lFallos);
         pAbajo.add(lAciertos);
-        
+
         listDesplegable.addItem("Elegir tema");
         listDesplegable.addItem("Pricesas disney");
         listDesplegable.addItem("Florecitas");
         listDesplegable.addItem("Animalitos");
-        
-        pCentro.add(b1); pCentro.add(b2); pCentro.add(b3); pCentro.add(b4); 
-        pCentro.add(b5); pCentro.add(b6); pCentro.add(b7); pCentro.add(b8); 
-        pCentro.add(b9); pCentro.add(b10); pCentro.add(b11); pCentro.add(b12);
-        pCentro.add(b13); pCentro.add(b14); pCentro.add(b15); pCentro.add(b16);
-        
+
+        pCentro.add(b1);
+        pCentro.add(b2);
+        pCentro.add(b3);
+        pCentro.add(b4);
+        pCentro.add(b5);
+        pCentro.add(b6);
+        pCentro.add(b7);
+        pCentro.add(b8);
+        pCentro.add(b9);
+        pCentro.add(b10);
+        pCentro.add(b11);
+        pCentro.add(b12);
+        pCentro.add(b13);
+        pCentro.add(b14);
+        pCentro.add(b15);
+        pCentro.add(b16);
+
         contenPPal = getContentPane();
         contenPPal.setLayout(new BorderLayout());
-        contenPPal.add(pArriba,BorderLayout.NORTH);
-        contenPPal.add(pCentro,BorderLayout.CENTER);
-        contenPPal.add(pAbajo,BorderLayout.SOUTH);
-        
+        contenPPal.add(pArriba, BorderLayout.NORTH);
+        contenPPal.add(pCentro, BorderLayout.CENTER);
+        contenPPal.add(pAbajo, BorderLayout.SOUTH);
+
+        //listener y manejo de eventos
+        ManejaEventos eventos = new ManejaEventos();
+        bIniciar.addActionListener(eventos);
+
+        b1.addActionListener(eventos);
+        b2.addActionListener(eventos);
+        b3.addActionListener(eventos);
+        b4.addActionListener(eventos);
+        b5.addActionListener(eventos);
+        b6.addActionListener(eventos);
+        b7.addActionListener(eventos);
+        b8.addActionListener(eventos);
+        b9.addActionListener(eventos);
+        b10.addActionListener(eventos);
+        b11.addActionListener(eventos);
+        b12.addActionListener(eventos);
+        b13.addActionListener(eventos);
+        b14.addActionListener(eventos);
+        b15.addActionListener(eventos);
+        b16.addActionListener(eventos);
+
         setTitle("Juego Concentrese");
         setSize(500, 500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
     }
-    
-     /**
+
+    /**
      * @param args the command line arguments
-     */ 
+     */
     public static void main(String[] args) {
         // TODO code application logic here
         GUIConcentrese concentrese = new GUIConcentrese();
     }
-    
-    class ManejaEventos implements ActionListener
-    {
+
+    class ManejaEventos implements ActionListener {
+
         ConcentreseJuego juego;
-        
+
         public ManejaEventos() {
             juego = new ConcentreseJuego();
         }
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            if (ae.getSource() == bIniciar) {
+                JOptionPane.showMessageDialog(null, "boton presionado ");
+                lAciertos.setText("Aciertos: " + juego.aciertos);
+                juego.iniciarJuego();
+            }else if(ae.getSource() == b1){
+                juego.destaparCasilla(0, 0);
+            }else if(ae.getSource() == b2){
+                juego.destaparCasilla(0, 1);
+            }else if(ae.getSource() == b3){
+                juego.destaparCasilla(0, 2);
+            }else if(ae.getSource() == b4){
+                juego.destaparCasilla(0, 3);
+            }else if(ae.getSource() == b5){
+                juego.destaparCasilla(1, 0);
+            }else if(ae.getSource() == b6){
+                juego.destaparCasilla(1, 1);
+            }else if(ae.getSource() == b7){
+                juego.destaparCasilla(1, 2);
+            }else if(ae.getSource() == b8){
+                juego.destaparCasilla(1, 3);
+            }else if(ae.getSource() == b9){
+                juego.destaparCasilla(2, 0);
+            }else if(ae.getSource() == b10){
+                juego.destaparCasilla(2, 1);
+            }else if(ae.getSource() == b11){
+                juego.destaparCasilla(2, 2);
+            }else if(ae.getSource() == b12){
+                juego.destaparCasilla(2, 3);
+            }else if(ae.getSource() == b13){
+                juego.destaparCasilla(3, 0);
+            }else if(ae.getSource() == b14){
+                juego.destaparCasilla(3, 1);
+            }else if(ae.getSource() == b15){
+                juego.destaparCasilla(3, 2);
+            }else if(ae.getSource() == b16){
+                juego.destaparCasilla(3, 3);
+            }
+            
+            
+            String aux = "";
+            for (int i = 1; i < 17; i++) {
+                aux = "b" + i;
+                if (ae.getSource() == aux) {
+                    JOptionPane.showMessageDialog(null, "boton presionado " + aux);
+                }
+            }
         }
     }
 
-    
 }
