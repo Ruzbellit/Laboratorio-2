@@ -8,6 +8,7 @@ package concentresejuego;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import javax.swing.*;
 
 /**
@@ -27,7 +28,7 @@ public class GUIConcentrese extends JFrame {
     JMenuItem mosEstadisticas;
     JComboBox<String> listDesplegable;
     JButton bIniciar;
-    JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16;
+    JButton botones[] = new JButton[16];// b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16;
     JLabel lVidas, lFallos, lAciertos;
 
     String rutaTemaImagenes = "1/";
@@ -48,22 +49,9 @@ public class GUIConcentrese extends JFrame {
         listDesplegable = new JComboBox<>();
 
         bIniciar = new JButton("Iniciar Juego");
-        b1 = new JButton("");
-        b2 = new JButton("");
-        b3 = new JButton("");
-        b4 = new JButton("");
-        b5 = new JButton("");
-        b6 = new JButton("");
-        b7 = new JButton("");
-        b8 = new JButton("");
-        b9 = new JButton("");
-        b10 = new JButton("");
-        b11 = new JButton("");
-        b12 = new JButton("");
-        b13 = new JButton("");
-        b14 = new JButton("");
-        b15 = new JButton("");
-        b16 = new JButton("");
+        for (int x = 0; x < 16; x++) {
+            botones[x] = new JButton("");
+        }
 
         lVidas = new JLabel("Vidas: ");
         lFallos = new JLabel("Fallos: ");
@@ -75,24 +63,6 @@ public class GUIConcentrese extends JFrame {
         pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 4), "Concentrese"));
         pAbajo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 2), ""));
 
-        /*
-        b1.setIcon(new ImageIcon(getClass().getResource("01/01.png")));
-        b2.setIcon(new ImageIcon(getClass().getResource("01/02.png")));
-        b3.setIcon(new ImageIcon(getClass().getResource("01/03.png")));
-        b4.setIcon(new ImageIcon(getClass().getResource("01/04.png")));
-        b5.setIcon(new ImageIcon(getClass().getResource("01/05.png")));
-        b6.setIcon(new ImageIcon(getClass().getResource("01/06.png")));
-        b7.setIcon(new ImageIcon(getClass().getResource("01/07.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-        b8.setIcon(new ImageIcon(getClass().getResource("01/08.png")));
-         */
         pArriba.setLayout(new BorderLayout());
         pAMenu.setLayout(new FlowLayout(25));
         pAOpcion.setLayout(new GridLayout(1, 2, 5, 2));
@@ -117,23 +87,9 @@ public class GUIConcentrese extends JFrame {
         listDesplegable.addItem("Pricesas disney");
         listDesplegable.addItem("Florecitas");
         listDesplegable.addItem("Animalitos");
-
-        pCentro.add(b1);
-        pCentro.add(b2);
-        pCentro.add(b3);
-        pCentro.add(b4);
-        pCentro.add(b5);
-        pCentro.add(b6);
-        pCentro.add(b7);
-        pCentro.add(b8);
-        pCentro.add(b9);
-        pCentro.add(b10);
-        pCentro.add(b11);
-        pCentro.add(b12);
-        pCentro.add(b13);
-        pCentro.add(b14);
-        pCentro.add(b15);
-        pCentro.add(b16);
+        for (int x = 0; x < 16; x++) {
+            pCentro.add(botones[x]);
+        }
 
         contenPPal = getContentPane();
         contenPPal.setLayout(new BorderLayout());
@@ -145,30 +101,15 @@ public class GUIConcentrese extends JFrame {
         ManejaEventos eventos = new ManejaEventos();
         bIniciar.addActionListener(eventos);
 
-        b1.addActionListener(eventos);
-        b2.addActionListener(eventos);
-        b3.addActionListener(eventos);
-        b4.addActionListener(eventos);
-        b5.addActionListener(eventos);
-        b6.addActionListener(eventos);
-        b7.addActionListener(eventos);
-        b8.addActionListener(eventos);
-        b9.addActionListener(eventos);
-        b10.addActionListener(eventos);
-        b11.addActionListener(eventos);
-        b12.addActionListener(eventos);
-        b13.addActionListener(eventos);
-        b14.addActionListener(eventos);
-        b15.addActionListener(eventos);
-        b16.addActionListener(eventos);
-
+        for (int x = 0; x < 16; x++) {
+            botones[x].addActionListener(eventos);
+        }
         ayuda.addActionListener(eventos);
 
         setTitle("Juego Concentrese");
         setSize(500, 500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     /**
@@ -191,85 +132,18 @@ public class GUIConcentrese extends JFrame {
             lAciertos.setText("Aciertos: " + juego.aciertos);
             lFallos.setText("Fallos: " + juego.fallos);
             lVidas.setText("Vidas: " + juego.vidas);
-            if (juego.estadoCasilla(0, 0)) {
-                b1.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 0) + ".png")));
-            } else {
-                b1.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(0, 1)) {
-                b2.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 1) + ".png")));
-            } else {
-                b2.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(0, 2)) {
-                b3.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 2) + ".png")));
-            } else {
-                b3.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(0, 3)) {
-                b4.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(0, 3) + ".png")));
-            } else {
-                b4.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(1, 0)) {
-                b5.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 0) + ".png")));
-            } else {
-                b5.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(1, 1)) {
-                b6.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 1) + ".png")));
-            } else {
-                b6.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(1, 2)) {
-                b7.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 2) + ".png")));
-            } else {
-                b7.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(1, 3)) {
-                b8.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(1, 3) + ".png")));
-            } else {
-                b8.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(2, 0)) {
-                b9.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 0) + ".png")));
-            } else {
-                b9.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(2, 1)) {
-                b10.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 1) + ".png")));
-            } else {
-                b10.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(2, 2)) {
-                b11.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 2) + ".png")));
-            } else {
-                b11.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(2, 3)) {
-                b12.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(2, 3) + ".png")));
-            } else {
-                b12.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(3, 0)) {
-                b13.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 0) + ".png")));
-            } else {
-                b13.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(3, 1)) {
-                b14.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 1) + ".png")));
-            } else {
-                b14.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(3, 2)) {
-                b15.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 2) + ".png")));
-            } else {
-                b15.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-            }
-            if (juego.estadoCasilla(3, 3)) {
-                b16.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(3, 3) + ".png")));
-            } else {
-                b16.setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+
+            int b = 0;
+            for (int x = 0; x < 4; x++) {
+                for (int y = 0; y < 4; y++) {
+                    if (juego.estadoCasilla(x, y)) {
+                        botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
+                        System.out.println("concentresejuego.GUIConcentrese.ManejaEventos.actualizarJuego()");
+                    } else {
+                        botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+                    }
+                    b++;
+                }
             }
         }
 
@@ -278,54 +152,21 @@ public class GUIConcentrese extends JFrame {
             if (ae.getSource() == bIniciar) {
                 juego.iniciarJuego();
                 actualizarJuego();
-            } else if (ae.getSource() == b1) {
-                juego.destaparCasilla(0, 0);
-                actualizarJuego();
-            } else if (ae.getSource() == b2) {
-                juego.destaparCasilla(0, 1);
-                actualizarJuego();
-            } else if (ae.getSource() == b3) {
-                juego.destaparCasilla(0, 2);
-                actualizarJuego();
-            } else if (ae.getSource() == b4) {
-                juego.destaparCasilla(0, 3);
-                actualizarJuego();
-            } else if (ae.getSource() == b5) {
-                juego.destaparCasilla(1, 0);
-                actualizarJuego();
-            } else if (ae.getSource() == b6) {
-                juego.destaparCasilla(1, 1);
-                actualizarJuego();
-            } else if (ae.getSource() == b7) {
-                juego.destaparCasilla(1, 2);
-                actualizarJuego();
-            } else if (ae.getSource() == b8) {
-                juego.destaparCasilla(1, 3);
-                actualizarJuego();
-            } else if (ae.getSource() == b9) {
-                juego.destaparCasilla(2, 0);
-                actualizarJuego();
-            } else if (ae.getSource() == b10) {
-                juego.destaparCasilla(2, 1);
-                actualizarJuego();
-            } else if (ae.getSource() == b11) {
-                juego.destaparCasilla(2, 2);
-                actualizarJuego();
-            } else if (ae.getSource() == b12) {
-                juego.destaparCasilla(2, 3);
-                actualizarJuego();
-            } else if (ae.getSource() == b13) {
-                juego.destaparCasilla(3, 0);
-                actualizarJuego();
-            } else if (ae.getSource() == b14) {
-                juego.destaparCasilla(3, 1);
-                actualizarJuego();
-            } else if (ae.getSource() == b15) {
-                juego.destaparCasilla(3, 2);
-                actualizarJuego();
-            } else if (ae.getSource() == b16) {
-                juego.destaparCasilla(3, 3);
-                actualizarJuego();
+            } else {
+                int x = 0;
+                int y = 0;
+                for (int b = 0; b < 16; b++) {
+                    if (ae.getSource() == botones[b]) {
+                        juego.destaparCasilla(x, y);
+                        actualizarJuego();
+                        break;
+                    }
+                    y++;
+                    if (y == 4) {
+                        x++;
+                        y = 0;
+                    }
+                }
             }
         }
     }

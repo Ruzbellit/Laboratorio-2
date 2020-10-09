@@ -45,11 +45,11 @@ public class ConcentreseJuego {
 
         /*
         Random aleatorio = new Random();
-        for (int numeroImagen = 1; numeroImagen <= 8; numeroImagen++) {
+        for (int numeroImagen = 1; numeroImagen <= 8; numeroImagen++) { //poner los 8 pares de imagenes
             for (int c = 1; c < 3; c++) { //guardar 2 veces el numero de la imagen en la matriz
                 int randomX = aleatorio.nextInt(4);
                 int randomY = aleatorio.nextInt(4);
-                while (Validaciones.compararNumeroMatriz(matriz, randomX, randomY) != 0) {
+                while (Validaciones.compararNumeroMatriz(matriz, randomX, randomY) == 0) { //verifica si esta vacio la posicion de la matriz
                     randomX = aleatorio.nextInt(4);
                     randomY = aleatorio.nextInt(4);
                 }
