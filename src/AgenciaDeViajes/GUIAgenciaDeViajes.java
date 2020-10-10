@@ -6,9 +6,13 @@
 package AgenciaDeViajes;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 
 
@@ -95,25 +99,26 @@ public class GUIAgenciaDeViajes extends JFrame{
         ciudadDestino = new JComboBox<>();
         
         lCiudadDestino = new JLabel("Ciudad: ");
-        lValMin = new JLabel("Ingrese Valor Minimo: ");
-        lValMax = new JLabel("Ingrese Valor Maximo: ");
-        lDiasViaje = new JLabel("Ingrese los dias de viaje: ");
-        lPersonasViaje = new JLabel("Ingrese las personas a viajar: ");
+        lValMin = new JLabel("Valor Minimo: ");
+        lValMax = new JLabel("Valor Maximo: ");
+        lDiasViaje = new JLabel("Cantidad días de viaje: ");
+        lPersonasViaje = new JLabel("Viajeros: ");
         
-        MaskFormatter mascaraF;
-        try
-        {
-            mascaraF = new MaskFormatter("#######");
-            fTValMin = new JFormattedTextField(mascaraF);
-            fTValMax = new JFormattedTextField(mascaraF);
-            
-        }catch(ParseException ex){
-            System.out.print("no se pudo formatear");
-            
-        }
         
-        sDiasViaje = new JSpinner();
-        sPersonasViaje = new JSpinner();
+        NumberFormat format = NumberFormat.getInstance();
+        NumberFormatter numberFormatter = new NumberFormatter(format);
+        numberFormatter.setValueClass(Integer.class);
+        numberFormatter.setMinimum(0);
+        numberFormatter.setAllowsInvalid(false);
+        // If you want the value to be committed on each keystroke instead of focus lost
+        numberFormatter.setCommitsOnValidEdit(true);
+        fTValMin = new JFormattedTextField(numberFormatter);
+        fTValMax = new JFormattedTextField(numberFormatter);
+        
+        SpinnerModel intSpinnerDias = new SpinnerNumberModel(1, 1, 20, 1);
+        sDiasViaje = new JSpinner(intSpinnerDias);
+        SpinnerModel intSpinnerPersonas = new SpinnerNumberModel(1, 1, 20, 1);
+        sPersonasViaje = new JSpinner(intSpinnerPersonas);
         
         bBuscarP1 = new JButton("Buscar");
         
@@ -419,9 +424,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         pEstadisticas.add(pDerP6);
         
         JPanel pDerP6, pIzqP6;
-    JLabel lCiudadesP6, lHotelesP6;
-    JTextArea tCiudadesP6, tHotelesP6;
-    JScrollPane barrasCP6, barrasHP6;
+        JLabel lCiudadesP6, lHotelesP6;
+        JTextArea tCiudadesP6, tHotelesP6;
+        JScrollPane barrasCP6, barrasHP6;
         
         //Anadicion de pestañas y paneles
        
@@ -435,21 +440,58 @@ public class GUIAgenciaDeViajes extends JFrame{
         contenPPal = getContentPane();
         contenPPal.add(pestañas);
         
+        // asociar eventos que va a escuchar
+        ManejadoraEventos mEvento = new ManejadoraEventos();
+        bBuscarP1.addActionListener(mEvento);
+        bBuscarP2.addActionListener(mEvento);
+        bCrearReserv.addActionListener(mEvento);
+        bBuscarP4.addActionListener(mEvento);
+
         setTitle("Agencia De Viajes");
         setSize(900, 600);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-    
     }
     
-    
-    
-    
-    
-    
-    
+
+    class ManejadoraEventos implements ActionListener {
+        
+        
+        public ManejadoraEventos()
+        {
+
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent ae) 
+        {
+
+            if(ae.getSource() == bBuscarP1)
+            {
+                //double v1, v2;
+                //v1 = Validaciones.esDouble(tfNum1.getText());
+                //v2 = Validaciones.esDouble(tfNum2.getText());
+                //tfResul.setText("" + op.suma(v1, v2));
+            }
+            if(ae.getSource() == bBuscarP2)
+            {
+                JOptionPane.showMessageDialog(null, "Falta enlazar acción!");
+            }
+            if(ae.getSource() == bCrearReserv)
+            {
+                JOptionPane.showMessageDialog(null, "Falta enlazar acción!");
+            }
+            if(ae.getSource() == bBuscarP4)
+            {
+                JOptionPane.showMessageDialog(null, "Falta enlazar acción!");
+            }
+
+
+        }
+
+        
+    }
     
     
     /**
@@ -461,7 +503,4 @@ public class GUIAgenciaDeViajes extends JFrame{
         GUIAgenciaDeViajes app = new GUIAgenciaDeViajes();
     }
 
-
-   
-    
 }
