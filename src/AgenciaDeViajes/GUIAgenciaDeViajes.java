@@ -47,13 +47,35 @@ public class GUIAgenciaDeViajes extends JFrame{
             lHotelP3, lAerolineaP3, lTransporteP3, lEventoAsistirP3;
     JSpinner sDiasViajeP3, sEstrellasHotel, sViajerosP3;
     JCheckBox cEventOp1, cEventOp2, cEventOp3; 
- ; 
     JButton bCrearReserv;
-   
-   
+
     //componentes de la GUI pestaña 4 (Consultar Reserva)
+    JPanel pArribaP4, pCenP4;
+    JLabel lNumCCP4, lDatosReservP4;
+    JFormattedTextField fTNumCCP4;
+    JTextArea tDatosReserv;
+    JScrollPane barrasP4;
+    JButton bBuscarP4;
+    
     //componentes de la GUI pestaña 5 (Agregar Info)
+    JPanel pHotelP5, pAerolineaP5, pTransporteP5, pEventosP5;
+    JLabel lHotelP5, lNomHotel, lEstrellas, lCiudad, lCostHabitacion,
+            lAerolineaP5, lNomAeroLinea, lAgregarVuelo, lCiudOrigen, lCiudDestino, lPrecioVuelo,
+            lTransporteP5, lCiudadTransp, lCostBus, lCostChiva, lCostBici,
+            lEventosP5, lNomEvent, lCiudadEvent, lCostPersona, lHorarioEvent, lFechaEvent, lLugarEvent;
+    JFormattedTextField fTCostHabitacion, fTCostVuelo, fTCostBus, ftCostChiva, fTCostBici, fTCostEvent,
+            fTCiudadHotel, fTCiudadOriA, fTCiudadDestA, fTCiudadTransp, fTCiudadEvent, fTHorarioEvent,
+            fTFechaEvent, fTLugarEvent;
+    JTextField tNomHotel, tNomAerolinea, tNomEvento;
+    JSpinner sEstrellasH;
+    JButton bIngresHotel, bIngresAerolinea, bIngresTransp, bIngresEvent;
+    
     //componentes de la GUI pestaña 6 (Estadisticas)
+    JPanel pDerP6, pIzqP6;
+    JLabel lCiudadesP6, lHotelesP6;
+    JTextArea tCiudadesP6, tHotelesP6;
+    JScrollPane barrasCP6, barrasHP6;
+    
     public GUIAgenciaDeViajes()
     {
         
@@ -238,10 +260,168 @@ public class GUIAgenciaDeViajes extends JFrame{
         pRealizReserv.add(pDerP3);
         
         //pestaña 4 (Consultar Reserva)
+        pArribaP4 = new JPanel();
+        pCenP4 = new JPanel();
         
+        lNumCCP4 = new JLabel("Número de cédula: ");
+        lDatosReservP4 = new JLabel("Datos de su Reserva: ");
+        
+        MaskFormatter mascaraFP4;
+        try
+        {
+            mascaraFP4 = new MaskFormatter("###########");
+            fTNumCCP4 = new JFormattedTextField(mascaraFP4);
+            
+            
+        }catch(ParseException ex){
+            System.out.print("no se pudo formatear");
+            
+        }
+        
+        tDatosReserv = new JTextArea("Su reserva: ");
+        barrasP4 = new JScrollPane(tDatosReserv);
+        bBuscarP4 = new JButton("Buscar");
+        
+        pConsultReserv.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
+        
+        pArribaP4.setLayout(new BoxLayout(pArribaP4,1));
+        pArribaP4.add(lNumCCP4);
+        pArribaP4.add(fTNumCCP4);
+        pArribaP4.add(bBuscarP4);
+        
+        pCenP4.setLayout(new BoxLayout(pCenP4,1));
+        pCenP4.add(lDatosReservP4);
+        pCenP4.add(barrasP4);
+        
+        pConsultReserv.setLayout(new BorderLayout());
+        pConsultReserv.add(pArribaP4, BorderLayout.NORTH);
+        pConsultReserv.add(pCenP4, BorderLayout.CENTER);
+       
         //pestaña 5 (Agregar info)
+        pHotelP5 = new JPanel();
+        pAerolineaP5 = new JPanel();
+        pTransporteP5 = new JPanel();
+        pEventosP5 = new JPanel();
+    
+        lHotelP5 = new JLabel("HOTEL");
+        lNomHotel = new JLabel("Nombre");
+        lEstrellas = new JLabel("Estrellas");
+        lCiudad = new JLabel("Ciudad");
+        lCostHabitacion = new JLabel("Costo por habitacion");
+        lAerolineaP5 = new JLabel("AEROLINEA");
+        lNomAeroLinea = new JLabel("Nombre");
+        lAgregarVuelo = new JLabel("*Agregar Vuelo");
+        lCiudOrigen = new JLabel("Ciudad origen");
+        lCiudDestino = new JLabel("Ciudad destino");
+        lPrecioVuelo = new JLabel("Precio por vuelo");
+        lTransporteP5 = new JLabel("MEDIOS DE TRANSPORTE");
+        lCiudadTransp = new JLabel("Ciudad");
+        lCostBus = new JLabel("Costo por Bus");
+        lCostChiva = new JLabel("Costo por Chiva");
+        lCostBici = new JLabel("Costo por Bici");
+        lEventosP5 = new JLabel("EVENTOS");
+        lNomEvent = new JLabel("Nombre");
+        lCiudadEvent = new JLabel("Ciudad");
+        lCostPersona = new JLabel("Costo por persona");
+        lHorarioEvent = new JLabel("Horario (HH/MM)");
+        lFechaEvent = new JLabel("Fecha (DD/MM/AAAA)");
+        lLugarEvent = new JLabel("Lugar");
         
+        tNomHotel = new JTextField("");
+        tNomAerolinea = new JTextField("");
+        tNomEvento = new JTextField("");
+        
+        sEstrellasH = new JSpinner();
+        
+        bIngresHotel = new JButton("Agregar Hotel");
+        bIngresAerolinea = new JButton("Agregar Hotel");
+        bIngresTransp = new JButton("Agregar Hotel");
+        bIngresEvent = new JButton("Agregar Hotel");
+       
+        pIngresInfo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
+        
+        pHotelP5.setLayout(new BoxLayout(pHotelP5,1));
+        pHotelP5.add(lHotelP5);
+        pHotelP5.add(lNomHotel);
+        pHotelP5.add(tNomHotel);
+        pHotelP5.add(lEstrellas);
+        pHotelP5.add(sEstrellasH);
+        pHotelP5.add(lCiudad);
+        
+        pHotelP5.add(lCostHabitacion);
+        
+        
+        pAerolineaP5.setLayout(new BoxLayout(pAerolineaP5,1));
+        pAerolineaP5.add(lAerolineaP5);
+        pAerolineaP5.add(lNomAeroLinea);
+        pAerolineaP5.add(tNomAerolinea);
+        pAerolineaP5.add(lAgregarVuelo);
+        pAerolineaP5.add(lCiudOrigen);
+        
+        pAerolineaP5.add(lCiudDestino);
+        
+        pAerolineaP5.add(lPrecioVuelo);
+      
+        
+        pTransporteP5.setLayout(new BoxLayout(pTransporteP5,1));
+        pTransporteP5.add(lTransporteP5);
+        
+        pTransporteP5.add(lCiudadTransp);
+        
+        pTransporteP5.add(lCostBus);
+        
+        pTransporteP5.add(lCostChiva);
+        
+        pTransporteP5.add(lCostBici);
+        
+        
+        pEventosP5.setLayout(new BoxLayout(pEventosP5,1));
+        pEventosP5.add(lEventosP5);
+        pEventosP5.add(lNomEvent);
+        pEventosP5.add(tNomEvento);
+        pEventosP5.add(lCiudadEvent);
+        pEventosP5.add(lCostPersona);
+        pEventosP5.add(lHorarioEvent);
+        pEventosP5.add(lFechaEvent);
+        pEventosP5.add(lLugarEvent);
+        
+        pIngresInfo.setLayout(new GridLayout(1,4,3,0));
+        pIngresInfo.add(pHotelP5);
+        pIngresInfo.add(pAerolineaP5);
+        pIngresInfo.add(pTransporteP5);
+        pIngresInfo.add(pEventosP5);
+   
         //pestaña 6 (Estadisticas)
+        pIzqP6 = new JPanel();
+        pDerP6 = new JPanel();
+        
+        lCiudadesP6 = new JLabel("Ciudades con mas Reservas");
+        lHotelesP6 = new JLabel("Hoteles con mas Reservas");
+        
+        tCiudadesP6  = new JTextArea("");
+        tHotelesP6 = new JTextArea("");
+        
+        barrasCP6 = new JScrollPane(tCiudadesP6);
+        barrasHP6 = new JScrollPane(tHotelesP6);
+        
+        pEstadisticas.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
+                
+        pIzqP6.setLayout(new BoxLayout(pIzqP6, 1));
+        pIzqP6.add(lCiudadesP6);
+        pIzqP6.add(barrasCP6);
+        
+        pDerP6.setLayout(new BoxLayout(pDerP6, 1));
+        pDerP6.add(lHotelesP6);
+        pDerP6.add(barrasHP6);
+        
+        pEstadisticas.setLayout(new GridLayout(1,2,3,0));
+        pEstadisticas.add(pIzqP6);
+        pEstadisticas.add(pDerP6);
+        
+        JPanel pDerP6, pIzqP6;
+    JLabel lCiudadesP6, lHotelesP6;
+    JTextArea tCiudadesP6, tHotelesP6;
+    JScrollPane barrasCP6, barrasHP6;
         
         //Anadicion de pestañas y paneles
        
