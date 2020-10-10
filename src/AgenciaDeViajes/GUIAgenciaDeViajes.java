@@ -110,7 +110,6 @@ public class GUIAgenciaDeViajes extends JFrame{
         numberFormatter.setValueClass(Integer.class);
         numberFormatter.setMinimum(0);
         numberFormatter.setAllowsInvalid(false);
-        // If you want the value to be committed on each keystroke instead of focus lost
         numberFormatter.setCommitsOnValidEdit(true);
         fTValMin = new JFormattedTextField(numberFormatter);
         fTValMax = new JFormattedTextField(numberFormatter);
@@ -129,7 +128,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         pIzquierda.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 10),""));
         
         ciudadDestino.addItem("Cali");
-        ciudadDestino.addItem("Medellin");
+        ciudadDestino.addItem("Bogotá");
+        ciudadDestino.addItem("Medellín");
         ciudadDestino.addItem("Cartagena");
         
         pIzquierda.setLayout(new BoxLayout(pIzquierda,1));
@@ -470,13 +470,9 @@ public class GUIAgenciaDeViajes extends JFrame{
 
             if(ae.getSource() == bBuscarP1)
             {
-                //double v1, v2;
-                //v1 = Validaciones.esDouble(tfNum1.getText());
-                //v2 = Validaciones.esDouble(tfNum2.getText());
-                //tfResul.setText("" + op.suma(v1, v2));
                 String destino = ciudadDestino.getItemAt(ciudadDestino.getSelectedIndex());
                 int vMin = (Integer)fTValMin.getValue();
-                int vMax = (Integer)fTValMin.getValue();
+                int vMax = (Integer)fTValMax.getValue();
                 int diasViaje = (Integer)sDiasViaje.getValue();
                 int cantViajeros = (Integer)sPersonasViaje.getValue();
                 String datos = agenciaViajes.catalogo(destino, vMin, vMax, diasViaje, cantViajeros);

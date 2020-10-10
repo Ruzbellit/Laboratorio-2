@@ -43,6 +43,7 @@ public class AgenciaDeViajes {
         area = new JTextArea();
         barras = new JScrollPane(area);
         barras.createVerticalScrollBar();
+        listadoDePrueba();
     }
 
     /**
@@ -578,6 +579,23 @@ public class AgenciaDeViajes {
         // TODO code application logic here
         AgenciaDeViajes app = new AgenciaDeViajes();
         app.menu();
+    }
+
+    /**	
+     * agrega un hotel, una aerolinea, un evento y medios de transportes a las	
+     * listas iniciales	
+     */	
+    private void listadoDePrueba() {	
+        hoteles.add(new Hotel(3, "INTERCONTINENTAL", "Bogotá", 60000));	
+        hoteles.add(new Hotel(5, "SUPREMO", "Bogotá", 100000));	
+        hoteles.add(new Hotel(3, "AMERICANO", "Medellín", 50000));	
+        hoteles.add(new Hotel(5, "PARAISO", "Medellín", 80000));	
+        eventosCulturales.add(new EventoCultural("CONCIERTO SHAKIRA", "Bogotá", 25000, "5 P.M - 10 P.M", "2020-10-12", "SOACHA"));	
+        eventosCulturales.add(new EventoCultural("DIA DE LA INDEPENDENCIA", "Bogotá", 0, "5 P.M - 10 P.M", "2020-07-20", "PALACIO DE NARIÑO"));	
+        eventosCulturales.add(new EventoCultural("FERIA DE LAS FLORES", "Medellín", 20000, "5 P.M - 10 P.M", "2020-07-01", "PRINCIPALES AUTOPISTAS"));	
+        eventosCulturales.add(new EventoCultural("FIESTA DE LA VIRGEN DEL CARMEN", "Medellín", 4000, "5 P.M - 10 P.M", "2020-07-16", "MUNICIPIO DE FRONTINO"));	
+        transportes.add(new TransporteCiudad("Bogotá", 2500, 2000, 1000));	
+        transportes.add(new TransporteCiudad("Medellín", 2200, 1600, 600));	
     }
 
 }
