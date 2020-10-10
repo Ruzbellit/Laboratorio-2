@@ -25,23 +25,35 @@ public class GUIAgenciaDeViajes extends JFrame{
     //componentes de la GUI pestaña 1(consultar opciones)
     JPanel pIzquierda, pCentro;
     JComboBox<String> ciudadDestino;
-    JLabel lValMin, lValMax, lDiasViaje, lPersonasViaje;
+    JLabel lCiudadDestino, lValMin, lValMax, lDiasViaje, lPersonasViaje;
     JFormattedTextField fTValMin, fTValMax;
     JSpinner sDiasViaje, sPersonasViaje;
     JScrollPane barras;
     JTextArea area;
+    JButton bBuscarP1;
+    
+    //componentes de la GUI pestaña 2 (Listar Hoteles/Eventos)
+    JPanel pArribaP2, pCentroP2;
+    JComboBox<String> ciudadDestinoP2;
+    JScrollPane barrasHP2, barrasEP2;
+    JTextArea tHotelesList, tEventosList;
+    JButton bBuscarP2;
     
      //componentes de la GUI pestaña 3 (Realizar Reserva)
-    JComboBox<String> ciudadDestinoP3, nombreHotel, nombreAerolinea, tipoTransporte;
+    JPanel pIzqP3, pCenP3, pDerP3;
+    JComboBox<String> ciudadDestinoP3, hotelP3, aerolineaP3, transporteP3;
     JFormattedTextField fTFechaViaje, fTNumCC;
-    JLabel lFechaViaje, lNumCC, lDiasViajeP3, lEstrellasHotel, lPersonasViajeP3, 
-            lNomHotel, lNomAerolinea, lTipoTransporte, lEventoAsistir;
-    JSpinner sDiasViajeP3, sEstrellasHotel, sPersonasViajeP3;
-    JCheckBox cEventosAsistir; 
+    JLabel lFechaViaje, lCiudadP3, lNumCC, lDiasViajeP3, lEstrellasHotel, lViajerosP3, 
+            lHotelP3, lAerolineaP3, lTransporteP3, lEventoAsistirP3;
+    JSpinner sDiasViajeP3, sEstrellasHotel, sViajerosP3;
+    JCheckBox cEventOp1, cEventOp2, cEventOp3; 
+ ; 
     JButton bCrearReserv;
-    JTextArea tDescuentos;
    
-    
+   
+    //componentes de la GUI pestaña 4 (Consultar Reserva)
+    //componentes de la GUI pestaña 5 (Agregar Info)
+    //componentes de la GUI pestaña 6 (Estadisticas)
     public GUIAgenciaDeViajes()
     {
         
@@ -59,7 +71,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         pCentro = new JPanel();
          
         ciudadDestino = new JComboBox<>();
-         
+        
+        lCiudadDestino = new JLabel("Ciudad: ");
         lValMin = new JLabel("Ingrese Valor Minimo: ");
         lValMax = new JLabel("Ingrese Valor Maximo: ");
         lDiasViaje = new JLabel("Ingrese los dias de viaje: ");
@@ -80,18 +93,20 @@ public class GUIAgenciaDeViajes extends JFrame{
         sDiasViaje = new JSpinner();
         sPersonasViaje = new JSpinner();
         
+        bBuscarP1 = new JButton("Buscar");
+        
         area = new JTextArea("Opciones disponibles de acuerdo a los parametros indicados:");
         barras = new JScrollPane(area);
         
-        pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 30),""));
-        pIzquierda.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.PINK, 10),""));
+        pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
+        pIzquierda.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 10),""));
         
-        ciudadDestino.addItem("Elegir Ciudad Destino");
         ciudadDestino.addItem("Cali");
         ciudadDestino.addItem("Medellin");
         ciudadDestino.addItem("Cartagena");
         
         pIzquierda.setLayout(new BoxLayout(pIzquierda,1));
+        pIzquierda.add(lCiudadDestino);
         pIzquierda.add(ciudadDestino);
         pIzquierda.add(lValMin);
         pIzquierda.add(fTValMin);
@@ -101,6 +116,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         pIzquierda.add(sDiasViaje);
         pIzquierda.add(lPersonasViaje);
         pIzquierda.add(sPersonasViaje);
+        pIzquierda.add(bBuscarP1);
         pCentro.setLayout(new GridLayout(1,1));
         pCentro.add(barras);
         
@@ -109,14 +125,43 @@ public class GUIAgenciaDeViajes extends JFrame{
         pConsulOpc.add(pCentro,BorderLayout.CENTER);
         
         //pestaña 2 (Listar Hoteles y Eventos)
+        pArribaP2 = new JPanel();
+        pCentroP2 = new JPanel();
         
+        ciudadDestinoP2 = new JComboBox<>();
         
+        tHotelesList = new JTextArea("Hoteles listados:");
+        tEventosList = new JTextArea("Eventos listados:");    
+        barrasHP2 = new JScrollPane(tHotelesList);
+        barrasEP2 = new JScrollPane(tEventosList);
+        
+        bBuscarP2 = new JButton("Buscar");
+        
+        ciudadDestinoP2.addItem("Cali");
+        ciudadDestinoP2.addItem("Medellin");
+        ciudadDestinoP2.addItem("Cartagena");
+        
+        pListHotelEven.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
+          
+        pArribaP2.add(ciudadDestinoP2);
+        pArribaP2.add(bBuscarP2);
+        pCentroP2.setLayout(new GridLayout(1,2,3,0));
+        pCentroP2.add(barrasHP2);
+        pCentroP2.add(barrasEP2);
+        
+        pListHotelEven.setLayout(new BorderLayout());
+        pListHotelEven.add(pArribaP2,BorderLayout.NORTH);
+        pListHotelEven.add(pCentroP2,BorderLayout.CENTER);
         
         //pestaña 3 (Realizar Reserva)
+        pIzqP3 = new JPanel();
+        pCenP3 = new JPanel();
+        pDerP3 = new JPanel();
+
         ciudadDestinoP3 = new JComboBox<>();
-        nombreHotel = new JComboBox<>();
-        nombreAerolinea = new JComboBox<>();
-        tipoTransporte = new JComboBox<>();
+        hotelP3 = new JComboBox<>();
+        aerolineaP3 = new JComboBox<>();
+        transporteP3 = new JComboBox<>();
         
          MaskFormatter mascaraF3;
         try
@@ -131,61 +176,72 @@ public class GUIAgenciaDeViajes extends JFrame{
         }
         
         lFechaViaje = new JLabel("Fecha de viaje(DD/MM/AA: ");
-        lNumCC = new JLabel("Ingrese su numero de cedula: ");
+        lCiudadP3 = new JLabel("Ciudad");
+        lNumCC = new JLabel("Número de cédula: ");
         lDiasViajeP3 = new JLabel("Dias de viaje: ");
         lEstrellasHotel = new JLabel("Estrellas del Hotel: ");
-        lPersonasViajeP3 = new JLabel("Personas a viajar: ");
-        lNomHotel = new JLabel("Nombre del hotel: ");
-        lNomAerolinea = new JLabel("Nombre de la Aerolinea): ");
-        lTipoTransporte = new JLabel("Tipo de transporte: ");
-        lEventoAsistir = new JLabel("Eventos a asistir: ");
+        lViajerosP3 = new JLabel("Viajeros: ");
+        lHotelP3 = new JLabel("Hotel: ");
+        lAerolineaP3 = new JLabel("Aerolinea): ");
+        lTransporteP3 = new JLabel("Tipo de transporte: ");
+        lEventoAsistirP3 = new JLabel("Eventos a asistir: ");
         
         sDiasViajeP3 = new JSpinner();
         sEstrellasHotel = new JSpinner();
-        sPersonasViajeP3 = new JSpinner();
+        sViajerosP3 = new JSpinner();
         
-        cEventosAsistir = new JCheckBox();
+        cEventOp1 = new JCheckBox("Opcion 1");
+        cEventOp2 = new JCheckBox("Opcion 2");
+        cEventOp3 = new JCheckBox("Opcion 3");
         
         bCrearReserv = new JButton("Crear Reservacion");
-        
-        tDescuentos = new JTextArea("Descuentos: ");
-        
-        ciudadDestinoP3.addItem("Ciudad Destino");
+ 
         ciudadDestinoP3.addItem("Cali");
         ciudadDestinoP3.addItem("Medellin");
         ciudadDestinoP3.addItem("Cartagena");
-        nombreHotel.addItem("Nombre del Hotel");
-        nombreAerolinea.addItem("Nombre de la Aerolinea");
-        tipoTransporte.addItem("Tipo de transporte");
+        hotelP3.addItem(" --- ");
+        aerolineaP3.addItem(" --- ");
+        transporteP3.addItem(" --- ");
         
-        pRealizReserv.setLayout(new FlowLayout(25));
-        pRealizReserv.add(ciudadDestinoP3);
-        pRealizReserv.add(lFechaViaje);
-        pRealizReserv.add(fTFechaViaje);
-        pRealizReserv.add(lNumCC);
-        pRealizReserv.add(fTNumCC);
-        pRealizReserv.add(lDiasViajeP3);
-        pRealizReserv.add(sDiasViajeP3);
-        pRealizReserv.add(lEstrellasHotel);
-        pRealizReserv.add(sEstrellasHotel);
-        pRealizReserv.add(lPersonasViajeP3);
-        pRealizReserv.add(sPersonasViajeP3);
-        pRealizReserv.add(lNomHotel);
-        pRealizReserv.add(nombreHotel);
-        pRealizReserv.add(lNomAerolinea);
-        pRealizReserv.add(nombreAerolinea);
-        pRealizReserv.add(lTipoTransporte);
-        pRealizReserv.add(tipoTransporte);
-        pRealizReserv.add(lEventoAsistir);
+        pIzqP3.setLayout(new BoxLayout(pIzqP3,1));
+        pIzqP3.add(lNumCC);
+        pIzqP3.add(fTNumCC);
+        pIzqP3.add(lDiasViajeP3);
+        pIzqP3.add(sDiasViajeP3);
+        pIzqP3.add(lHotelP3);
+        pIzqP3.add(hotelP3);
+        pIzqP3.add(lEventoAsistirP3);
+        pIzqP3.add(cEventOp1);
+        pIzqP3.add(cEventOp2);
+        pIzqP3.add(cEventOp3);
         
-        pRealizReserv.add(bCrearReserv);
-        pRealizReserv.add(tDescuentos);
+        pCenP3.setLayout(new BoxLayout(pCenP3,1));
+        pCenP3.add(lFechaViaje);
+        pCenP3.add(fTFechaViaje);
+        pCenP3.add(lEstrellasHotel);
+        pCenP3.add(sEstrellasHotel);
+        pCenP3.add(lAerolineaP3);
+        pCenP3.add(aerolineaP3);
+        pCenP3.add(bCrearReserv);
         
+        pDerP3.setLayout(new BoxLayout(pDerP3,1));
+        pDerP3.add(lCiudadP3);
+        pDerP3.add(ciudadDestinoP3);
+        pDerP3.add(lViajerosP3);
+        pDerP3.add(sViajerosP3);
+        pDerP3.add(lTransporteP3);
+        pDerP3.add(transporteP3);
+        
+        pRealizReserv.setLayout(new GridLayout(1,3,3,0));
+        pRealizReserv.add(pIzqP3);
+        pRealizReserv.add(pCenP3);
+        pRealizReserv.add(pDerP3);
         
         //pestaña 4 (Consultar Reserva)
         
+        //pestaña 5 (Agregar info)
         
-        
+        //pestaña 6 (Estadisticas)
         
         //Anadicion de pestañas y paneles
        
