@@ -124,8 +124,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         area = new JTextArea("Opciones disponibles de acuerdo a los parametros indicados:");
         barras = new JScrollPane(area);
         
-        pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
-        pIzquierda.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 10),""));
+        pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 30),""));
+        pIzquierda.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 10),""));
         
         ciudadDestino.addItem("Cali");
         ciudadDestino.addItem("Bogotá");
@@ -135,15 +135,21 @@ public class GUIAgenciaDeViajes extends JFrame{
         pIzquierda.setLayout(new BoxLayout(pIzquierda,1));
         pIzquierda.add(lCiudadDestino);
         pIzquierda.add(ciudadDestino);
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
         pIzquierda.add(lValMin);
         pIzquierda.add(fTValMin);
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
         pIzquierda.add(lValMax);
         pIzquierda.add(fTValMax);
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
         pIzquierda.add(lDiasViaje);
         pIzquierda.add(sDiasViaje);
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
         pIzquierda.add(lPersonasViaje);
         pIzquierda.add(sPersonasViaje);
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,60)));
         pIzquierda.add(bBuscarP1);
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,40)));
         pCentro.setLayout(new GridLayout(1,1));
         pCentro.add(barras);
         
