@@ -155,13 +155,7 @@ public class AgenciaDeViajes {
      * ingresados (ciudad, rango de valores, dias de viaje, cantidad de
      * personas)
      */
-    private void catalogo() {
-        //el usuario ingresa los parametros para listar las opciones disponibles
-        String ciudadDestino = JOptionPane.showInputDialog("Ingrese la ciudad de destino").trim().toUpperCase();
-        double valorMinimo = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor minimo del viaje").trim());
-        double valorMaximo = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor maximo del viaje").trim());
-        int diasViaje = Integer.parseInt(JOptionPane.showInputDialog("Digite los dias de viaje").trim());
-        int cantidadPersonas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de personas a viajar").trim());
+    public String catalogo(String ciudadDestino, int valorMinimo, int valorMaximo, int diasViaje, int cantidadPersonas) {
 
         String datos = "Opciones disponibles de acuerdo a los parametros indicados:\n"
                 + "Ciudad destino: " + ciudadDestino
@@ -225,8 +219,7 @@ public class AgenciaDeViajes {
                 }
             }
         }
-        area.setText(datos);
-        JOptionPane.showMessageDialog(null, barras);
+        return datos;
     }
 
     /**
@@ -542,7 +535,15 @@ public class AgenciaDeViajes {
                     ingresarInformacion();
                     break;
                 case "2": // consultar todas las opciones disponibles
-                    catalogo();
+                    //el usuario ingresa los parametros para listar las opciones disponibles
+                    String ciudadDestino = JOptionPane.showInputDialog("Ingrese la ciudad de destino").trim().toUpperCase();
+                    int valorMinimo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor minimo del viaje").trim());
+                    int valorMaximo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor maximo del viaje").trim());
+                    int diasViaje = Integer.parseInt(JOptionPane.showInputDialog("Digite los dias de viaje").trim());
+                    int cantidadPersonas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de personas a viajar").trim());
+                    String datos = catalogo(ciudadDestino, valorMinimo, valorMaximo, diasViaje, cantidadPersonas);
+                    area.setText(datos);
+                    JOptionPane.showMessageDialog(null, barras);
                     break;
                 case "3": //listar hoteles
                     area.setText(listarHoteles());

@@ -457,10 +457,11 @@ public class GUIAgenciaDeViajes extends JFrame{
 
     class ManejadoraEventos implements ActionListener {
         
+        AgenciaDeViajes agenciaViajes;
         
         public ManejadoraEventos()
         {
-
+            agenciaViajes = new AgenciaDeViajes();
         }
 
         @Override
@@ -473,6 +474,13 @@ public class GUIAgenciaDeViajes extends JFrame{
                 //v1 = Validaciones.esDouble(tfNum1.getText());
                 //v2 = Validaciones.esDouble(tfNum2.getText());
                 //tfResul.setText("" + op.suma(v1, v2));
+                String destino = ciudadDestino.getItemAt(ciudadDestino.getSelectedIndex());
+                int vMin = (Integer)fTValMin.getValue();
+                int vMax = (Integer)fTValMin.getValue();
+                int diasViaje = (Integer)sDiasViaje.getValue();
+                int cantViajeros = (Integer)sPersonasViaje.getValue();
+                String datos = agenciaViajes.catalogo(destino, vMin, vMax, diasViaje, cantViajeros);
+                area.setText(datos);
             }
             if(ae.getSource() == bBuscarP2)
             {
