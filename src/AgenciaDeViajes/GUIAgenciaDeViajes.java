@@ -165,7 +165,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         bBuscarP2 = new JButton("Buscar");
         
         ciudadDestinoP2.addItem("Cali");
-        ciudadDestinoP2.addItem("Medellin");
+        ciudadDestinoP2.addItem("Bogotá");
+        ciudadDestinoP2.addItem("Medellín");
         ciudadDestinoP2.addItem("Cartagena");
         
         pListHotelEven.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
@@ -224,7 +225,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         bCrearReserv = new JButton("Crear Reservacion");
  
         ciudadDestinoP3.addItem("Cali");
-        ciudadDestinoP3.addItem("Medellin");
+        ciudadDestinoP3.addItem("Bogotá");
+        ciudadDestinoP3.addItem("Medellín");
         ciudadDestinoP3.addItem("Cartagena");
         hotelP3.addItem(" --- ");
         aerolineaP3.addItem(" --- ");
@@ -480,7 +482,11 @@ public class GUIAgenciaDeViajes extends JFrame{
             }
             if(ae.getSource() == bBuscarP2)
             {
-                JOptionPane.showMessageDialog(null, "Falta enlazar acción!");
+                String destino = ciudadDestinoP2.getItemAt(ciudadDestinoP2.getSelectedIndex());
+                String listaHoteles = agenciaViajes.listarHoteles(destino);
+                String listaEventos = agenciaViajes.listarEventosCulturales(destino);
+                tHotelesList.setText(listaHoteles);
+                tEventosList.setText(listaEventos);
             }
             if(ae.getSource() == bCrearReserv)
             {

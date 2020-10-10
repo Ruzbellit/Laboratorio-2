@@ -228,7 +228,7 @@ public class AgenciaDeViajes {
      *
      * @return lista de hoteles
      */
-    private String listarHoteles() {
+    public String listarHoteles() {
         if (!hoteles.isEmpty()) {
             String datos = "";
             for (Hotel x : hoteles) {
@@ -246,13 +246,16 @@ public class AgenciaDeViajes {
      * @param ciudad
      * @return lista de hoteles
      */
-    private String listarHoteles(String ciudad) {
+    public String listarHoteles(String ciudad) {
         if (!hoteles.isEmpty()) {
             String datos = "";
             for (Hotel x : hoteles) {
                 if (x.getCiudad().equals(ciudad)) {
                     datos += x.getInformacion() + "\n";
                 }
+            }
+            if (datos.equals("")) {
+                return "No hay Hoteles disponibles para la ciudad seleccionada";
             }
             return datos;
         } else {
@@ -268,7 +271,7 @@ public class AgenciaDeViajes {
      * @param estrellas
      * @return lista de hoteles
      */
-    private String listarHoteles(String ciudad, int estrellas) {
+    public String listarHoteles(String ciudad, int estrellas) {
         if (!hoteles.isEmpty()) {
             String datos = "";
             int enumerador = 1;
@@ -295,11 +298,33 @@ public class AgenciaDeViajes {
      *
      * @return
      */
-    private String listarEventosCulturales() {
+    public String listarEventosCulturales() {
         if (!eventosCulturales.isEmpty()) {
             String datos = "";
             for (EventoCultural x : eventosCulturales) {
                 datos += x.getInformacion() + "\n\n";
+            }
+            return datos;
+        } else {
+            return "No hay eventos culturales listados";
+        }
+    }
+
+    /**
+     * lista todos los eventos disponibles en una ciudad establecida
+     *
+     * @return
+     */
+    public String listarEventosCulturales(String ciudad) {
+        if (!eventosCulturales.isEmpty()) {
+            String datos = "";
+            for (EventoCultural x : eventosCulturales) {
+                if (x.getCiudad().equals(ciudad)) {
+                    datos += x.getInformacion() + "\n\n";
+                }
+            }
+            if (datos.equals("")) {
+                return "No hay eventos culturales disponibles para la ciudad seleccionada";
             }
             return datos;
         } else {
