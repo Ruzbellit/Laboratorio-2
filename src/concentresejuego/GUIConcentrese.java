@@ -138,7 +138,6 @@ public class GUIConcentrese extends JFrame {
                 for (int y = 0; y < 4; y++) {
                     if (juego.estadoCasilla(x, y)) {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
-                        System.out.println("concentresejuego.GUIConcentrese.ManejaEventos.actualizarJuego()");
                     } else {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
                     }

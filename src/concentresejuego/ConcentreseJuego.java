@@ -37,26 +37,19 @@ public class ConcentreseJuego {
         matrizDestapar = new boolean[4][4];
         casillaDestapada = false;
 
+        //int[][] matriz = new int[4][4];
+        int imagen = 8;
+        ArrayList<Integer> elementosColocados = new ArrayList<Integer>();
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
-                matriz[x][y] = x + y;
+                do {
+                    imagen = 1 + (int) (Math.random() * 8);
+                } while (elementosColocados.indexOf(imagen) != elementosColocados.lastIndexOf(imagen));
+                elementosColocados.add(imagen);
+                matriz[x][y] = imagen;
             }
         }
 
-        /*
-        Random aleatorio = new Random();
-        for (int numeroImagen = 1; numeroImagen <= 8; numeroImagen++) { //poner los 8 pares de imagenes
-            for (int c = 1; c < 3; c++) { //guardar 2 veces el numero de la imagen en la matriz
-                int randomX = aleatorio.nextInt(4);
-                int randomY = aleatorio.nextInt(4);
-                while (Validaciones.compararNumeroMatriz(matriz, randomX, randomY) == 0) { //verifica si esta vacio la posicion de la matriz
-                    randomX = aleatorio.nextInt(4);
-                    randomY = aleatorio.nextInt(4);
-                }
-                matriz[randomX][randomY] = numeroImagen;
-            }
-        }
-         */
     }
 
     /**
