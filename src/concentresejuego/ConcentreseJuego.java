@@ -22,8 +22,8 @@ public class ConcentreseJuego {
     boolean casillaDestapada;
     int casillaDestapadaX;
     int casillaDestapadaY;
-    int juegosTotales;
-    int juegosGanados;
+    int juegosTotales = 0;
+    int juegosGanados = 0;
     String estadisticas;
 
     public ConcentreseJuego() {
@@ -140,7 +140,7 @@ public class ConcentreseJuego {
     }
 
     public String mostrarAyuda() {
-        return "CONCENTRECE" + "\n" + "Saludos invocador, "
+        return "CONCENTRESE" + "\n" + "Saludos invocador, "
                 + "Primero debe seleccionar la tematica del juego y presionar el botón de Iniciar Juego, "
                 + "una vez inicie se le mostrara por un tiempo de cuatro (4) segundos la distribución de las cartas "
                 + "dispondra de tres (3) intentos para encontrar todas las parejas de cartas" + "\n"
@@ -148,10 +148,14 @@ public class ConcentreseJuego {
     }
 
     public String mostrarEstadisticas() {
+        if(juegosTotales != 0){
         return "Estadisticas de Jugadas\n" + "\n"
                 + "Cantidad de juegos realizados: " + juegosTotales + "\n"
                 + "Porcentaje de juegos ganados: " + ((juegosGanados / juegosTotales) * 100) + "%\n"
                 + "Porcentaje de juegos perdidos " + (((juegosTotales - juegosGanados) / juegosTotales) * 100) + "%\n";
+        }else{
+            return "No se han jugado partidas";
+        }
 
     }
 

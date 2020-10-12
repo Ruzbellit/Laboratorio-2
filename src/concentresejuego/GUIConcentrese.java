@@ -105,6 +105,8 @@ public class GUIConcentrese extends JFrame {
         ManejaEventos eventos = new ManejaEventos();
         bIniciar.addActionListener(eventos);
         listDesplegable.addItemListener(eventos);
+        ayuda.addActionListener(eventos);
+        mosEstadisticas.addActionListener(eventos);
 
         for (int x = 0; x < 16; x++) {
             botones[x].addActionListener(eventos);
@@ -162,8 +164,11 @@ public class GUIConcentrese extends JFrame {
                 actualizarJuego();
                 mostrarCasillas = true;
                 primeraVista();
-
-            } else {
+            }else if (ae.getSource() == ayuda){
+                JOptionPane.showMessageDialog(null, juego.mostrarAyuda());
+            }else if(ae.getSource() == mosEstadisticas){
+                JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
+            }else {
                 int x = 0;
                 int y = 0;
                 for (int b = 0; b < 16; b++) {
@@ -207,7 +212,7 @@ public class GUIConcentrese extends JFrame {
                     actualizarJuego();
                 }
             };
-            vista.schedule(tiempo, 5000);
+            vista.schedule(tiempo, 4000);
         }
 
         public void vistaParejaCasillas() {
