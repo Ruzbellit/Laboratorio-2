@@ -164,7 +164,6 @@ public class AgenciaDeViajes {
                 + "\nDias de viaje: " + diasViaje
                 + "\nCantidad de personas a viajar: " + cantidadPersonas + "\n";
         int contador = 1;
-
         /*
         lista los hoteles de la ciudad, combinado con los eventos a los que
         puede asistir
@@ -476,21 +475,16 @@ public class AgenciaDeViajes {
      * busca una reserva de acuerdo con el numero de identidad a la cual fue
      * guardada la reserva
      */
-    private void consultarReserva() {
-        String buscarReserva = JOptionPane.showInputDialog("Ingrese el documento de identidad del cliente").trim();
+    public String consultarReserva(String numeroCedula) {
+        String infoReserv = "No se ha encontrado reservas con los parametros ingresados";
         if (!reservaciones.isEmpty()) {
             for (Reserva x : reservaciones) {
-                if (x.getIdentCliente().equals(buscarReserva)) {
-                    area.setText(x.getInformacion());
-                    JOptionPane.showMessageDialog(null, barras);
-                    break;
+                if (x.getIdentCliente().equals(numeroCedula)) {
+                    infoReserv = x.getInformacion();
                 }
             }
-            JOptionPane.showMessageDialog(null, "No se ha encontrado reservas con los parametros ingresados");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se ha encontrado reservas con los parametros ingresados");
         }
-
+        return infoReserv;
     }
 
     /**
@@ -583,7 +577,10 @@ public class AgenciaDeViajes {
                     realizarReserva();
                     break;
                 case "6": //consultar reservaciones
-                    consultarReserva();
+                    String numeroCedula = JOptionPane.showInputDialog("Ingrese el documento de identidad del cliente").trim();
+                    String resultadoConsulta = consultarReserva(numeroCedula);
+                    area.setText(resultadoConsulta);
+                    JOptionPane.showMessageDialog(null, barras);
                     break;
                 case "7": //mostrar estadisticas
                     estadisticas();
@@ -620,7 +617,12 @@ public class AgenciaDeViajes {
         eventosCulturales.add(new EventoCultural("FERIA DE LAS FLORES", "Medellín", 20000, "5 P.M - 10 P.M", "2020-07-01", "PRINCIPALES AUTOPISTAS"));	
         eventosCulturales.add(new EventoCultural("FIESTA DE LA VIRGEN DEL CARMEN", "Medellín", 4000, "5 P.M - 10 P.M", "2020-07-16", "MUNICIPIO DE FRONTINO"));	
         transportes.add(new TransporteCiudad("Bogotá", 2500, 2000, 1000));	
-        transportes.add(new TransporteCiudad("Medellín", 2200, 1600, 600));	
+        transportes.add(new TransporteCiudad("Medellín", 2200, 1600, 600));
+        aerolineas.add(new Aerolinea("LATAN"));
+        reservaciones.add(new Reserva("119343", LocalDate.parse("2020-05-10"), LocalDate.parse("2020-05-15"), 2, "Medellin", 5,"PARAISO", 2000, "LATAN",
+                10000, "Chiva", 1600, eventosCulturales.get(2).getInformacion(), eventosCulturales.get(2).getCosto()));
+        
+        
     }
 
 }
