@@ -8,7 +8,10 @@ package concentresejuego;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.*;
 
 /**
@@ -84,7 +87,8 @@ public class GUIConcentrese extends JFrame {
         pAbajo.add(lAciertos);
 
         listDesplegable.addItem("Elegir tema");
-        listDesplegable.addItem("Pricesas disney");
+        listDesplegable.addItem("Lenguajes de Programacion");
+        listDesplegable.addItem("Princesas disney");
         listDesplegable.addItem("Florecitas");
         listDesplegable.addItem("Animalitos");
         for (int x = 0; x < 16; x++) {
@@ -100,6 +104,7 @@ public class GUIConcentrese extends JFrame {
         //listener y manejo de eventos
         ManejaEventos eventos = new ManejaEventos();
         bIniciar.addActionListener(eventos);
+        listDesplegable.addItemListener(eventos);
 
         for (int x = 0; x < 16; x++) {
             botones[x].addActionListener(eventos);
@@ -120,12 +125,14 @@ public class GUIConcentrese extends JFrame {
         GUIConcentrese concentrese = new GUIConcentrese();
     }
 
-    class ManejaEventos implements ActionListener {
+    class ManejaEventos implements ActionListener, ItemListener {
 
         ConcentreseJuego juego;
+        boolean mostrarCasillas;
 
         public ManejaEventos() {
             juego = new ConcentreseJuego();
+            //primeraVista();
         }
 
         public void actualizarJuego() {
@@ -138,6 +145,7 @@ public class GUIConcentrese extends JFrame {
                 for (int y = 0; y < 4; y++) {
                     if (juego.estadoCasilla(x, y)) {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
+                        
                     } else {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
                     }
@@ -148,9 +156,13 @@ public class GUIConcentrese extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            if (ae.getSource() == bIniciar) {
+            if (ae.getSource() == bIniciar && listDesplegable.getSelectedIndex() != 0) {
                 juego.iniciarJuego();
+                juego.destaparTodasCasillas();
                 actualizarJuego();
+                mostrarCasillas = true;
+                primeraVista();
+
             } else {
                 int x = 0;
                 int y = 0;
@@ -167,6 +179,46 @@ public class GUIConcentrese extends JFrame {
                     }
                 }
             }
+        }
+
+        @Override
+        public void itemStateChanged(ItemEvent ie) {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                switch (listDesplegable.getSelectedIndex()) {
+                    case 1:
+                        rutaTemaImagenes = "1/";
+                        break;
+                    case 2:
+                        rutaTemaImagenes = "2/";
+                        break;
+                    case 3:
+                        rutaTemaImagenes = "3/";
+                        break;
+                }
+            }
+        }
+
+        public void primeraVista() {
+            Timer vista = new Timer();
+            TimerTask tiempo = new TimerTask() {
+                @Override
+                public void run() {
+                    juego.taparTodasCasillas();
+                    actualizarJuego();
+                }
+            };
+            vista.schedule(tiempo, 5000);
+        }
+
+        public void vistaParejaCasillas() {
+            Timer vista = new Timer();
+            TimerTask tiempo = new TimerTask() {
+                @Override
+                public void run() {
+
+                }
+            };
+            vista.schedule(tiempo, 2000);
         }
     }
 

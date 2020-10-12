@@ -107,7 +107,20 @@ public class ConcentreseJuego {
     }
 
     public void destaparTodasCasillas() {
-
+        for(int x = 0; x < 4; x++){
+            for(int y = 0; y < 4; y++){
+                matrizDestapar[x][y] = true;
+            }
+        }
+    }
+    
+    public void taparTodasCasillas(){
+        matrizDestapar = new boolean[4][4];
+        for(int x = 0; x < 4; x++){
+            for(int y = 0; y < 4; y++){
+                matrizDestapar[x][y] = false;
+            }
+        }
     }
 
     public String verificarJuego() {
@@ -127,7 +140,7 @@ public class ConcentreseJuego {
     }
 
     public String mostrarAyuda() {
-        return "CONCENTRCE" + "\n" + "Saludos invocador, "
+        return "CONCENTRECE" + "\n" + "Saludos invocador, "
                 + "Primero debe seleccionar la tematica del juego y presionar el botón de Iniciar Juego, "
                 + "una vez inicie se le mostrara por un tiempo de cuatro (4) segundos la distribución de las cartas "
                 + "dispondra de tres (3) intentos para encontrar todas las parejas de cartas" + "\n"
