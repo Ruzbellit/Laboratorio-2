@@ -55,10 +55,10 @@ public class AgenciaDeViajes {
         do {
 
             opcion = JOptionPane.showInputDialog("Escoga el tipo de informacion que desea ingresar\n"
-                    + "1. Hotel\n"
-                    + "2. Aerolínea\n"
-                    + "3. Medios de Transporte\n"
-                    + "4. Eventos Culturales\n"
+                   + "1. Hotel\n"
+                   + "2. Aerolínea\n"
+                   + "3. Medios de Transporte\n"
+                   + "4. Eventos Culturales\n"
                     + "5. Regresar al Menú");
 
             switch (opcion) {
@@ -151,6 +151,38 @@ public class AgenciaDeViajes {
         } while (!opcion.equals("5"));
     }
 
+    public String registrarHotel(String nombreH, int estrellas, String ciudadH, double precio){
+        hoteles.add(new Hotel(estrellas, nombreH, ciudadH, precio));
+       
+       return "Informacion del hotel ingresado con exito\n\n" + "Nombre: " + nombreH 
+               + "\n" + "Estrellas: " + estrellas + "\n" + "Ciudad: " + ciudadH + "\n" + "Precio: " + precio;
+    }
+    
+    public String registrarAerolinea(String nombreA){
+        Aerolinea aerolinea = new Aerolinea(nombreA);
+        return "";
+    }
+    
+    public String registrarTransporte(String ciudadT, double precioBus, double precioChiva, double precioBicicleta){
+        transportes.add(new TransporteCiudad(ciudadT, precioBus, precioChiva, precioBicicleta));
+        return "Informacion de los medios de transporte ingresado con exito:\n"
+                            + "\nCiudad: " + ciudadT
+                            + "\nPrecio pasaje Bus: " + precioBus
+                            + "\nPrecio pasaje Chiva: " + precioChiva
+                            + "\nPrecio alquiler Bicicleta: " + precioBicicleta;
+    }
+    
+    public String registrarEventos(String nombreE, String ciudadE, double costo, String horario, String fecha, String lugar ){
+        eventosCulturales.add(new EventoCultural(nombreE, ciudadE, costo, horario, fecha, lugar));
+        return "Informacion del evento ingresado con exito\n"
+                            + "\nEvento: " + nombreE
+                            + "\nCiudad: " + ciudadE
+                            + "\nCosto entrada: " + costo
+                            + "\nHorario: " + horario
+                            + "\nFecha evento: " + fecha
+                            + "\nLugar evento: " + lugar;
+    }
+            
     /**
      * lista las posibles opciones a escoger de acuerdo a los parametros
      * ingresados (ciudad, rango de valores, dias de viaje, cantidad de

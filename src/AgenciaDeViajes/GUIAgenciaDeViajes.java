@@ -491,6 +491,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         bBuscarP2.addActionListener(mEvento);
         bCrearReserv.addActionListener(mEvento);
         bBuscarP4.addActionListener(mEvento);
+        bIngresHotel.addActionListener(mEvento);
+        bIngresAerolinea.addActionListener(mEvento);
+        bIngresTransp.addActionListener(mEvento);
 
         setTitle("Agencia De Viajes");
         setSize(900, 600);
@@ -541,7 +544,37 @@ public class GUIAgenciaDeViajes extends JFrame{
                 String infoReserv = agenciaViajes.consultarReserva(numeroCedula);
                 tDatosReserv.setText(infoReserv);
             }
-
+            if(ae.getSource() == bIngresHotel)
+            {
+                String nombreH = tNomHotel.getText();
+                int estrellas = (Integer)sEstrellasH.getValue();
+                String ciudadH = tCiudadHotel.getText();
+                double precio = (Integer)fTCostHabitacion.getValue();
+                String mensaje = agenciaViajes.registrarHotel(nombreH, estrellas, ciudadH, precio);
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
+            if(ae.getSource() == bIngresAerolinea)
+            {
+                
+            }
+            if(ae.getSource() == bIngresTransp)
+            {
+                String ciudadT = tCiudadTrasp.getText();
+                double precioBus = (Integer)fTCostBus.getValue();
+                double precioChiva = (Integer)ftCostChiva.getValue();
+                double precioBicicleta = (Integer)fTCostBici.getValue();
+                String mensaje = agenciaViajes.registrarTransporte(ciudadT, precioBus, precioChiva, precioBicicleta);
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
+            if(ae.getSource() == bIngresTransp)
+            {
+                // String nombreE = tCiudadTrasp.getText();
+                // String ciudadE = tCiudadTrasp.getText();
+                // double costo
+                // String horario
+                // String fecha
+                // String lugar
+            }
 
         }
 
