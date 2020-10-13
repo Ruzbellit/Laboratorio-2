@@ -31,7 +31,7 @@ public class GUIConcentrese extends JFrame {
     JMenuItem mosEstadisticas;
     JComboBox<String> listDesplegable;
     JButton bIniciar;
-    JButton botones[] = new JButton[16];// b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16;
+    JButton botones[] = new JButton[16];
     JLabel lVidas, lFallos, lAciertos;
 
     String rutaTemaImagenes = "1/";
@@ -130,11 +130,9 @@ public class GUIConcentrese extends JFrame {
     class ManejaEventos implements ActionListener, ItemListener {
 
         ConcentreseJuego juego;
-        boolean mostrarCasillas;
 
         public ManejaEventos() {
             juego = new ConcentreseJuego();
-            //primeraVista();
         }
 
         public void actualizarJuego() {
@@ -147,9 +145,10 @@ public class GUIConcentrese extends JFrame {
                 for (int y = 0; y < 4; y++) {
                     if (juego.estadoCasilla(x, y)) {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
-                        
-                    } else {
+                        botones[b].setEnabled(true);
+                    } else {                        
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+                        //botones[b].setEnabled(false);
                     }
                     b++;
                 }
@@ -159,22 +158,32 @@ public class GUIConcentrese extends JFrame {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == bIniciar && listDesplegable.getSelectedIndex() != 0) {
-                juego.iniciarJuego();
-                juego.destaparTodasCasillas();
-                actualizarJuego();
-                mostrarCasillas = true;
-                primeraVista();
-            }else if (ae.getSource() == ayuda){
+                iniciarJuego();
+            } else if (ae.getSource() == ayuda) {
                 JOptionPane.showMessageDialog(null, juego.mostrarAyuda());
-            }else if(ae.getSource() == mosEstadisticas){
+            } else if (ae.getSource() == mosEstadisticas) {
                 JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
-            }else {
+            } else {
                 int x = 0;
                 int y = 0;
                 for (int b = 0; b < 16; b++) {
                     if (ae.getSource() == botones[b]) {
                         juego.destaparCasilla(x, y);
                         actualizarJuego();
+                        if (juego.getParCasillasDestapadas()) {
+                            juego.compararCasillas();
+                            vistaParejaCasillas();
+                            switch (juego.getEstadoJuego()) {
+                                case 0: //perdio el juego
+                                    JOptionPane.showMessageDialog(null, "Juego perdido");
+                                    iniciarJuego();
+                                    break;
+                                case 1: //gano la partida
+                                    JOptionPane.showMessageDialog(null, "Juego Ganado");
+                                    break;
+                            }
+
+                        }
                         break;
                     }
                     y++;
@@ -220,10 +229,17 @@ public class GUIConcentrese extends JFrame {
             TimerTask tiempo = new TimerTask() {
                 @Override
                 public void run() {
-
+                    actualizarJuego();
                 }
             };
-            vista.schedule(tiempo, 2000);
+            vista.schedule(tiempo, 1000);
+        }
+
+        public void iniciarJuego() {
+            juego.iniciarJuego();
+            juego.destaparTodasCasillas();
+            actualizarJuego();
+            primeraVista();
         }
     }
 
