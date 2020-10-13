@@ -6,7 +6,6 @@
 package concentresejuego;
 
 import java.util.*;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,14 +19,18 @@ public class ConcentreseJuego {
     int matriz[][] = new int[4][4];
     boolean matrizDestapar[][];
     boolean casillaDestapada;
-    int casillaDestapadaX;
-    int casillaDestapadaY;
-    int juegosTotales = 0;
-    int juegosGanados = 0;
+    boolean parCasillasDestapadas;
+    int casillaDestapada1X;
+    int casillaDestapada1Y;
+    int casillaDestapada2X;
+    int casillaDestapada2Y;
+    int juegosTotales;
+    int juegosGanados;
     String estadisticas;
 
     public ConcentreseJuego() {
-
+        juegosTotales = 0;
+        juegosGanados = 0;
     }
 
     public void iniciarJuego() {
@@ -38,33 +41,35 @@ public class ConcentreseJuego {
         casillaDestapada = false;
 
         int imagen = 8;
+        Random aleatorio = new Random();
         ArrayList<Integer> elementosColocados = new ArrayList<Integer>();
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 do {
-                    imagen = 1 + (int) (Math.random() * 8);
+                    imagen = 1 + aleatorio.nextInt(8);
                 } while (elementosColocados.indexOf(imagen) != elementosColocados.lastIndexOf(imagen));
                 elementosColocados.add(imagen);
                 matriz[x][y] = imagen;
             }
         }
-
     }
 
     /**
      *
-     * @param x
-     * @param y
+     * @param x fila en la matriz
+     * @param y columna en la matriz
      */
     public void destaparCasilla(int x, int y) {
         if (!matrizDestapar[x][y]) { //ejecuta si la casilla esta en false (sin revelar)
             matrizDestapar[x][y] = true;
             if (casillaDestapada) { //verifica si ya se ha destapado otra casilla
-                compararCasillas(casillaDestapadaX, casillaDestapadaY, x, y);
+                casillaDestapada2X = x;
+                casillaDestapada2Y = y;
+                parCasillasDestapadas = true;
             } else {
                 casillaDestapada = true;
-                casillaDestapadaX = x;
-                casillaDestapadaY = y;
+                casillaDestapada1X = x;
+                casillaDestapada1Y = y;
             }
         }
     }
@@ -89,57 +94,59 @@ public class ConcentreseJuego {
         return matriz[x][y];
     }
 
-    public void compararCasillas(int casillaX1, int casillaY1, int casillaX2, int casillaY2) {
-        if (matriz[casillaX1][casillaY1] == matriz[casillaX2][casillaY2]) { //si tienen la misma imagen, quedan reveladas
-            matrizDestapar[casillaX1][casillaY1] = true;
-            matrizDestapar[casillaX2][casillaY2] = true;
+    public void compararCasillas() {
+        if (matriz[casillaDestapada1X][casillaDestapada1Y] == matriz[casillaDestapada2X][casillaDestapada2Y]) { //si tienen la misma imagen, quedan reveladas
+            matrizDestapar[casillaDestapada1X][casillaDestapada1Y] = true;
+            matrizDestapar[casillaDestapada2X][casillaDestapada2Y] = true;
             aciertos++;
-            //verificarJuego();
         } else { //se voltean las dos casillas
-            matrizDestapar[casillaX1][casillaY1] = false;
-            matrizDestapar[casillaX2][casillaY2] = false;
+            matrizDestapar[casillaDestapada1X][casillaDestapada1Y] = false;
+            matrizDestapar[casillaDestapada2X][casillaDestapada2Y] = false;
             vidas--;
             fallos++;
-            //verificarJuego();
         }
         casillaDestapada = false;
+        parCasillasDestapadas = false;
+    }
+
+    public boolean getParCasillasDestapadas() {
+        return parCasillasDestapadas;
     }
 
     public void destaparTodasCasillas() {
-        for(int x = 0; x < 4; x++){
-            for(int y = 0; y < 4; y++){
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
                 matrizDestapar[x][y] = true;
             }
         }
     }
-    
-    public void taparTodasCasillas(){
+
+    public void taparTodasCasillas() {
         matrizDestapar = new boolean[4][4];
-        for(int x = 0; x < 4; x++){
-            for(int y = 0; y < 4; y++){
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
                 matrizDestapar[x][y] = false;
             }
         }
     }
 
-    public String verificarJuego() {
+    public int getEstadoJuego() {
         if (vidas == 0) {
-            return "DERROTA";
+            juegosTotales++;
+            return 0;
         }
 
-        for (int i = 0; i > 3; i++) {
-            for (int j = 0; i > 3; j++) {
-                if (matrizDestapar[i][j] == false) {
-                    return "DERROTA!!";
-                }
-            }
+        if (aciertos == 8) {
+            juegosTotales++;
+            juegosGanados++;
+            return 1;
         }
 
-        return "VICTORIA";
+        return 2;
     }
 
     public String mostrarAyuda() {
-        return "CONCENTRESE" + "\n" + "Saludos invocador, "
+        return "CONCENTRESE\n" + "Saludos invocador, "
                 + "Primero debe seleccionar la tematica del juego y presionar el botón de Iniciar Juego, "
                 + "una vez inicie se le mostrara por un tiempo de cuatro (4) segundos la distribución de las cartas "
                 + "dispondra de tres (3) intentos para encontrar todas las parejas de cartas" + "\n"
@@ -147,15 +154,13 @@ public class ConcentreseJuego {
     }
 
     public String mostrarEstadisticas() {
-        if(juegosTotales != 0){
-        return "Estadisticas de Jugadas\n" + "\n"
-                + "Cantidad de juegos realizados: " + juegosTotales + "\n"
-                + "Porcentaje de juegos ganados: " + ((juegosGanados / juegosTotales) * 100) + "%\n"
-                + "Porcentaje de juegos perdidos " + (((juegosTotales - juegosGanados) / juegosTotales) * 100) + "%\n";
-        }else{
+        if (juegosTotales != 0) {
+            return "Estadisticas de Jugadas\n\n"
+                    + "Cantidad de juegos realizados: " + juegosTotales + "\n"
+                    + "Porcentaje de juegos ganados: " + ((juegosGanados / juegosTotales) * 100) + "%\n"
+                    + "Porcentaje de juegos perdidos " + (((juegosTotales - juegosGanados) / juegosTotales) * 100) + "%\n";
+        } else {
             return "No se han jugado partidas";
         }
-
     }
-
 }
