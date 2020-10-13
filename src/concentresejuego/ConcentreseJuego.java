@@ -37,7 +37,6 @@ public class ConcentreseJuego {
         matrizDestapar = new boolean[4][4];
         casillaDestapada = false;
 
-        //int[][] matriz = new int[4][4];
         int imagen = 8;
         ArrayList<Integer> elementosColocados = new ArrayList<Integer>();
         for (int x = 0; x < 4; x++) {
