@@ -88,9 +88,8 @@ public class GUIConcentrese extends JFrame {
 
         listDesplegable.addItem("Elegir tema");
         listDesplegable.addItem("Lenguajes de Programacion");
-        listDesplegable.addItem("Princesas disney");
+        listDesplegable.addItem("Juegos");
         listDesplegable.addItem("Florecitas");
-        listDesplegable.addItem("Animalitos");
         for (int x = 0; x < 16; x++) {
             pCentro.add(botones[x]);
         }
@@ -176,7 +175,8 @@ public class GUIConcentrese extends JFrame {
                             switch (juego.getEstadoJuego()) {
                                 case 0: //perdio el juego
                                     JOptionPane.showMessageDialog(null, "Juego perdido");
-                                    iniciarJuego();
+                                    juego.destaparTodasCasillas();
+                                    actualizarJuego();
                                     break;
                                 case 1: //gano la partida
                                     JOptionPane.showMessageDialog(null, "Juego Ganado");
