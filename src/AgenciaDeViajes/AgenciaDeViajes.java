@@ -271,6 +271,18 @@ public class AgenciaDeViajes {
         }
     }
 
+    public ArrayList<String> arrNombreHoteles(String ciudad) {
+        ArrayList<String> arrHoteles = new ArrayList();
+        if (!hoteles.isEmpty()) {
+            for (Hotel x : hoteles) {
+                if (x.getCiudad().equals(ciudad)) {
+                    arrHoteles.add(x.getNombre());
+                }
+            }
+        }
+        return arrHoteles;
+    }
+
     /**
      * lista los hoteles de acuerdo a la ciudad solicitada
      *
@@ -433,6 +445,16 @@ public class AgenciaDeViajes {
             }
         }
         return datos;
+    }
+
+    public ArrayList<String> arrNombreAerolineas(String origen, String destino) {
+        ArrayList<String> nombresAerolineas = new ArrayList();
+        for (Aerolinea x : aerolineas) {
+            if (x.consultarVuelo(origen, destino)) {
+                nombresAerolineas.add(x.getNombre());
+            }
+        }
+        return nombresAerolineas;
     }
 
     /**
@@ -729,6 +751,11 @@ public class AgenciaDeViajes {
         transportes.add(new TransporteCiudad("Bogotá", 2500, 2000, 1000));	
         transportes.add(new TransporteCiudad("Medellín", 2200, 1600, 600));
         aerolineas.add(new Aerolinea("LATAN"));
+        aerolineas.add(new Aerolinea("AVIANCA"));
+        aerolineas.get(0).agregarVuelo("Cali", "Medellín", 250000);
+        aerolineas.get(1).agregarVuelo("Cali", "Medellín", 290000);
+        aerolineas.get(0).agregarVuelo("Cali", "Bogotá", 350000);
+        aerolineas.get(1).agregarVuelo("Cali", "Cartagena", 500000);
         reservaciones.add(new Reserva("119343", LocalDate.parse("2020-05-10"), LocalDate.parse("2020-05-15"), 2, "Medellin", 5,"PARAISO", 2000, "LATAN",
                 10000, "Chiva", 1600, eventosCulturales.get(2).getInformacion(), eventosCulturales.get(2).getCosto()));
         
