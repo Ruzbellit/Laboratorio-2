@@ -48,23 +48,14 @@ public class Aerolinea {
      */
      public boolean consultarVuelo(String origen, String destino)
      {
-       boolean vueloDisponible = true;
-      
-      for (Vuelo x: vuelos)
-      {
-          
-          if((x.getOrigen().equals(origen)) && x.getDestino().equals(destino))
-          {
-              return vueloDisponible;
-          }
-          else 
-          {
-              vueloDisponible = false;
-          }
-      }  
-      
-      return vueloDisponible;
-      
+        for (Vuelo x: vuelos)
+        {
+            if((x.getOrigen().equals(origen)) && x.getDestino().equals(destino))
+            {
+                return true;
+            }
+        }  
+        return false;
      }
      
      /**
