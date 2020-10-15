@@ -342,11 +342,28 @@ public class AgenciaDeViajes {
     }
 
     /**
+     * Devuelve un ArrayList<String> de los eventos disponibles para la ciudad seleccionada
+     *
+     * @return
+     */
+    public ArrayList<EventoCultural> listarEventosCulturales(String ciudad) {
+        ArrayList<EventoCultural> eventos = new ArrayList();
+        if (!eventosCulturales.isEmpty()) {
+            for (EventoCultural x : eventosCulturales) {
+                if (x.getCiudad().equals(ciudad)) {
+                    eventos.add(x);
+                }
+            }
+        }
+        return eventos;
+    }
+
+    /**
      * lista todos los eventos disponibles en una ciudad establecida
      *
      * @return
      */
-    public String listarEventosCulturales(String ciudad) {
+    public String listarInfoEventosCulturales(String ciudad) {
         if (!eventosCulturales.isEmpty()) {
             String datos = "";
             for (EventoCultural x : eventosCulturales) {
@@ -501,6 +518,67 @@ public class AgenciaDeViajes {
         }
 
         reservaciones.add(new Reserva(idClienteReserva, fechaViaje, fechaRegreso, viajeros, ciudadDestinoReserva, diasViaje, nombreHotel, costoHotel, nombreAerolinea, 10000, tipoTransporteDeseado, costoTransporte, infoEventosCulturales, costoEventos));
+    }
+
+    /**
+     * el usuario ingresa la informacion acerca de la reserva a realizar, con
+     * respecto a las opciones disponibles
+     */
+    public String realizarReserva(
+        String cedulaCliente,
+        String ciudadDestinoReserva,
+        LocalDate fechaViaje,
+        int diasViaje,
+        String nombreHotel,
+        String nombreAerolinea,
+        int viajeros,
+        String tipoTransporteDeseado,
+        ArrayList<String> eventosSeleccionados) {
+
+        LocalDate fechaRegreso = fechaViaje.plusDays(diasViaje);
+
+        double costoHotel = 0;
+        for (Hotel x : hoteles) {
+            if (x.getNombre().equals(nombreHotel)) {
+                costoHotel = x.getPrecio();
+                break;
+            }
+        }
+
+        double precioVuelo = 0;
+        for (Aerolinea x : aerolineas) {
+            if (x.getNombre().equals(nombreAerolinea)) {
+                precioVuelo = x.precioVuelo("Cali", ciudadDestinoReserva);
+                break;
+            }
+        }
+
+        double costoTransporte = 0;
+        for (TransporteCiudad x : transportes) {
+            if (x.getCiudad().equals(ciudadDestinoReserva)) {
+                costoTransporte = x.getPrecio(tipoTransporteDeseado);
+                break;
+            }
+        }
+        
+        String infoEventosCulturales = "";
+        double costoEventos = 0;
+        for (String nombreEvento : eventosSeleccionados) {
+            for (EventoCultural x : eventosCulturales) {
+                if (x.getNombre().equals(nombreEvento)) {
+                    infoEventosCulturales += x.getInformacion() + "\n";
+                    costoEventos += x.getCosto();
+                }
+            }
+        }
+
+        String resultado = "La reserva se ha guardado exitosamente!";
+        if (fechaViaje.getDayOfMonth() >= 25) {
+            resultado += "\nAdicionalmente se ha aplicado descuento del 15% al valor total, por concepto de viaje al final de mes a cargo de la agencia";
+        }
+
+        reservaciones.add(new Reserva(cedulaCliente, fechaViaje, fechaRegreso, viajeros, ciudadDestinoReserva, diasViaje, nombreHotel, costoHotel, nombreAerolinea, precioVuelo, tipoTransporteDeseado, costoTransporte, infoEventosCulturales, costoEventos));
+        return resultado;
     }
 
     /**

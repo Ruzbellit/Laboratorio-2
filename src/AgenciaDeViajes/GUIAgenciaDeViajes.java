@@ -16,7 +16,6 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
 
-
 /**
  *
  * @author ruzbe
@@ -26,6 +25,8 @@ public class GUIAgenciaDeViajes extends JFrame{
     Container contenPPal;
     JTabbedPane pestañas;
     JPanel pConsulOpc, pListHotelEven, pRealizReserv, pConsultReserv, pIngresInfo, pEstadisticas;
+
+    ArrayList<String> ciudades;
     
     //componentes de la GUI pestaña 1(consultar opciones)
     JPanel pIzquierda, pCentro;
@@ -85,6 +86,11 @@ public class GUIAgenciaDeViajes extends JFrame{
     
     public GUIAgenciaDeViajes()
     {
+        ciudades = new ArrayList();
+        ciudades.add("Cali");
+        ciudades.add("Bogotá");
+        ciudades.add("Medellín");
+        ciudades.add("Cartagena");
         
         pestañas = new JTabbedPane();
         
@@ -108,14 +114,14 @@ public class GUIAgenciaDeViajes extends JFrame{
         lPersonasViaje = new JLabel("Viajeros: ");
         
         
-        NumberFormat format = NumberFormat.getInstance();
-        NumberFormatter numberFormatter = new NumberFormatter(format);
-        numberFormatter.setValueClass(Integer.class);
-        numberFormatter.setMinimum(0);
-        numberFormatter.setAllowsInvalid(false);
-        numberFormatter.setCommitsOnValidEdit(true);
-        fTValMin = new JFormattedTextField(numberFormatter);
-        fTValMax = new JFormattedTextField(numberFormatter);
+        NumberFormat numFormat = NumberFormat.getInstance();
+        NumberFormatter integerFormatter = new NumberFormatter(numFormat);
+        integerFormatter.setValueClass(Integer.class);
+        integerFormatter.setMinimum(0);
+        integerFormatter.setAllowsInvalid(false);
+        integerFormatter.setCommitsOnValidEdit(true);
+        fTValMin = new JFormattedTextField(integerFormatter);
+        fTValMax = new JFormattedTextField(integerFormatter);
         
         SpinnerModel intSpinnerDias = new SpinnerNumberModel(1, 1, 20, 1);
         sDiasViaje = new JSpinner(intSpinnerDias);
@@ -130,10 +136,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         pCentro.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 30),""));
         pIzquierda.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 10),""));
         
-        ciudadDestino.addItem("Cali");
-        ciudadDestino.addItem("Bogotá");
-        ciudadDestino.addItem("Medellín");
-        ciudadDestino.addItem("Cartagena");
+        for (String ciudad : ciudades) { 		      
+            ciudadDestino.addItem(ciudad);
+        }
         
         pIzquierda.setLayout(new BoxLayout(pIzquierda,1));
         pIzquierda.add(lCiudadDestino);
@@ -173,10 +178,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         
         bBuscarP2 = new JButton("Buscar");
         
-        ciudadDestinoP2.addItem("Cali");
-        ciudadDestinoP2.addItem("Bogotá");
-        ciudadDestinoP2.addItem("Medellín");
-        ciudadDestinoP2.addItem("Cartagena");
+        for (String ciudad : ciudades) { 		      
+            ciudadDestinoP2.addItem(ciudad);
+        }
         
         pListHotelEven.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
           
@@ -200,19 +204,19 @@ public class GUIAgenciaDeViajes extends JFrame{
         aerolineaP3 = new JComboBox<>();
         transporteP3 = new JComboBox<>();
         
-         MaskFormatter mascaraF3;
+        fTNumCC = new JFormattedTextField(integerFormatter);
+        MaskFormatter mascaraF3;
         try
         {
-            mascaraF3 = new MaskFormatter("##/##/##");
+            mascaraF3 = new MaskFormatter("####/##/##");
             fTFechaViaje = new JFormattedTextField(mascaraF3);
-            fTNumCC = new JFormattedTextField(mascaraF3);
             
         }catch(ParseException ex){
             System.out.print("no se pudo formatear");
             
         }
         
-        lFechaViaje = new JLabel("Fecha de viaje(AAAA-MM-DD: ");
+        lFechaViaje = new JLabel("Fecha de viaje (AAAA-MM-DD) ");
         lCiudadP3 = new JLabel("Ciudad");
         lNumCC = new JLabel("Número de cédula: ");
         lDiasViajeP3 = new JLabel("Dias de viaje: ");
@@ -234,10 +238,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         
         bCrearReserv = new JButton("Crear Reservacion");
  
-        ciudadDestinoP3.addItem("Cali");
-        ciudadDestinoP3.addItem("Bogotá");
-        ciudadDestinoP3.addItem("Medellín");
-        ciudadDestinoP3.addItem("Cartagena");
+        for (String ciudad : ciudades) { 		      
+            ciudadDestinoP3.addItem(ciudad);
+        }
         hotelP3.addItem(" --- ");
         aerolineaP3.addItem(" --- ");
         transporteP3.addItem(" --- ");
@@ -282,14 +285,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         
         lNumCCP4 = new JLabel("Número de cédula: ");
         lDatosReservP4 = new JLabel("Datos de su Reserva: ");
-        
-        NumberFormat formatP4 = NumberFormat.getInstance();
-        NumberFormatter numberFormatterP4 = new NumberFormatter(formatP4);
-        numberFormatterP4.setValueClass(Integer.class);
-        numberFormatterP4.setMinimum(0);
-        numberFormatterP4.setAllowsInvalid(false);
-        numberFormatterP4.setCommitsOnValidEdit(true);
-        fTNumCCP4 = new JFormattedTextField(numberFormatterP4);
+
+        fTNumCCP4 = new JFormattedTextField(integerFormatter);
         
         tDatosReserv = new JTextArea("Su reserva: ");
         barrasP4 = new JScrollPane(tDatosReserv);
@@ -363,19 +360,13 @@ public class GUIAgenciaDeViajes extends JFrame{
             System.out.print("no se pudo formatear");
             
         }
-        
-        NumberFormat formatP5 = NumberFormat.getInstance();
-        NumberFormatter numberFormatterP5 = new NumberFormatter(formatP5);
-        numberFormatterP5.setValueClass(Integer.class);
-        numberFormatterP5.setMinimum(0);
-        numberFormatterP5.setAllowsInvalid(false);
-        numberFormatterP5.setCommitsOnValidEdit(true);
-        fTCostHabitacion = new JFormattedTextField(numberFormatterP5);
-        fTCostVuelo = new JFormattedTextField(numberFormatterP5);
-        fTCostBus = new JFormattedTextField(numberFormatterP5);
-        ftCostChiva = new JFormattedTextField(numberFormatterP5);
-        fTCostBici = new JFormattedTextField(numberFormatterP5);
-        fTCostEvent = new JFormattedTextField(numberFormatterP5);
+
+        fTCostHabitacion = new JFormattedTextField(integerFormatter);
+        fTCostVuelo = new JFormattedTextField(integerFormatter);
+        fTCostBus = new JFormattedTextField(integerFormatter);
+        ftCostChiva = new JFormattedTextField(integerFormatter);
+        fTCostBici = new JFormattedTextField(integerFormatter);
+        fTCostEvent = new JFormattedTextField(integerFormatter);
        
         sEstrellasH = new JSpinner();
         
@@ -541,29 +532,22 @@ public class GUIAgenciaDeViajes extends JFrame{
             {
                 String destino = ciudadDestinoP2.getItemAt(ciudadDestinoP2.getSelectedIndex());
                 String listaHoteles = agenciaViajes.listarHoteles(destino);
-                String listaEventos = agenciaViajes.listarEventosCulturales(destino);
+                String listaEventos = agenciaViajes.listarInfoEventosCulturales(destino);
                 tHotelesList.setText(listaHoteles);
                 tEventosList.setText(listaEventos);
             }
+            // Pintar checkboxes de eventos culturales según la ciudad seleccionada
             if (ae.getSource() == ciudadDestinoP3) {
                 String ciudadDestino = ciudadDestinoP3.getItemAt(ciudadDestinoP3.getSelectedIndex());
                 for (int i = 0; i < checkboxes.size(); i++) {
                     pIzqP3.remove(checkboxes.get(i));
                 }
                 checkboxes.clear();
-                if (ciudadDestino.equals("Medellín")) {
-                    String eventos[] = {"Ciudad de las flores", "Feria", "Caminata", "otros"};
-                     for (int i = 0; i < eventos.length; i++) {
-                        JCheckBox checkbox = new JCheckBox(eventos[i]);
-                        checkboxes.add(checkbox); //for further use you add it to the list
-                    }
-                }
-                if (ciudadDestino.equals("Bogotá")) {
-                    String eventos[] = {"Rock al parque", "Visita museos"};
-                     for (int i = 0; i < eventos.length; i++) {
-                        JCheckBox checkbox = new JCheckBox(eventos[i]);
-                        checkboxes.add(checkbox); //for further use you add it to the list
-                    }
+
+                ArrayList<EventoCultural> eventos = agenciaViajes.listarEventosCulturales(ciudadDestino);
+                for (int i = 0; i < eventos.size(); i++) {
+                    JCheckBox checkbox = new JCheckBox(eventos.get(i).getNombre());
+                    checkboxes.add(checkbox);
                 }
                 
                 for (int i = 0; i < checkboxes.size(); i++) {
@@ -573,8 +557,25 @@ public class GUIAgenciaDeViajes extends JFrame{
             }
             if(ae.getSource() == bCrearReserv)
             {
-                
-                JOptionPane.showMessageDialog(null, "Falta enlazar acción!");
+                String info = "";
+                String cedulaCliente = fTNumCC.getText();
+                info += cedulaCliente + "\n";
+                for (JCheckBox chkbEventos: checkboxes) {
+                    if (chkbEventos.isSelected()) {
+                        info+= chkbEventos.getText() + "\n";
+                    }
+                }
+                // realizarReserva(
+                // String cedulaCliente,
+                // String ciudadDestinoReserva,
+                // LocalDate fechaViaje,
+                // int diasViaje,
+                // String nombreHotel,
+                // String nombreAerolinea,
+                // int viajeros,
+                // String tipoTransporteDeseado,
+                // ArrayList<String> eventosSeleccionados)
+                JOptionPane.showMessageDialog(null, info);
             }
             if(ae.getSource() == bBuscarP4)
             {
