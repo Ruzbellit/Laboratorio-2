@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
@@ -52,6 +53,7 @@ public class GUIAgenciaDeViajes extends JFrame{
     JSpinner sDiasViajeP3, sEstrellasHotel, sViajerosP3;
     JCheckBox cEventOp1, cEventOp2, cEventOp3; 
     JButton bCrearReserv;
+    ArrayList<JCheckBox> checkboxes;
 
     //componentes de la GUI pestaña 4 (Consultar Reserva)
     JPanel pArribaP4, pCenP4;
@@ -77,6 +79,7 @@ public class GUIAgenciaDeViajes extends JFrame{
     //componentes de la GUI pestaña 6 (Estadisticas)
     JPanel pDerP6, pIzqP6;
     JLabel lCiudadesP6, lHotelesP6;
+    JButton bBuscarCiudR, bBuscarHotelR;
     JTextArea tCiudadesP6, tHotelesP6;
     JScrollPane barrasCP6, barrasHP6;
     
@@ -227,6 +230,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         cEventOp1 = new JCheckBox("Opcion 1");
         cEventOp2 = new JCheckBox("Opcion 2");
         cEventOp3 = new JCheckBox("Opcion 3");
+        checkboxes = new ArrayList<JCheckBox>();
         
         bCrearReserv = new JButton("Crear Reservacion");
  
@@ -246,9 +250,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         pIzqP3.add(lHotelP3);
         pIzqP3.add(hotelP3);
         pIzqP3.add(lEventoAsistirP3);
-        pIzqP3.add(cEventOp1);
-        pIzqP3.add(cEventOp2);
-        pIzqP3.add(cEventOp3);
+        // pIzqP3.add(cEventOp1);
+        // pIzqP3.add(cEventOp2);
+        // pIzqP3.add(cEventOp3);
         
         pCenP3.setLayout(new BoxLayout(pCenP3,1));
         pCenP3.add(lFechaViaje);
@@ -452,6 +456,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         lCiudadesP6 = new JLabel("Ciudades con mas Reservas");
         lHotelesP6 = new JLabel("Hoteles con mas Reservas");
         
+        bBuscarCiudR = new JButton("Buscar");
+        bBuscarHotelR = new JButton("Buscar");
+                
         tCiudadesP6  = new JTextArea("");
         tHotelesP6 = new JTextArea("");
         
@@ -463,10 +470,12 @@ public class GUIAgenciaDeViajes extends JFrame{
         pIzqP6.setLayout(new BoxLayout(pIzqP6, 1));
         pIzqP6.add(lCiudadesP6);
         pIzqP6.add(barrasCP6);
+        pIzqP6.add(bBuscarCiudR);
         
         pDerP6.setLayout(new BoxLayout(pDerP6, 1));
         pDerP6.add(lHotelesP6);
         pDerP6.add(barrasHP6);
+        pDerP6.add(bBuscarHotelR);
         
         pEstadisticas.setLayout(new GridLayout(1,2,3,0));
         pEstadisticas.add(pIzqP6);
@@ -494,6 +503,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         bIngresHotel.addActionListener(mEvento);
         bIngresAerolinea.addActionListener(mEvento);
         bIngresTransp.addActionListener(mEvento);
+        bIngresEvent.addActionListener(mEvento);
+        ciudadDestinoP3.addActionListener(mEvento);
 
         setTitle("Agencia De Viajes");
         setSize(900, 600);
@@ -534,8 +545,35 @@ public class GUIAgenciaDeViajes extends JFrame{
                 tHotelesList.setText(listaHoteles);
                 tEventosList.setText(listaEventos);
             }
+            if (ae.getSource() == ciudadDestinoP3) {
+                String ciudadDestino = ciudadDestinoP3.getItemAt(ciudadDestinoP3.getSelectedIndex());
+                for (int i = 0; i < checkboxes.size(); i++) {
+                    pIzqP3.remove(checkboxes.get(i));
+                }
+                checkboxes.clear();
+                if (ciudadDestino.equals("Medellín")) {
+                    String eventos[] = {"Ciudad de las flores", "Feria", "Caminata", "otros"};
+                     for (int i = 0; i < eventos.length; i++) {
+                        JCheckBox checkbox = new JCheckBox(eventos[i]);
+                        checkboxes.add(checkbox); //for further use you add it to the list
+                    }
+                }
+                if (ciudadDestino.equals("Bogotá")) {
+                    String eventos[] = {"Rock al parque", "Visita museos"};
+                     for (int i = 0; i < eventos.length; i++) {
+                        JCheckBox checkbox = new JCheckBox(eventos[i]);
+                        checkboxes.add(checkbox); //for further use you add it to the list
+                    }
+                }
+                
+                for (int i = 0; i < checkboxes.size(); i++) {
+                    pIzqP3.add(checkboxes.get(i));
+                }
+                pIzqP3.revalidate();
+            }
             if(ae.getSource() == bCrearReserv)
             {
+                
                 JOptionPane.showMessageDialog(null, "Falta enlazar acción!");
             }
             if(ae.getSource() == bBuscarP4)
@@ -555,7 +593,7 @@ public class GUIAgenciaDeViajes extends JFrame{
             }
             if(ae.getSource() == bIngresAerolinea)
             {
-                
+                //No se como hacerlo
             }
             if(ae.getSource() == bIngresTransp)
             {
@@ -566,14 +604,21 @@ public class GUIAgenciaDeViajes extends JFrame{
                 String mensaje = agenciaViajes.registrarTransporte(ciudadT, precioBus, precioChiva, precioBicicleta);
                 JOptionPane.showMessageDialog(null, mensaje);
             }
-            if(ae.getSource() == bIngresTransp)
+            if(ae.getSource() == bIngresEvent)
             {
-                // String nombreE = tCiudadTrasp.getText();
-                // String ciudadE = tCiudadTrasp.getText();
-                // double costo
-                // String horario
-                // String fecha
-                // String lugar
+                String nombreE = tNomEvento.getText();
+                String ciudadE = tCiudadEvent.getText();
+                double costo = (Integer)fTCostEvent.getValue();
+                String horario = fTHorarioEvent.getText();
+                String fecha = fTFechaEvent.getText();
+                String lugar = tLugarEvent.getText();
+                String mensaje = agenciaViajes.registrarEventos(nombreE, ciudadE, costo, horario, fecha, lugar);
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
+            if(ae.getSource() == bIngresEvent)
+            {
+                
+                        
             }
 
         }
