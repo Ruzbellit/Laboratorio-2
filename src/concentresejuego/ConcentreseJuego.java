@@ -147,20 +147,22 @@ public class ConcentreseJuego {
 
     public String mostrarAyuda() {
         return "CONCENTRESE\n" + "Saludos invocador, "
-                + "Primero debe seleccionar la tematica del juego y presionar el botón de Iniciar Juego, "
-                + "una vez inicie se le mostrara por un tiempo de cuatro (4) segundos la distribución de las cartas "
-                + "dispondra de tres (3) intentos para encontrar todas las parejas de cartas" + "\n"
+                + "Primero debe seleccionar la tematica del juego y presionar el botón de Iniciar Juego,\n"
+                + "una vez inicie se le mostrara por un tiempo de cuatro (4) segundos la distribución de las cartas\n"
+                + "dispondras de tres (3) intentos para encontrar todas las parejas de cartas" + "\n"
                 + "Mucha suerte! c:";
     }
 
     public String mostrarEstadisticas() {
         if (juegosTotales != 0) {
+            double porcentajeGanados = (double) juegosGanados / juegosTotales * 100;
+            double porcentajePerdidos = (double) (juegosTotales - juegosGanados) / juegosTotales * 100;
             return "Estadisticas de Jugadas\n\n"
                     + "Cantidad de juegos realizados: " + juegosTotales + "\n"
-                    + "Porcentaje de juegos ganados: " + ((juegosGanados / juegosTotales) * 100) + "%\n"
-                    + "Porcentaje de juegos perdidos " + (((juegosTotales - juegosGanados) / juegosTotales) * 100) + "%\n";
+                    + "Porcentaje de juegos ganados: " + String.format("%.1f", porcentajeGanados) + " %\n"
+                    + "Porcentaje de juegos perdidos " + String.format("%.1f", porcentajePerdidos) + " %\n";
         } else {
-            return "No se han jugado partidas";
+            return "No se han completado partidas";
         }
     }
 }

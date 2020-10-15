@@ -54,6 +54,7 @@ public class GUIConcentrese extends JFrame {
         bIniciar = new JButton("Iniciar Juego");
         for (int x = 0; x < 16; x++) {
             botones[x] = new JButton("");
+            botones[x].setEnabled(false);
         }
 
         lVidas = new JLabel("Vidas: ");
@@ -76,10 +77,10 @@ public class GUIConcentrese extends JFrame {
 
         pAMenu.add(barra);
         barra.add(menu);
-        menu.add(salirJuego);
         menu.add(volverJugar);
         menu.add(mosEstadisticas);
         menu.add(ayuda);
+        menu.add(salirJuego);
         pAOpcion.add(listDesplegable);
         pAOpcion.add(bIniciar);
         pAbajo.add(lVidas);
@@ -104,18 +105,25 @@ public class GUIConcentrese extends JFrame {
         ManejaEventos eventos = new ManejaEventos();
         bIniciar.addActionListener(eventos);
         listDesplegable.addItemListener(eventos);
+
+        //listener de los elementos del menu
+        volverJugar.addActionListener(eventos);
         ayuda.addActionListener(eventos);
         mosEstadisticas.addActionListener(eventos);
+        salirJuego.addActionListener(eventos);
 
+        //listener a cada uno de los botones del tablero
         for (int x = 0; x < 16; x++) {
             botones[x].addActionListener(eventos);
         }
         ayuda.addActionListener(eventos);
 
         setTitle("Juego Concentrese");
-        setSize(500, 500);
+        setResizable(false);
+        setSize(430, 500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
 
     /**
@@ -144,10 +152,11 @@ public class GUIConcentrese extends JFrame {
                 for (int y = 0; y < 4; y++) {
                     if (juego.estadoCasilla(x, y)) {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
-                        botones[b].setEnabled(true);
-                    } else {                        
+                        botones[b].setOpaque(true);
+                        botones[b].setEnabled(false);
+                    } else {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
-                        //botones[b].setEnabled(false);
+                        botones[b].setEnabled(true);
                     }
                     b++;
                 }
@@ -162,13 +171,18 @@ public class GUIConcentrese extends JFrame {
                 JOptionPane.showMessageDialog(null, juego.mostrarAyuda());
             } else if (ae.getSource() == mosEstadisticas) {
                 JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
+            } else if (ae.getSource() == volverJugar && listDesplegable.getSelectedIndex() != 0) {
+                iniciarJuego();
+            } else if (ae.getSource() == salirJuego) {
+                JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
+                System.exit(0);
             } else {
                 int x = 0;
                 int y = 0;
                 for (int b = 0; b < 16; b++) {
                     if (ae.getSource() == botones[b]) {
                         juego.destaparCasilla(x, y);
-                        actualizarJuego();
+                        botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
                         if (juego.getParCasillasDestapadas()) {
                             juego.compararCasillas();
                             vistaParejaCasillas();
@@ -182,7 +196,6 @@ public class GUIConcentrese extends JFrame {
                                     JOptionPane.showMessageDialog(null, "Juego Ganado");
                                     break;
                             }
-
                         }
                         break;
                     }
@@ -238,7 +251,17 @@ public class GUIConcentrese extends JFrame {
         public void iniciarJuego() {
             juego.iniciarJuego();
             juego.destaparTodasCasillas();
-            actualizarJuego();
+            int x = 0;
+            int y = 0;
+            for(int b = 0; b < 16; b++){
+                botones[b].setEnabled(true);
+                botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
+                y++;
+                    if (y == 4) {
+                        x++;
+                        y = 0;
+                    }
+            }
             primeraVista();
         }
     }
