@@ -87,10 +87,10 @@ public class GUIConcentrese extends JFrame {
         pAbajo.add(lFallos);
         pAbajo.add(lAciertos);
 
-        listDesplegable.addItem("Elegir tema");
-        listDesplegable.addItem("Lenguajes de Programacion");
-        listDesplegable.addItem("Juegos");
-        listDesplegable.addItem("Florecitas");
+        listDesplegable.addItem("Elegir Tema");
+        listDesplegable.addItem("Lenguajes de Programación");
+        listDesplegable.addItem("Juegos de PC");
+        listDesplegable.addItem("Banderas del Mundo");
         for (int x = 0; x < 16; x++) {
             pCentro.add(botones[x]);
         }
@@ -155,7 +155,7 @@ public class GUIConcentrese extends JFrame {
                         botones[b].setOpaque(true);
                         botones[b].setEnabled(false);
                     } else {
-                        botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".png")));
+                        botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + 0 + ".gif")));
                         botones[b].setEnabled(true);
                     }
                     b++;
