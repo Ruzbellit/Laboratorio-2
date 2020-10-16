@@ -73,10 +73,10 @@ public class GUIAgenciaDeViajes extends JFrame{
             lAerolineaP5, lNomAeroLinea, lAgregarVuelo, lCiudOrigen, lCiudDestino, lPrecioVuelo,
             lTransporteP5, lCiudadTransp, lCostBus, lCostChiva, lCostBici,
             lEventosP5, lNomEvent, lCiudadEvent, lCostPersona, lHorarioEvent, lFechaEvent, lLugarEvent;
+    JComboBox<String> ciudadHotelP5, ciudadDestinoP5, ciudadOrigenP5, ciudadTranspP5, ciudadEventP5;
     JFormattedTextField fTCostHabitacion, fTCostVuelo, fTCostBus, ftCostChiva, fTCostBici, fTCostEvent,
             fTHorarioEvent, fTFechaEvent;
-    JTextField tNomHotel, tCiudadHotel, tNomAerolinea, tCiudadOrigen, tCiudadDestino, tCiudadTrasp, 
-            tNomEvento, tCiudadEvent, tLugarEvent;
+    JTextField tNomHotel, tNomAerolinea, tNomEvento, tLugarEvent;
     JSpinner sEstrellasH;
     JButton bIngresHotel, bIngresAerolinea, bIngresTransp, bIngresEvent;
     
@@ -324,14 +324,23 @@ public class GUIAgenciaDeViajes extends JFrame{
         lLugarEvent = new JLabel("Lugar");
         
         tNomHotel = new JTextField("");
-        tCiudadHotel = new JTextField("");
         tNomAerolinea = new JTextField("");
-        tCiudadOrigen = new JTextField("");
-        tCiudadDestino = new JTextField("");
         tNomEvento = new JTextField("");
-        tCiudadTrasp = new JTextField("");
-        tCiudadEvent = new JTextField("");
         tLugarEvent = new JTextField("");
+        
+        ciudadHotelP5 = new JComboBox();
+        ciudadDestinoP5 = new JComboBox();
+        ciudadOrigenP5 = new JComboBox();
+        ciudadTranspP5 = new JComboBox();
+        ciudadEventP5 = new JComboBox();
+        
+        for (String ciudad : ciudades) { 		      
+            ciudadHotelP5.addItem(ciudad);
+            ciudadDestinoP5.addItem(ciudad);
+            ciudadOrigenP5.addItem(ciudad);
+            ciudadTranspP5.addItem(ciudad);
+            ciudadEventP5.addItem(ciudad);
+        }
         
          MaskFormatter mascaraFP5H;
          MaskFormatter mascaraFP5F;
@@ -372,7 +381,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         pHotelP5.add(sEstrellasH);
         pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
         pHotelP5.add(lCiudad);
-        pHotelP5.add(tCiudadHotel);
+        pHotelP5.add(ciudadHotelP5);
         pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
         pHotelP5.add(lCostHabitacion);
         pHotelP5.add(fTCostHabitacion);
@@ -391,10 +400,10 @@ public class GUIAgenciaDeViajes extends JFrame{
         pAerolineaP5.add(lAgregarVuelo);
         pAerolineaP5.add(Box.createRigidArea(new Dimension(0,5)));
         pAerolineaP5.add(lCiudOrigen);
-        pAerolineaP5.add(tCiudadOrigen);
+        pAerolineaP5.add(ciudadOrigenP5);
         pAerolineaP5.add(Box.createRigidArea(new Dimension(0,40)));
         pAerolineaP5.add(lCiudDestino);
-        pAerolineaP5.add(tCiudadDestino);
+        pAerolineaP5.add(ciudadDestinoP5);
         pAerolineaP5.add(Box.createRigidArea(new Dimension(0,40)));
         pAerolineaP5.add(lPrecioVuelo);
         pAerolineaP5.add(fTCostVuelo);
@@ -408,7 +417,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         pTransporteP5.add(lTransporteP5);
         pTransporteP5.add(Box.createRigidArea(new Dimension(0,20)));
         pTransporteP5.add(lCiudadTransp);
-        pTransporteP5.add(tCiudadTrasp);
+        pTransporteP5.add(ciudadTranspP5);
         pTransporteP5.add(Box.createRigidArea(new Dimension(0,40)));
         pTransporteP5.add(lCostBus);
         pTransporteP5.add(fTCostBus);
@@ -431,7 +440,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         pEventosP5.add(tNomEvento);
         pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lCiudadEvent);
-        pEventosP5.add(tCiudadEvent);
+        pEventosP5.add(ciudadEventP5);
         pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lCostPersona);
         pEventosP5.add(fTCostEvent);
@@ -644,7 +653,7 @@ public class GUIAgenciaDeViajes extends JFrame{
             {
                 String nombreH = tNomHotel.getText();
                 int estrellas = (Integer)sEstrellasH.getValue();
-                String ciudadH = tCiudadHotel.getText();
+                String ciudadH = ciudadHotelP5.getItemAt(ciudadHotelP5.getSelectedIndex());
                 double precio = (Integer)fTCostHabitacion.getValue();
                 String mensaje = agenciaViajes.registrarHotel(nombreH, estrellas, ciudadH, precio);
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -655,7 +664,7 @@ public class GUIAgenciaDeViajes extends JFrame{
             }
             if(ae.getSource() == bIngresTransp)
             {
-                String ciudadT = tCiudadTrasp.getText();
+                String ciudadT = ciudadTranspP5.getItemAt(ciudadDestinoP5.getSelectedIndex());
                 double precioBus = (Integer)fTCostBus.getValue();
                 double precioChiva = (Integer)ftCostChiva.getValue();
                 double precioBicicleta = (Integer)fTCostBici.getValue();
@@ -665,7 +674,7 @@ public class GUIAgenciaDeViajes extends JFrame{
             if(ae.getSource() == bIngresEvent)
             {
                 String nombreE = tNomEvento.getText();
-                String ciudadE = tCiudadEvent.getText();
+                String ciudadE = ciudadEventP5.getItemAt(ciudadEventP5.getSelectedIndex());
                 double costo = (Integer)fTCostEvent.getValue();
                 String horario = fTHorarioEvent.getText();
                 String fecha = fTFechaEvent.getText();
