@@ -362,63 +362,94 @@ public class GUIAgenciaDeViajes extends JFrame{
         pIngresInfo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 30),""));
         
         pHotelP5.setLayout(new BoxLayout(pHotelP5,1));
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,10)));
         pHotelP5.add(lHotelP5);
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,20)));
         pHotelP5.add(lNomHotel);
         pHotelP5.add(tNomHotel);
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
         pHotelP5.add(lEstrellas);
         pHotelP5.add(sEstrellasH);
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
         pHotelP5.add(lCiudad);
         pHotelP5.add(tCiudadHotel);
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
         pHotelP5.add(lCostHabitacion);
         pHotelP5.add(fTCostHabitacion);
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,20)));
         pHotelP5.add(bIngresHotel);
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,20)));
         
         
         pAerolineaP5.setLayout(new BoxLayout(pAerolineaP5,1));
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,10)));
         pAerolineaP5.add(lAerolineaP5);
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
         pAerolineaP5.add(lNomAeroLinea);
         pAerolineaP5.add(tNomAerolinea);
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
         pAerolineaP5.add(lAgregarVuelo);
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,5)));
         pAerolineaP5.add(lCiudOrigen);
         pAerolineaP5.add(tCiudadOrigen);
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,40)));
         pAerolineaP5.add(lCiudDestino);
         pAerolineaP5.add(tCiudadDestino);
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,40)));
         pAerolineaP5.add(lPrecioVuelo);
         pAerolineaP5.add(fTCostVuelo);
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
         pAerolineaP5.add(bIngresAerolinea);
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
       
         
         pTransporteP5.setLayout(new BoxLayout(pTransporteP5,1));
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,10)));
         pTransporteP5.add(lTransporteP5);
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,20)));
         pTransporteP5.add(lCiudadTransp);
         pTransporteP5.add(tCiudadTrasp);
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,40)));
         pTransporteP5.add(lCostBus);
         pTransporteP5.add(fTCostBus);
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,40)));
         pTransporteP5.add(lCostChiva);
         pTransporteP5.add(ftCostChiva);
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,40)));
         pTransporteP5.add(lCostBici);
         pTransporteP5.add(fTCostBici);
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,20)));
         pTransporteP5.add(bIngresTransp);
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,20)));
         
         
         pEventosP5.setLayout(new BoxLayout(pEventosP5,1));
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,10)));
         pEventosP5.add(lEventosP5);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lNomEvent);
         pEventosP5.add(tNomEvento);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lCiudadEvent);
         pEventosP5.add(tCiudadEvent);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lCostPersona);
         pEventosP5.add(fTCostEvent);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lHorarioEvent);
         pEventosP5.add(fTHorarioEvent);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lFechaEvent);
         pEventosP5.add(fTFechaEvent);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lLugarEvent);
         pEventosP5.add(tLugarEvent);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(bIngresEvent);
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         
         
-        pIngresInfo.setLayout(new GridLayout(1,4,3,0));
+        pIngresInfo.setLayout(new GridLayout(1,4,15,0));
         pIngresInfo.add(pHotelP5);
         pIngresInfo.add(pAerolineaP5);
         pIngresInfo.add(pTransporteP5);
