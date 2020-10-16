@@ -479,6 +479,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         bIngresAerolinea.addActionListener(mEvento);
         bIngresTransp.addActionListener(mEvento);
         bIngresEvent.addActionListener(mEvento);
+        bBuscarCiudR.addActionListener(mEvento);
+        bBuscarHotelR.addActionListener(mEvento);
         ciudadDestinoP3.addActionListener(mEvento);
 
         setTitle("Agencia De Viajes");
@@ -626,9 +628,16 @@ public class GUIAgenciaDeViajes extends JFrame{
                 String mensaje = agenciaViajes.registrarEventos(nombreE, ciudadE, costo, horario, fecha, lugar);
                 JOptionPane.showMessageDialog(null, mensaje);
             }
-            if(ae.getSource() == bIngresEvent)
+            if(ae.getSource() == bBuscarCiudR)
             {
-                
+                String estadisticasCiudades = agenciaViajes.estadisticasMasCiudades();
+                tCiudadesP6.setText(estadisticasCiudades);
+                        
+            }
+            if(ae.getSource() == bBuscarHotelR)
+            {
+                String estadisticasCiudades = agenciaViajes.estadisticasMasHoteles();
+                tHotelesP6.setText(estadisticasCiudades);
                         
             }
 

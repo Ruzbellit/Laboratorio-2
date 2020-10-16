@@ -663,6 +663,48 @@ public class AgenciaDeViajes {
         area.setText(datos);
         JOptionPane.showMessageDialog(null, datos);
     }
+    
+    public String estadisticasMasCiudades() 
+    {
+      ArrayList<String> ciudades = new ArrayList<>();
+        for (Reserva r : reservaciones) {
+            if (!ciudades.contains(r.getCiudadDestino())) {
+                ciudades.add(r.getCiudadDestino());
+            }
+        }
+        String datos = "Ciudades con mas reservas:\n";
+        for (String c : ciudades) {
+            int contador = 0;
+            for (Reserva r: reservaciones) {
+                if (r.getCiudadDestino().equals(c)) {
+                    contador++;
+                }
+            }
+            datos += c + ": " + contador + "\n";
+        }
+        return datos;
+    }
+    
+    public String estadisticasMasHoteles() 
+    {
+      ArrayList<String> hoteles = new ArrayList<>();
+        for (Reserva r: reservaciones ) {
+            if (!hoteles.contains(r.getHotel())) {
+                hoteles.add(r.getHotel());
+            }
+        }
+        String datos = "Hoteles con mas huespedes:\n";
+        for(String h: hoteles){
+            int contador = 0;
+            for(Reserva r: reservaciones){
+                if (r.getHotel().equals(h)) {
+                    contador += r.getViajeros();
+                }
+            }
+            datos += h + ": " + contador + "\n";
+        }
+        return datos;
+    }
 
     /**
      * despliega todas las opciones a elegir, ademas de la fecha actual
