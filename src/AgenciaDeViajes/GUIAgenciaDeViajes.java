@@ -1,8 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+  Autor: Ruzbellit Rossy Romero Ramirez (1925456)
+  Email: ruzbellit.romero@correounivalle.edu.co
+  Autor: Christian Villanueva Paez (1924546)
+  Email: christian.villanueva@correounivalle.edu.co
+  Autor: Daniel Rodriguez Sanchez (1927631)
+  Email: daniel.rodriguez.sanchez@correounivalle.edu.co
+  Fecha última modificación: 2020-10-16
+*/
 package AgenciaDeViajes;
 
 import java.awt.*;
@@ -175,7 +179,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         pConsulOpc.add(pIzquierda,BorderLayout.WEST);
         pConsulOpc.add(pCentro,BorderLayout.CENTER);
         
-        //pestaña 2 (Listar Hoteles y Eventos)
+        //pestaña 2 (Listar Hoteles y Eventos) 
         pArribaP2 = new JPanel();
         pCentroP2 = new JPanel();
         
@@ -284,7 +288,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         pDerP3.add(Box.createRigidArea(new Dimension(0,30)));
         pDerP3.add(bCrearReserv);
         
-        pRealizReserv.setLayout(new GridLayout(1,3,10,0));
+        pRealizReserv.setLayout(new GridLayout(1,3,3,0));
         pRealizReserv.add(pIzqP3);
         pRealizReserv.add(pCenP3);
         pRealizReserv.add(pDerP3);
@@ -555,7 +559,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-
+    /**
+     * Maneja cada uno de los eventos de los componentes de la GUI
+     */
     class ManejadoraEventos implements ActionListener {
         
         AgenciaDeViajes agenciaViajes;

@@ -5,7 +5,7 @@
   Email: christian.villanueva@correounivalle.edu.co
   Autor: Daniel Rodriguez Sanchez (1927631)
   Email: daniel.rodriguez.sanchez@correounivalle.edu.co
-  Fecha última modificación: 2020-09-14
+  Fecha última modificación: 2020-10-16
 */
 package AgenciaDeViajes;
 
@@ -150,7 +150,7 @@ public class AgenciaDeViajes {
             }
         } while (!opcion.equals("5"));
     }
-
+    
     public String registrarHotel(String nombreH, int estrellas, String ciudadH, double precio){
         hoteles.add(new Hotel(estrellas, nombreH, ciudadH, precio));
        
@@ -163,6 +163,9 @@ public class AgenciaDeViajes {
         return "";
     }
     
+    /*
+    
+    */
     public String registrarTransporte(String ciudadT, double precioBus, double precioChiva, double precioBicicleta){
         transportes.add(new TransporteCiudad(ciudadT, precioBus, precioChiva, precioBicicleta));
         return "Informacion de los medios de transporte ingresado con exito:\n"
@@ -172,6 +175,16 @@ public class AgenciaDeViajes {
                             + "\nPrecio alquiler Bicicleta: " + precioBicicleta;
     }
     
+    /**
+     * Registra eventos en los eventos culturales
+     * @param nombreE
+     * @param ciudadE
+     * @param costo
+     * @param horario
+     * @param fecha
+     * @param lugar
+     * @return string con la info del evento
+     */
     public String registrarEventos(String nombreE, String ciudadE, double costo, String horario, String fecha, String lugar ){
         eventosCulturales.add(new EventoCultural(nombreE, ciudadE, costo, horario, fecha, lugar));
         return "Informacion del evento ingresado con exito\n"
@@ -234,7 +247,7 @@ public class AgenciaDeViajes {
                     datosCompletos += "\nPosibles eventos a asistir:";
                     for (EventoCultural e : eventosCulturales) {
                         if (e.getCiudad().equals(ciudadDestino)) {
-                            datosCompletos += "\n" + e.getInformacion();
+                            datosCompletos += "\n" + e.getInformacion() + "\n";
 
                             for (TransporteCiudad t : transportes) {
                                 if (t.getCiudad().equals(ciudadDestino)) {
@@ -275,7 +288,6 @@ public class AgenciaDeViajes {
 
     /**
      * lista todos los hoteles
-     *
      * @return lista de hoteles
      */
     public String listarHoteles() {
@@ -290,6 +302,11 @@ public class AgenciaDeViajes {
         }
     }
 
+    /**
+     * crea un arrayList de todos los hoteles con la ciudad seleccionada
+     * @param ciudad
+     * @return array de hoteles
+     */
     public ArrayList<String> arrNombreHoteles(String ciudad) {
         ArrayList<String> arrHoteles = new ArrayList();
         if (!hoteles.isEmpty()) {
@@ -304,7 +321,6 @@ public class AgenciaDeViajes {
 
     /**
      * lista los hoteles de acuerdo a la ciudad solicitada
-     *
      * @param ciudad
      * @return lista de hoteles
      */
@@ -328,7 +344,6 @@ public class AgenciaDeViajes {
     /**
      * lista los hoteles de acuerdo a la ciudad y cantidad de estrellas
      * solicitada
-     *
      * @param ciudad
      * @param estrellas
      * @return lista de hoteles
@@ -357,7 +372,6 @@ public class AgenciaDeViajes {
 
     /**
      * lista todos los eventos disponibles
-     *
      * @return
      */
     public String listarEventosCulturales() {
@@ -374,7 +388,6 @@ public class AgenciaDeViajes {
 
     /**
      * Devuelve un ArrayList<String> de los eventos disponibles para la ciudad seleccionada
-     *
      * @return
      */
     public ArrayList<EventoCultural> listarEventosCulturales(String ciudad) {
@@ -391,7 +404,6 @@ public class AgenciaDeViajes {
 
     /**
      * lista todos los eventos disponibles en una ciudad establecida
-     *
      * @return
      */
     public String listarInfoEventosCulturales(String ciudad) {
@@ -414,7 +426,6 @@ public class AgenciaDeViajes {
     /**
      * hace un listado de los eventos en una ciudad y dentro de una fecha
      * establecida
-     *
      * @param ciudad
      * @return lista de eventos
      */
@@ -434,8 +445,6 @@ public class AgenciaDeViajes {
 
     /**
      * hace un listado de precios de los medios de transporte que hay en una
-     * ciudad
-     *
      * @param ciudad
      * @return lista de precios de los medios de transporte
      */
@@ -451,7 +460,6 @@ public class AgenciaDeViajes {
     /**
      * hace un listado de las aerolineas que contengan vuelos hacia las ciudades
      * indicadas y su precio
-     *
      * @param origen
      * @param destino
      * @return lista de los vuelos hacia las ciudades indicadas y sus precios
@@ -466,6 +474,12 @@ public class AgenciaDeViajes {
         return datos;
     }
 
+    /**
+     * lista todas las aerolineas con vuelos establecidos
+     * @param origen
+     * @param destino
+     * @return  array de las aerolineas que se pueden elegir
+     */
     public ArrayList<String> arrNombreAerolineas(String origen, String destino) {
         ArrayList<String> nombresAerolineas = new ArrayList();
         for (Aerolinea x : aerolineas) {
@@ -502,7 +516,7 @@ public class AgenciaDeViajes {
         }
 
         /*
-        
+        pregunta la aerolinea seleccionada e ingresa la aerolinea
          */
         String escogerAerolinea = "Escoja la aerolinea deseada\n" + listarAerolineas("CALI", ciudadDestinoReserva);
         String nombreAerolinea = JOptionPane.showInputDialog(escogerAerolinea).trim().toUpperCase();
@@ -683,6 +697,10 @@ public class AgenciaDeViajes {
         JOptionPane.showMessageDialog(null, datos);
     }
     
+    /**
+     * lista las estadisticas de las ciudades
+     * @return  string con las ciudades y su cantidad de reservas
+     */
     public String estadisticasMasCiudades() 
     {
       ArrayList<String> ciudades = new ArrayList<>();
@@ -704,6 +722,10 @@ public class AgenciaDeViajes {
         return datos;
     }
     
+    /**
+     * lista las estadisticas de los hoteles
+     * @return string con los hoteles y su cantidad de reservas
+     */
     public String estadisticasMasHoteles() 
     {
       ArrayList<String> hoteles = new ArrayList<>();
@@ -820,7 +842,7 @@ public class AgenciaDeViajes {
         aerolineas.get(1).agregarVuelo("Cali", "Cartagena", 500000);
         reservaciones.add(new Reserva("119343", LocalDate.parse("2020-05-10"), LocalDate.parse("2020-05-15"), 2, "Medellin", 5,"PARAISO", 2000, "LATAN",
                 10000, "Chiva", 1600, eventosCulturales.get(2).getInformacion(), eventosCulturales.get(2).getCosto()));
-        reservaciones.add(new Reserva("119343", LocalDate.parse("2020-05-10"), LocalDate.parse("2020-05-15"), 3, "Bogota", 5,"SUPREMO", 2000, "LATAN",
+        reservaciones.add(new Reserva("12345", LocalDate.parse("2020-06-10"), LocalDate.parse("2020-06-15"), 3, "Bogota", 5,"SUPREMO", 2000, "LATAN",
                 10000, "Chiva", 1600, eventosCulturales.get(2).getInformacion(), eventosCulturales.get(2).getCosto()));
         
         
