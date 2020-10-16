@@ -50,9 +50,9 @@ public class GUIAgenciaDeViajes extends JFrame{
     
      //componentes de la GUI pestaña 3 (Realizar Reserva)
     JPanel pIzqP3, pCenP3, pDerP3;
-    JComboBox<String> ciudadDestinoP3, hotelP3, aerolineaP3, transporteP3;
+    JComboBox<String> ciudadOrigenP3, ciudadDestinoP3, hotelP3, aerolineaP3, transporteP3;
     JFormattedTextField fTFechaViaje, fTNumCC;
-    JLabel lFechaViaje, lCiudadP3, lNumCC, lDiasViajeP3, lViajerosP3, 
+    JLabel lFechaViaje, lCiudadOrigenP3, lCiudadP3, lNumCC, lDiasViajeP3, lViajerosP3, 
             lHotelP3, lAerolineaP3, lTransporteP3, lEventoAsistirP3;
     JSpinner sDiasViajeP3, sViajerosP3;
     JCheckBox cEventOp1, cEventOp2, cEventOp3; 
@@ -202,6 +202,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         pCenP3 = new JPanel();
         pDerP3 = new JPanel();
 
+        ciudadOrigenP3 = new JComboBox<>();
         ciudadDestinoP3 = new JComboBox<>();
         hotelP3 = new JComboBox<>();
         aerolineaP3 = new JComboBox<>();
@@ -213,7 +214,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         fTFechaViaje = new JFormattedTextField(formatoFecha);
         
         lFechaViaje = new JLabel("Fecha de viaje (yyyy-MM-dd) ");
-        lCiudadP3 = new JLabel("Ciudad");
+        lCiudadOrigenP3 = new JLabel("Ciudad origen");
+        lCiudadP3 = new JLabel("Ciudad destino");
         lNumCC = new JLabel("Número de cédula: ");
         lDiasViajeP3 = new JLabel("Dias de viaje: ");
         lViajerosP3 = new JLabel("Viajeros: ");
@@ -234,6 +236,7 @@ public class GUIAgenciaDeViajes extends JFrame{
  
         for (String ciudad : ciudades) { 		      
             ciudadDestinoP3.addItem(ciudad);
+            ciudadOrigenP3.addItem(ciudad);
         }
         
         pIzqP3.setLayout(new BoxLayout(pIzqP3,1));
@@ -253,6 +256,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         pCenP3.add(bCrearReserv);
         
         pDerP3.setLayout(new BoxLayout(pDerP3,1));
+        pDerP3.add(lCiudadOrigenP3);
+        pDerP3.add(ciudadOrigenP3);
         pDerP3.add(lCiudadP3);
         pDerP3.add(ciudadDestinoP3);
         pDerP3.add(lViajerosP3);
@@ -522,6 +527,7 @@ public class GUIAgenciaDeViajes extends JFrame{
         bBuscarCiudR.addActionListener(mEvento);
         bBuscarHotelR.addActionListener(mEvento);
         ciudadDestinoP3.addActionListener(mEvento);
+        ciudadOrigenP3.addActionListener(mEvento);
 
         setTitle("Agencia De Viajes");
         setSize(900, 600);
@@ -566,7 +572,8 @@ public class GUIAgenciaDeViajes extends JFrame{
                 tEventosList.setText(listaEventos);
             }
             // Eventos cuando una ciudad es seleccionada en crear Reservación
-            if (ae.getSource() == ciudadDestinoP3) {
+            if (ae.getSource() == ciudadDestinoP3 || ae.getSource() == ciudadOrigenP3) {
+                String ciudadOrigen = ciudadOrigenP3.getItemAt(ciudadOrigenP3.getSelectedIndex());
                 String ciudadDestino = ciudadDestinoP3.getItemAt(ciudadDestinoP3.getSelectedIndex());
 
                 // llenar comboBox de hoteles para la ciudad seleccionada
@@ -577,7 +584,7 @@ public class GUIAgenciaDeViajes extends JFrame{
                 }
 
                 // llenar comboBox de aerolineas
-                ArrayList<String> aerolineas = agenciaViajes.arrNombreAerolineas("Cali", ciudadDestino);
+                ArrayList<String> aerolineas = agenciaViajes.arrNombreAerolineas(ciudadOrigen, ciudadDestino);
                 aerolineaP3.removeAllItems();
                 for (String nombreAerolinea : aerolineas) {
                     aerolineaP3.addItem(nombreAerolinea);
@@ -604,6 +611,7 @@ public class GUIAgenciaDeViajes extends JFrame{
                 Boolean esValido = true;
                 String info = "";
                 String cedulaCliente = "";
+                String ciudadOrigen = "";
                 String ciudadDestino = "";
                 LocalDate fechaViaje = LocalDate.now();
                 int diasViaje = 0;
@@ -613,14 +621,13 @@ public class GUIAgenciaDeViajes extends JFrame{
                 String transporteCiudad = "";
                 ArrayList<String> eventosSeleccionados = new ArrayList();
                 try {
-                    cedulaCliente = fTNumCC.getValue().toString();
+                    cedulaCliente = fTNumCC.getValue() == null ? "" : fTNumCC.getValue().toString();
+                    ciudadOrigen = ciudadOrigenP3.getItemAt(ciudadOrigenP3.getSelectedIndex());
                     ciudadDestino = ciudadDestinoP3.getItemAt(ciudadDestinoP3.getSelectedIndex());
-                    fechaViaje = LocalDate.parse(fTFechaViaje.getText());
-                    esValido = esValido && Validaciones.validarFecha(fTFechaViaje.getText());
+                    fechaViaje = fTFechaViaje.getText().equals("") ? null : LocalDate.parse(fTFechaViaje.getText());
                     diasViaje = (Integer)sDiasViajeP3.getValue();
                     nombreHotel = hotelP3.getItemAt(hotelP3.getSelectedIndex());
                     nombreAerolinea = aerolineaP3.getItemAt(aerolineaP3.getSelectedIndex());
-                    // esValido -> validar si la aerolinea tiene vuelos para el origen y destino seleccionados
                     viajeros = (Integer)sViajerosP3.getValue();
                     transporteCiudad = transporteP3.getItemAt(transporteP3.getSelectedIndex());
 
@@ -630,9 +637,12 @@ public class GUIAgenciaDeViajes extends JFrame{
                         }
                     }
 
+                    esValido = esValido && Validaciones.validarCedula(cedulaCliente) &&
+                        Validaciones.validarFecha(fechaViaje);
+
                 } catch (Exception e) {
                     esValido = false;
-                    info = "Datos incompletos. Por favor seleccione un valor para cada campo\n";
+                    info = "Datos incompletos. Por favor seleccione un valor para cada campo\n" + e;
                 }
 
                 if (esValido) {

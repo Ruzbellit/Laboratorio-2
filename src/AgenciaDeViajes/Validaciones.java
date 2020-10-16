@@ -15,23 +15,32 @@ import javax.swing.JOptionPane;
 public class Validaciones {
     
 
-    public static Boolean validarFecha(String textoFecha) {
+    public static Boolean validarFecha(LocalDate fecha) {
         LocalDate fechaAhora = LocalDate.now();
         try {
-            LocalDate fecha = LocalDate.parse(textoFecha);
+            if (fecha == null) {
+                JOptionPane.showMessageDialog(null, "La fecha de viaje no puede estar vacía", "error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
             if (fechaAhora.isAfter(fecha)) {
-                JOptionPane.showMessageDialog(null, "La fecha de viaje debe ser superior a la fecha actual", "error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La fecha de viaje debe ser superior a la fecha actual", "error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         } catch (Exception e) {
             String mensaje = "Error al convertir fecha"
-                    + "formato 'yyyy-MM-dd'";
+                    + "\nformato 'yyyy-MM-dd'";
             JOptionPane.showMessageDialog(null, mensaje, "error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
     }
 
-    // Validar si hay vuelos disponibles con la aerolinea seleccionada, ciudad de origen y ciudad de destino
+    public static Boolean validarCedula(String cedula) {
+        if (cedula.equals("")) {
+            JOptionPane.showMessageDialog(null, "La cédula no puede estar vacía", "error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 
 }
