@@ -222,8 +222,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         lTransporteP3 = new JLabel("Tipo de transporte: ");
         lEventoAsistirP3 = new JLabel("Eventos a asistir: ");
         
-        sDiasViajeP3 = new JSpinner();
-        sViajerosP3 = new JSpinner();
+        sDiasViajeP3 = new JSpinner(intSpinnerDias);
+        sViajerosP3 = new JSpinner(intSpinnerPersonas);
         
         cEventOp1 = new JCheckBox("Opcion 1");
         cEventOp2 = new JCheckBox("Opcion 2");
@@ -561,32 +561,46 @@ public class GUIAgenciaDeViajes extends JFrame{
             }
             if(ae.getSource() == bCrearReserv)
             {
+                Boolean esValido = true;
                 String info = "";
-                String cedulaCliente = fTNumCC.getText();
-                String ciudadDestino = ciudadDestinoP2.getItemAt(ciudadDestinoP3.getSelectedIndex());
-                LocalDate fechaViaje = Validaciones.validarFecha(fTFechaViaje.getText());
-                int diasViaje = (Integer)sDiasViaje.getValue();
-                String nombreHotel;
+                String cedulaCliente = "";
+                String ciudadDestino = "";
+                LocalDate fechaViaje = LocalDate.now();
+                int diasViaje = 0;
+                String nombreHotel = "";
+                String nombreAerolinea = "";
+                int viajeros = 0;
+                String transporteCiudad = "";
+                ArrayList<String> eventosSeleccionados = new ArrayList();
+                try {
+                    cedulaCliente = fTNumCC.getValue().toString();
+                    ciudadDestino = ciudadDestinoP3.getItemAt(ciudadDestinoP3.getSelectedIndex());
+                    fechaViaje = LocalDate.parse(fTFechaViaje.getText());
+                    esValido = esValido && Validaciones.validarFecha(fTFechaViaje.getText());
+                    diasViaje = (Integer)sDiasViajeP3.getValue();
+                    nombreHotel = hotelP3.getItemAt(hotelP3.getSelectedIndex());
+                    nombreAerolinea = aerolineaP3.getItemAt(aerolineaP3.getSelectedIndex());
+                    // esValido -> validar si la aerolinea tiene vuelos para el origen y destino seleccionados
+                    viajeros = (Integer)sViajerosP3.getValue();
+                    transporteCiudad = transporteP3.getItemAt(transporteP3.getSelectedIndex());
 
-                info += cedulaCliente + "\n";
-                info += fechaViaje + "\n";
-                info += diasViaje + "\n";
-
-                for (JCheckBox chkbEventos: checkboxes) {
-                    if (chkbEventos.isSelected()) {
-                        info+= chkbEventos.getText() + "\n";
+                    for (JCheckBox chkbEventos: checkboxes) {
+                        if (chkbEventos.isSelected()) {
+                            eventosSeleccionados.add(chkbEventos.getText());
+                        }
                     }
+
+                } catch (Exception e) {
+                    esValido = false;
+                    info = "Datos incompletos. Por favor seleccione un valor para cada campo\n";
                 }
-                // realizarReserva(
-                // String cedulaCliente,
-                // String ciudadDestino,
-                // LocalDate fechaViaje,
-                // int diasViaje,
-                // String nombreHotel,
-                // String nombreAerolinea,
-                // int viajeros,
-                // String tipoTransporteDeseado,
-                // ArrayList<String> eventosSeleccionados)
+
+                if (esValido) {
+                    info = agenciaViajes.realizarReserva(cedulaCliente, ciudadDestino, fechaViaje, diasViaje, nombreHotel,
+                        nombreAerolinea, viajeros, transporteCiudad, eventosSeleccionados);
+                } else {
+                    info += "No se pudo guardar la reserva!";
+                }
                 JOptionPane.showMessageDialog(null, info);
             }
             if(ae.getSource() == bBuscarP4)

@@ -15,21 +15,21 @@ import javax.swing.JOptionPane;
 public class Validaciones {
     
 
-    public static LocalDate validarFecha(String textoFecha) {
+    public static Boolean validarFecha(String textoFecha) {
         LocalDate fechaAhora = LocalDate.now();
         try {
             LocalDate fecha = LocalDate.parse(textoFecha);
             if (fechaAhora.isAfter(fecha)) {
                 JOptionPane.showMessageDialog(null, "La fecha de viaje debe ser superior a la fecha actual", "error", JOptionPane.WARNING_MESSAGE);
-                return null;
+                return false;
             }
-            return fecha;
         } catch (Exception e) {
             String mensaje = "Error al convertir fecha"
                     + "formato 'yyyy-MM-dd'";
             JOptionPane.showMessageDialog(null, mensaje, "error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
-        return fechaAhora;
+        return true;
     }
 
     // Validar si hay vuelos disponibles con la aerolinea seleccionada, ciudad de origen y ciudad de destino
