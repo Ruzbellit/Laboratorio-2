@@ -626,8 +626,8 @@ public class GUIAgenciaDeViajes extends JFrame{
                     ciudadDestino = ciudadDestinoP3.getItemAt(ciudadDestinoP3.getSelectedIndex());
                     fechaViaje = fTFechaViaje.getText().equals("") ? null : LocalDate.parse(fTFechaViaje.getText());
                     diasViaje = (Integer)sDiasViajeP3.getValue();
-                    nombreHotel = hotelP3.getItemAt(hotelP3.getSelectedIndex());
-                    nombreAerolinea = aerolineaP3.getItemAt(aerolineaP3.getSelectedIndex());
+                    nombreHotel = hotelP3.getSelectedIndex() == -1 ? "" : hotelP3.getItemAt(hotelP3.getSelectedIndex());
+                    nombreAerolinea = aerolineaP3.getSelectedIndex() == -1 ? "" : aerolineaP3.getItemAt(aerolineaP3.getSelectedIndex());
                     viajeros = (Integer)sViajerosP3.getValue();
                     transporteCiudad = transporteP3.getItemAt(transporteP3.getSelectedIndex());
 
@@ -638,7 +638,10 @@ public class GUIAgenciaDeViajes extends JFrame{
                     }
 
                     esValido = esValido && Validaciones.validarCedula(cedulaCliente) &&
-                        Validaciones.validarFecha(fechaViaje);
+                        Validaciones.validarFecha(fechaViaje) &&
+                        Validaciones.validarVuelo(ciudadOrigen, ciudadDestino) &&
+                        Validaciones.validarHotel(nombreHotel) &&
+                        Validaciones.validarAerolinea(nombreAerolinea);
 
                 } catch (Exception e) {
                     esValido = false;
@@ -649,7 +652,7 @@ public class GUIAgenciaDeViajes extends JFrame{
                     info = agenciaViajes.realizarReserva(cedulaCliente, ciudadDestino, fechaViaje, diasViaje, nombreHotel,
                         nombreAerolinea, viajeros, transporteCiudad, eventosSeleccionados);
                 } else {
-                    info += "No se pudo guardar la reserva!";
+                    info += "\nNo se pudo guardar la reserva!";
                 }
                 JOptionPane.showMessageDialog(null, info);
             }

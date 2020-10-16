@@ -43,4 +43,28 @@ public class Validaciones {
         return true;
     }
 
+    public static Boolean validarHotel(String nombreHotel) {
+        if (nombreHotel.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe seleccinar un Hotel", "error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    public static Boolean validarAerolinea(String nombreAerolinea) {
+        if (nombreAerolinea.equals("")) {
+            JOptionPane.showMessageDialog(null, "Seleccione una aerolínea", "error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    public static Boolean validarVuelo(String ciudadOrigen, String ciudadDestino) {
+        if (ciudadOrigen.equals(ciudadDestino)) {
+            JOptionPane.showMessageDialog(null, "La ciudad origen y destino no pueden ser la misma", "error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
 }
