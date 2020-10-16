@@ -158,9 +158,15 @@ public class AgenciaDeViajes {
                + "\n" + "Estrellas: " + estrellas + "\n" + "Ciudad: " + ciudadH + "\n" + "Precio: " + precio;
     }
     
-    public String registrarAerolinea(String nombreA){
+    public String registrarAerolinea(String nombreA, String ciudadOrigen, String ciudadDestino, double precio){
         Aerolinea aerolinea = new Aerolinea(nombreA);
-        return "";
+        aerolinea.agregarVuelo(ciudadOrigen, ciudadDestino, precio);
+        aerolineas.add(aerolinea);
+        return "Informacion del vuelo de la aerolinea ingresado con exito:\n"
+                + "\nNombre Aerolinea: " + nombreA
+                + "\nCiudad Origen: " + ciudadOrigen
+                + "\nCiudad Destino: " + ciudadDestino
+                + "\nPrecio: " + precio;
     }
     
     public String registrarTransporte(String ciudadT, double precioBus, double precioChiva, double precioBicicleta){

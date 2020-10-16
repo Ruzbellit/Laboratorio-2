@@ -714,6 +714,12 @@ public class GUIAgenciaDeViajes extends JFrame{
             if(ae.getSource() == bIngresAerolinea)
             {
                 //No se como hacerlo
+                String nombreA = tNomAerolinea.getText();
+                String ciudadOrigen = ciudadOrigenP5.getItemAt(ciudadOrigenP5.getSelectedIndex());
+                String ciudadDestino = ciudadDestinoP5.getItemAt(ciudadDestinoP5.getSelectedIndex());
+                double costoVuelo = (Integer) fTCostVuelo.getValue();
+                String mensaje = agenciaViajes.registrarAerolinea(nombreA, ciudadOrigen, ciudadDestino, costoVuelo);
+                JOptionPane.showMessageDialog(null, mensaje);
             }
             if(ae.getSource() == bIngresTransp)
             {
