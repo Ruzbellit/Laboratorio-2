@@ -151,6 +151,14 @@ public class AgenciaDeViajes {
         } while (!opcion.equals("5"));
     }
     
+    /**
+     * registra un hotel y los agrega en el array de hoteles 
+     * @param nombreH
+     * @param estrellas
+     * @param ciudadH
+     * @param precio
+     * @return 
+     */
     public String registrarHotel(String nombreH, int estrellas, String ciudadH, double precio){
         hoteles.add(new Hotel(estrellas, nombreH, ciudadH, precio));
        
@@ -158,6 +166,14 @@ public class AgenciaDeViajes {
                + "\n" + "Estrellas: " + estrellas + "\n" + "Ciudad: " + ciudadH + "\n" + "Precio: " + precio;
     }
     
+    /**
+     * registra la aerolinea en aerolineas
+     * @param nombreA
+     * @param ciudadOrigen
+     * @param ciudadDestino
+     * @param precio
+     * @return 
+     */
     public String registrarAerolinea(String nombreA, String ciudadOrigen, String ciudadDestino, double precio){
         Aerolinea aerolinea = new Aerolinea(nombreA);
         aerolinea.agregarVuelo(ciudadOrigen, ciudadDestino, precio);
@@ -169,9 +185,14 @@ public class AgenciaDeViajes {
                 + "\nPrecio: " + precio;
     }
     
-    /*
-    
-    */
+    /**
+     * registra los tipos de transporte en transportes
+     * @param ciudadT
+     * @param precioBus
+     * @param precioChiva
+     * @param precioBicicleta
+     * @return  string con la informacion de lo agregado
+     */
     public String registrarTransporte(String ciudadT, double precioBus, double precioChiva, double precioBicicleta){
         transportes.add(new TransporteCiudad(ciudadT, precioBus, precioChiva, precioBicicleta));
         return "Informacion de los medios de transporte ingresado con exito:\n"
