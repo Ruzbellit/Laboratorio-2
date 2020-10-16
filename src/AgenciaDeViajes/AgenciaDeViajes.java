@@ -188,9 +188,10 @@ public class AgenciaDeViajes {
      * ingresados (ciudad, rango de valores, dias de viaje, cantidad de
      * personas)
      */
-    public String catalogo(String ciudadDestino, int valorMinimo, int valorMaximo, int diasViaje, int cantidadPersonas) {
+    public String catalogo(String ciudadOrigen, String ciudadDestino, int valorMinimo, int valorMaximo, int diasViaje, int cantidadPersonas) {
 
         String datos = "Opciones disponibles de acuerdo a los parametros indicados:\n"
+                + "Ciudad destino: " + ciudadOrigen
                 + "Ciudad destino: " + ciudadDestino
                 + "\nRango de precio: " + valorMinimo + " - " + valorMaximo
                 + "\nDias de viaje: " + diasViaje
@@ -200,58 +201,76 @@ public class AgenciaDeViajes {
         lista los hoteles de la ciudad, combinado con los eventos a los que
         puede asistir
          */
+        String datosCompletos = datos;
+        
         for (Hotel x : hoteles) {
             if (x.getCiudad().equals(ciudadDestino)) {
                 double precioTotal = 0;
                 if (x.getPrecio() * diasViaje * cantidadPersonas < valorMaximo) {
                     precioTotal = x.getPrecio() * diasViaje * cantidadPersonas;
-                    datos += "\n\tOpcion " + contador
+                    datosCompletos += "\n\n\tOpcion " + contador
                             + "\nNombre Hotel: " + x.getNombre()
                             + "\nEstrellas: " + x.getEstrellas()
                             + "\nPrecio hotel dia: " + x.getPrecio()
                             + "\nPrecio Total (Hotel): " + precioTotal;
                     contador++;
 
+                    //Muestra los posibles vuelos
+                    datosCompletos += "\n\nPosibles Vuelos:";
+                    for (Aerolinea a : aerolineas) {
+                        if (a.consultarVuelo(ciudadOrigen, ciudadDestino)) {
+                            if (a.precioVuelo(ciudadOrigen, ciudadDestino) + precioTotal < valorMaximo) {
+                                precioTotal = a.precioVuelo(ciudadOrigen, ciudadDestino) + precioTotal;
+                                datosCompletos += "\n" + "Nombre: " + a.getNombre() + "\n" 
+                                + "Precio: " + a.precioVuelo(ciudadOrigen, ciudadDestino) + "\n" ;
+                            } 
+                        }
+                    }
+                    
                     /*
                     muestra los eventos de la ciudad, combinado con los diferentes
                     tipo de transporte y su precio
                      */
-                    datos += "\n\nPosibles eventos a asistir:";
+                    datosCompletos += "\nPosibles eventos a asistir:";
                     for (EventoCultural e : eventosCulturales) {
                         if (e.getCiudad().equals(ciudadDestino)) {
-                            datos += "\n" + e.getInformacion();
+                            datosCompletos += "\n" + e.getInformacion();
 
                             for (TransporteCiudad t : transportes) {
                                 if (t.getCiudad().equals(ciudadDestino)) {
-                                    datos += "\nPrecio Total en Bus (Hotel, Evento, Transporte): ";
+                                    datosCompletos += "\nPrecio Total en Bus (Hotel, Evento, Transporte): ";
                                     if (precioTotal + t.getPrecio("BUS") * cantidadPersonas * diasViaje < valorMaximo) {
-                                        datos += precioTotal + e.getCosto() * cantidadPersonas + t.getPrecio("BUS") * cantidadPersonas * diasViaje;
+                                        datosCompletos += precioTotal + e.getCosto() * cantidadPersonas + t.getPrecio("BUS") * cantidadPersonas * diasViaje;
                                     } else {
-                                        datos += "Excede el precio maximo\n";
+                                        datosCompletos += "Excede el precio maximo\n";
                                     }
 
-                                    datos += "\nPrecio Total en Chiva (Hotel, Evento, Transporte): ";
+                                    datosCompletos += "\nPrecio Total en Chiva (Hotel, Evento, Transporte): ";
                                     if (precioTotal + t.getPrecio("CHIVA") * cantidadPersonas * diasViaje < valorMaximo) {
-                                        datos += precioTotal + e.getCosto() * cantidadPersonas + t.getPrecio("CHIVA") * cantidadPersonas * diasViaje;
+                                        datosCompletos += precioTotal + e.getCosto() * cantidadPersonas + t.getPrecio("CHIVA") * cantidadPersonas * diasViaje;
                                     } else {
-                                        datos += "Excede el precio maximo\n";
+                                        datosCompletos += "Excede el precio maximo\n";
                                     }
 
-                                    datos += "\nPrecio Total en Bicicleta (Hotel, Evento, Transporte): ";
+                                    datosCompletos += "\nPrecio Total en Bicicleta (Hotel, Evento, Transporte): ";
                                     if (precioTotal + t.getPrecio("BICICLETA") * cantidadPersonas * diasViaje < valorMaximo) {
-                                        datos += precioTotal + e.getCosto() * cantidadPersonas + t.getPrecio("BICICLETA") * cantidadPersonas * diasViaje + "\n";
+                                        datosCompletos += precioTotal + e.getCosto() * cantidadPersonas + t.getPrecio("BICICLETA") * cantidadPersonas * diasViaje + "\n";
                                     } else {
-                                        datos += "Excede el precio maximo\n";
+                                        datosCompletos += "Excede el precio maximo\n";
                                     }
                                 }
                             }
 
                         }
                     }
+                    
                 }
             }
         }
-        return datos;
+        if (datosCompletos.equals(datos)) {
+            return "No se encuentran opciones con los valores ingresados datos";
+        }
+        return datosCompletos;
     }
 
     /**
@@ -631,7 +650,7 @@ public class AgenciaDeViajes {
                 ciudades.add(r.getCiudadDestino());
             }
         }
-        String datos = "Ciudades con mas reservas:\n";
+        String datos = "Ciudades con reservas:\n";
         for (String c : ciudades) {
             int contador = 0;
             for (Reserva r: reservaciones) {
@@ -649,7 +668,7 @@ public class AgenciaDeViajes {
                 hoteles.add(r.getHotel());
             }
         }
-        datos += "\nHoteles con mas huespedes:\n";
+        datos += "\nHoteles con huespedes:\n";
         for(String h: hoteles){
             int contador = 0;
             for(Reserva r: reservaciones){
@@ -672,7 +691,7 @@ public class AgenciaDeViajes {
                 ciudades.add(r.getCiudadDestino());
             }
         }
-        String datos = "Ciudades con mas reservas:\n";
+        String datos = "Ciudades con reservas:\n";
         for (String c : ciudades) {
             int contador = 0;
             for (Reserva r: reservaciones) {
@@ -693,7 +712,7 @@ public class AgenciaDeViajes {
                 hoteles.add(r.getHotel());
             }
         }
-        String datos = "Hoteles con mas huespedes:\n";
+        String datos = "Hoteles con huespedes:\n";
         for(String h: hoteles){
             int contador = 0;
             for(Reserva r: reservaciones){
@@ -730,12 +749,13 @@ public class AgenciaDeViajes {
                     break;
                 case "2": // consultar todas las opciones disponibles
                     //el usuario ingresa los parametros para listar las opciones disponibles
+                    String ciudadOrigen = JOptionPane.showInputDialog("Ingrese la ciudad de Origen").trim().toUpperCase();
                     String ciudadDestino = JOptionPane.showInputDialog("Ingrese la ciudad de destino").trim().toUpperCase();
                     int valorMinimo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor minimo del viaje").trim());
                     int valorMaximo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor maximo del viaje").trim());
                     int diasViaje = Integer.parseInt(JOptionPane.showInputDialog("Digite los dias de viaje").trim());
                     int cantidadPersonas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de personas a viajar").trim());
-                    String datos = catalogo(ciudadDestino, valorMinimo, valorMaximo, diasViaje, cantidadPersonas);
+                    String datos = catalogo(ciudadOrigen, ciudadDestino, valorMinimo, valorMaximo, diasViaje, cantidadPersonas);
                     area.setText(datos);
                     JOptionPane.showMessageDialog(null, barras);
                     break;
@@ -799,6 +819,8 @@ public class AgenciaDeViajes {
         aerolineas.get(0).agregarVuelo("Cali", "Bogotá", 350000);
         aerolineas.get(1).agregarVuelo("Cali", "Cartagena", 500000);
         reservaciones.add(new Reserva("119343", LocalDate.parse("2020-05-10"), LocalDate.parse("2020-05-15"), 2, "Medellin", 5,"PARAISO", 2000, "LATAN",
+                10000, "Chiva", 1600, eventosCulturales.get(2).getInformacion(), eventosCulturales.get(2).getCosto()));
+        reservaciones.add(new Reserva("119343", LocalDate.parse("2020-05-10"), LocalDate.parse("2020-05-15"), 3, "Bogota", 5,"SUPREMO", 2000, "LATAN",
                 10000, "Chiva", 1600, eventosCulturales.get(2).getInformacion(), eventosCulturales.get(2).getCosto()));
         
         

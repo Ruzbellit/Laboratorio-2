@@ -66,5 +66,13 @@ public class Validaciones {
         }
         return true;
     }
+    
+    public static Boolean validarMaxMin(int valMin, int valMax) {
+        if (valMin > valMax) {
+            JOptionPane.showMessageDialog(null, "El valor maximo no puede ser menor al valor minimo", "error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 
 }

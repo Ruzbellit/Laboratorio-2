@@ -33,8 +33,8 @@ public class GUIAgenciaDeViajes extends JFrame{
     
     //componentes de la GUI pestaña 1(consultar opciones)
     JPanel pIzquierda, pCentro;
-    JComboBox<String> ciudadDestino;
-    JLabel lCiudadDestino, lValMin, lValMax, lDiasViaje, lPersonasViaje;
+    JComboBox<String> ciudadDestino,ciudadOrigen;
+    JLabel lCiudadDestino, lCiudadOrigen, lValMin, lValMax, lDiasViaje, lPersonasViaje;
     JFormattedTextField fTValMin, fTValMax;
     JSpinner sDiasViaje, sPersonasViaje;
     JScrollPane barras;
@@ -109,8 +109,10 @@ public class GUIAgenciaDeViajes extends JFrame{
         pCentro = new JPanel();
          
         ciudadDestino = new JComboBox<>();
+        ciudadOrigen = new JComboBox<>();
         
-        lCiudadDestino = new JLabel("Ciudad: ");
+        lCiudadOrigen = new JLabel("Ciudad Origen: ");
+        lCiudadDestino = new JLabel("Ciudad Destino: ");
         lValMin = new JLabel("Valor Minimo: ");
         lValMax = new JLabel("Valor Maximo: ");
         lDiasViaje = new JLabel("Cantidad días de viaje: ");
@@ -141,26 +143,31 @@ public class GUIAgenciaDeViajes extends JFrame{
         
         for (String ciudad : ciudades) { 		      
             ciudadDestino.addItem(ciudad);
+            ciudadOrigen.addItem(ciudad);
         }
         
         pIzquierda.setLayout(new BoxLayout(pIzquierda,1));
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,10)));
+        pIzquierda.add(lCiudadOrigen);
+        pIzquierda.add(ciudadOrigen);
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,30)));
         pIzquierda.add(lCiudadDestino);
         pIzquierda.add(ciudadDestino);
-        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,30)));
         pIzquierda.add(lValMin);
         pIzquierda.add(fTValMin);
-        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,45)));
         pIzquierda.add(lValMax);
         pIzquierda.add(fTValMax);
-        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,45)));
         pIzquierda.add(lDiasViaje);
         pIzquierda.add(sDiasViaje);
-        pIzquierda.add(Box.createRigidArea(new Dimension(0,50)));
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,45)));
         pIzquierda.add(lPersonasViaje);
         pIzquierda.add(sPersonasViaje);
-        pIzquierda.add(Box.createRigidArea(new Dimension(0,60)));
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,30)));
         pIzquierda.add(bBuscarP1);
-        pIzquierda.add(Box.createRigidArea(new Dimension(0,40)));
+        pIzquierda.add(Box.createRigidArea(new Dimension(0,20)));
         pCentro.setLayout(new GridLayout(1,1));
         pCentro.add(barras);
         
@@ -378,69 +385,69 @@ public class GUIAgenciaDeViajes extends JFrame{
         pHotelP5.setLayout(new BoxLayout(pHotelP5,1));
         pHotelP5.add(Box.createRigidArea(new Dimension(0,10)));
         pHotelP5.add(lHotelP5);
-        pHotelP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,30)));
         pHotelP5.add(lNomHotel);
         pHotelP5.add(tNomHotel);
         pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
         pHotelP5.add(lEstrellas);
         pHotelP5.add(sEstrellasH);
-        pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,60)));
         pHotelP5.add(lCiudad);
         pHotelP5.add(ciudadHotelP5);
         pHotelP5.add(Box.createRigidArea(new Dimension(0,50)));
         pHotelP5.add(lCostHabitacion);
         pHotelP5.add(fTCostHabitacion);
-        pHotelP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,30)));
         pHotelP5.add(bIngresHotel);
-        pHotelP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pHotelP5.add(Box.createRigidArea(new Dimension(0,30)));
         
         
         pAerolineaP5.setLayout(new BoxLayout(pAerolineaP5,1));
         pAerolineaP5.add(Box.createRigidArea(new Dimension(0,10)));
         pAerolineaP5.add(lAerolineaP5);
-        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,30)));
         pAerolineaP5.add(lNomAeroLinea);
         pAerolineaP5.add(tNomAerolinea);
-        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,30)));
         pAerolineaP5.add(lAgregarVuelo);
         pAerolineaP5.add(Box.createRigidArea(new Dimension(0,5)));
         pAerolineaP5.add(lCiudOrigen);
         pAerolineaP5.add(ciudadOrigenP5);
-        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,40)));
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,50)));
         pAerolineaP5.add(lCiudDestino);
         pAerolineaP5.add(ciudadDestinoP5);
-        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,40)));
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,50)));
         pAerolineaP5.add(lPrecioVuelo);
         pAerolineaP5.add(fTCostVuelo);
-        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,30)));
         pAerolineaP5.add(bIngresAerolinea);
-        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pAerolineaP5.add(Box.createRigidArea(new Dimension(0,30)));
       
         
         pTransporteP5.setLayout(new BoxLayout(pTransporteP5,1));
         pTransporteP5.add(Box.createRigidArea(new Dimension(0,10)));
         pTransporteP5.add(lTransporteP5);
-        pTransporteP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,30)));
         pTransporteP5.add(lCiudadTransp);
         pTransporteP5.add(ciudadTranspP5);
-        pTransporteP5.add(Box.createRigidArea(new Dimension(0,40)));
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,50)));
         pTransporteP5.add(lCostBus);
         pTransporteP5.add(fTCostBus);
-        pTransporteP5.add(Box.createRigidArea(new Dimension(0,40)));
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,50)));
         pTransporteP5.add(lCostChiva);
         pTransporteP5.add(ftCostChiva);
-        pTransporteP5.add(Box.createRigidArea(new Dimension(0,40)));
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,45)));
         pTransporteP5.add(lCostBici);
         pTransporteP5.add(fTCostBici);
-        pTransporteP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,30)));
         pTransporteP5.add(bIngresTransp);
-        pTransporteP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pTransporteP5.add(Box.createRigidArea(new Dimension(0,30)));
         
         
         pEventosP5.setLayout(new BoxLayout(pEventosP5,1));
         pEventosP5.add(Box.createRigidArea(new Dimension(0,10)));
         pEventosP5.add(lEventosP5);
-        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,30)));
         pEventosP5.add(lNomEvent);
         pEventosP5.add(tNomEvento);
         pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
@@ -458,9 +465,9 @@ public class GUIAgenciaDeViajes extends JFrame{
         pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
         pEventosP5.add(lLugarEvent);
         pEventosP5.add(tLugarEvent);
-        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,30)));
         pEventosP5.add(bIngresEvent);
-        pEventosP5.add(Box.createRigidArea(new Dimension(0,20)));
+        pEventosP5.add(Box.createRigidArea(new Dimension(0,30)));
         
         
         pIngresInfo.setLayout(new GridLayout(1,4,15,0));
@@ -473,8 +480,8 @@ public class GUIAgenciaDeViajes extends JFrame{
         pIzqP6 = new JPanel();
         pDerP6 = new JPanel();
         
-        lCiudadesP6 = new JLabel("Ciudades con mas Reservas");
-        lHotelesP6 = new JLabel("Hoteles con mas Reservas");
+        lCiudadesP6 = new JLabel("Reservas ciudades");
+        lHotelesP6 = new JLabel("Reservas Hoteles");
         
         bBuscarCiudR = new JButton("Buscar");
         bBuscarHotelR = new JButton("Buscar");
@@ -555,13 +562,34 @@ public class GUIAgenciaDeViajes extends JFrame{
 
             if(ae.getSource() == bBuscarP1)
             {
-                String destino = ciudadDestino.getItemAt(ciudadDestino.getSelectedIndex());
-                int vMin = (Integer)fTValMin.getValue();
-                int vMax = (Integer)fTValMax.getValue();
+                Boolean esValido = true;
+                String origen = "";
+                String destino = "";
+                int vMin = 0;
+                int vMax = 0;
                 int diasViaje = (Integer)sDiasViaje.getValue();
                 int cantViajeros = (Integer)sPersonasViaje.getValue();
-                String datos = agenciaViajes.catalogo(destino, vMin, vMax, diasViaje, cantViajeros);
-                area.setText(datos);
+                String datos = "";
+                //area.setText(datos);
+                
+                try {
+                    origen = ciudadOrigen.getItemAt(ciudadOrigen.getSelectedIndex());
+                    destino = ciudadDestino.getItemAt(ciudadDestino.getSelectedIndex());
+                    vMin = fTValMin.getValue() == null ? 0 : (Integer)fTValMin.getValue();
+                    vMax = fTValMax.getValue() == null ? 0 : (Integer)fTValMax.getValue();
+                    
+                    esValido = esValido && Validaciones.validarVuelo(origen, destino) && 
+                            Validaciones.validarMaxMin(vMin, vMax);
+                    
+                    
+                }catch(Exception e){
+                    esValido = false;
+                    datos = "Datos incompletos. Por favor seleccione un valor para cada campo\n" + e;
+                }
+                if (esValido) {
+                       datos = agenciaViajes.catalogo(origen ,destino, vMin, vMax, diasViaje, cantViajeros);
+                       area.setText(datos);
+                }
             }
             if(ae.getSource() == bBuscarP2)
             {
@@ -707,10 +735,7 @@ public class GUIAgenciaDeViajes extends JFrame{
                 tHotelesP6.setText(estadisticasCiudades);
                         
             }
-
         }
-
-        
     }
     
     
