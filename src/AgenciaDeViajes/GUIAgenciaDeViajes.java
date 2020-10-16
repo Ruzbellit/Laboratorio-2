@@ -247,32 +247,44 @@ public class GUIAgenciaDeViajes extends JFrame{
         }
         
         pIzqP3.setLayout(new BoxLayout(pIzqP3,1));
+        pIzqP3.add(Box.createRigidArea(new Dimension(0,10)));
         pIzqP3.add(lNumCC);
         pIzqP3.add(fTNumCC);
-        pIzqP3.add(lDiasViajeP3);
-        pIzqP3.add(sDiasViajeP3);
-        pIzqP3.add(lHotelP3);
-        pIzqP3.add(hotelP3);
-        pIzqP3.add(lEventoAsistirP3);
+        pIzqP3.add(Box.createRigidArea(new Dimension(0,50)));
+        pIzqP3.add(lFechaViaje);
+        pIzqP3.add(fTFechaViaje);
+        pIzqP3.add(Box.createRigidArea(new Dimension(0,50)));
+        pIzqP3.add(lCiudadOrigenP3);
+        pIzqP3.add(ciudadOrigenP3);
+        pIzqP3.add(Box.createRigidArea(new Dimension(0,50)));
+        pIzqP3.add(lCiudadP3);
+        pIzqP3.add(ciudadDestinoP3);
+        
         
         pCenP3.setLayout(new BoxLayout(pCenP3,1));
-        pCenP3.add(lFechaViaje);
-        pCenP3.add(fTFechaViaje);
-        pCenP3.add(lAerolineaP3);
-        pCenP3.add(aerolineaP3);
-        pCenP3.add(bCrearReserv);
+        pCenP3.add(Box.createRigidArea(new Dimension(0,10)));
+        pCenP3.add(lDiasViajeP3);
+        pCenP3.add(sDiasViajeP3);
+        pCenP3.add(Box.createRigidArea(new Dimension(0,50)));
+        pCenP3.add(lViajerosP3);
+        pCenP3.add(sViajerosP3);
+        pCenP3.add(Box.createRigidArea(new Dimension(0,30)));
+        pCenP3.add(lEventoAsistirP3);
         
         pDerP3.setLayout(new BoxLayout(pDerP3,1));
-        pDerP3.add(lCiudadOrigenP3);
-        pDerP3.add(ciudadOrigenP3);
-        pDerP3.add(lCiudadP3);
-        pDerP3.add(ciudadDestinoP3);
-        pDerP3.add(lViajerosP3);
-        pDerP3.add(sViajerosP3);
+        pDerP3.add(Box.createRigidArea(new Dimension(0,10)));
+        pDerP3.add(lAerolineaP3);
+        pDerP3.add(aerolineaP3);
+        pDerP3.add(Box.createRigidArea(new Dimension(0,80)));
+        pDerP3.add(lHotelP3);
+        pDerP3.add(hotelP3);
+        pDerP3.add(Box.createRigidArea(new Dimension(0,80)));
         pDerP3.add(lTransporteP3);
         pDerP3.add(transporteP3);
+        pDerP3.add(Box.createRigidArea(new Dimension(0,30)));
+        pDerP3.add(bCrearReserv);
         
-        pRealizReserv.setLayout(new GridLayout(1,3,3,0));
+        pRealizReserv.setLayout(new GridLayout(1,3,10,0));
         pRealizReserv.add(pIzqP3);
         pRealizReserv.add(pCenP3);
         pRealizReserv.add(pDerP3);
@@ -620,7 +632,7 @@ public class GUIAgenciaDeViajes extends JFrame{
 
                 // Pintar checkboxes de eventos culturales según la ciudad seleccionada
                 for (int i = 0; i < checkboxes.size(); i++) {
-                    pIzqP3.remove(checkboxes.get(i));
+                    pCenP3.remove(checkboxes.get(i));
                 }
                 checkboxes.clear();
                 ArrayList<EventoCultural> eventos = agenciaViajes.listarEventosCulturales(ciudadDestino);
@@ -629,10 +641,10 @@ public class GUIAgenciaDeViajes extends JFrame{
                     checkboxes.add(checkbox);
                 }
                 for (int i = 0; i < checkboxes.size(); i++) {
-                    pIzqP3.add(checkboxes.get(i));
+                    pCenP3.add(checkboxes.get(i));
                 }
 
-                pIzqP3.revalidate();
+                pCenP3.revalidate();
             }
             if(ae.getSource() == bCrearReserv)
             {
