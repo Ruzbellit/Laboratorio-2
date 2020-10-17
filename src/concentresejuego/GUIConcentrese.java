@@ -15,8 +15,8 @@ import java.util.TimerTask;
 import javax.swing.*;
 
 /**
- *
- * @author ruzbe
+ * Clase que representara graficamente la logica
+ * del juego Concentrese
  */
 public class GUIConcentrese extends JFrame {
 
@@ -123,7 +123,7 @@ public class GUIConcentrese extends JFrame {
         setSize(430, 500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
     }
 
     /**
@@ -134,6 +134,10 @@ public class GUIConcentrese extends JFrame {
         GUIConcentrese concentrese = new GUIConcentrese();
     }
 
+    /**
+     * Maneja cada uno de las acciones de los componentes de la GUI
+     * para representar graficamente el estado de la logica del juego
+     */
     class ManejaEventos implements ActionListener, ItemListener {
 
         ConcentreseJuego juego;
@@ -142,14 +146,22 @@ public class GUIConcentrese extends JFrame {
             juego = new ConcentreseJuego();
         }
 
+        /**
+         * actualiza la informacion y las imagenes del tablero
+         * de acuerdo a la logica del juego
+         */
         public void actualizarJuego() {
+            //se actualiza los parametros del juego actual
             lAciertos.setText("Aciertos: " + juego.aciertos);
             lFallos.setText("Fallos: " + juego.fallos);
             lVidas.setText("Vidas: " + juego.vidas);
 
-            int b = 0;
+            int b = 0;  //para recorrer cada uno de los botones a traves del arreglo
+            
+            //2 for para el recorrido de la matriz
             for (int x = 0; x < 4; x++) {
                 for (int y = 0; y < 4; y++) {
+                    //verifica si la casilla esta descubierta (true), de lo contrario muestra otra imagen para indicar que esta tapada
                     if (juego.estadoCasilla(x, y)) {
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
                         botones[b].setOpaque(true);
@@ -167,22 +179,25 @@ public class GUIConcentrese extends JFrame {
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == bIniciar && listDesplegable.getSelectedIndex() != 0) {
                 iniciarJuego();
-            } else if (ae.getSource() == ayuda) {
+            } else if (ae.getSource() == ayuda) {   //muestra un cuadro con informacion acerca del juego
                 JOptionPane.showMessageDialog(null, juego.mostrarAyuda());
-            } else if (ae.getSource() == mosEstadisticas) {
+            } else if (ae.getSource() == mosEstadisticas) { //muestra un cuadro con las estadisticas
                 JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
-            } else if (ae.getSource() == volverJugar && listDesplegable.getSelectedIndex() != 0) {
+            } else if (ae.getSource() == volverJugar && listDesplegable.getSelectedIndex() != 0) {  //reinicia el juego
                 iniciarJuego();
-            } else if (ae.getSource() == salirJuego) {
+            } else if (ae.getSource() == salirJuego) {  //muestra las estadisticas y luego cierra la aplicacion
                 JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
                 System.exit(0);
-            } else {
+            } else { //maneja los eventos de los botones del tablero
+                //coordenadas x y y de acuerdo a la matriz en la logica
                 int x = 0;
                 int y = 0;
                 for (int b = 0; b < 16; b++) {
                     if (ae.getSource() == botones[b]) {
                         juego.destaparCasilla(x, y);
                         botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
+                        
+                        //si ya se habia destapado otra casilla, procede a comparar las casillas y verificar las vidas del jugador
                         if (juego.getParCasillasDestapadas()) {
                             juego.compararCasillas();
                             vistaParejaCasillas();
@@ -225,6 +240,9 @@ public class GUIConcentrese extends JFrame {
             }
         }
 
+        /**
+         * espera 4 segundos para luego tapar todas las casillas
+         */
         public void primeraVista() {
             Timer vista = new Timer();
             TimerTask tiempo = new TimerTask() {
@@ -237,6 +255,9 @@ public class GUIConcentrese extends JFrame {
             vista.schedule(tiempo, 4000);
         }
 
+        /**
+         * deja ver las 2 casillas destapadas durante un segundo
+         */
         public void vistaParejaCasillas() {
             Timer vista = new Timer();
             TimerTask tiempo = new TimerTask() {
@@ -248,19 +269,22 @@ public class GUIConcentrese extends JFrame {
             vista.schedule(tiempo, 1000);
         }
 
+        /**
+         * resetea el juego y muestra las casillas durante 4 segundos
+         */
         public void iniciarJuego() {
             juego.iniciarJuego();
             juego.destaparTodasCasillas();
             int x = 0;
             int y = 0;
-            for(int b = 0; b < 16; b++){
+            for (int b = 0; b < 16; b++) {
                 botones[b].setEnabled(true);
                 botones[b].setIcon(new ImageIcon(getClass().getResource(rutaTemaImagenes + juego.imagenCasilla(x, y) + ".png")));
                 y++;
-                    if (y == 4) {
-                        x++;
-                        y = 0;
-                    }
+                if (y == 4) {
+                    x++;
+                    y = 0;
+                }
             }
             primeraVista();
         }
