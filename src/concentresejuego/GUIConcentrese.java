@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+  Autor: Ruzbellit Rossy Romero Ramirez (1925456)
+  Email: ruzbellit.romero@correounivalle.edu.co
+  Autor: Christian Villanueva Paez (1924546)
+  Email: christian.villanueva@correounivalle.edu.co
+  Autor: Daniel Rodriguez Sanchez (1927631)
+  Email: daniel.rodriguez.sanchez@correounivalle.edu.co
+  Fecha última modificación: 2020-10-18
  */
 package concentresejuego;
 
@@ -20,7 +24,7 @@ import javax.swing.*;
  */
 public class GUIConcentrese extends JFrame {
 
-    //componentes de la GUI
+    //Componentes de la GUI
     Container contenPPal;
     JPanel pArriba, pAMenu, pAOpcion, pCentro, pAbajo;
     JMenuBar barra;
@@ -36,6 +40,9 @@ public class GUIConcentrese extends JFrame {
 
     String rutaTemaImagenes = "1/";
 
+    /**
+     * Inicializa todos los componentes de la GUI y sus respectivas funciones
+     */
     public GUIConcentrese() {
         pArriba = new JPanel();
         pAMenu = new JPanel();//
@@ -127,6 +134,7 @@ public class GUIConcentrese extends JFrame {
     }
 
     /**
+     * Main de la aplicacion que ejecuta la GUI, para comenzar el juego
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -142,12 +150,15 @@ public class GUIConcentrese extends JFrame {
 
         ConcentreseJuego juego;
 
+        /**
+         * Inicializa el objeto e inicializa el objeto "juego" correspondiente a la logica
+         */
         public ManejaEventos() {
             juego = new ConcentreseJuego();
         }
 
         /**
-         * actualiza la informacion y las imagenes del tablero
+         * Actualiza la informacion y las imagenes del tablero
          * de acuerdo a la logica del juego
          */
         public void actualizarJuego() {
@@ -179,15 +190,20 @@ public class GUIConcentrese extends JFrame {
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == bIniciar && listDesplegable.getSelectedIndex() != 0) {
                 iniciarJuego();
+                
             } else if (ae.getSource() == ayuda) {   //muestra un cuadro con informacion acerca del juego
                 JOptionPane.showMessageDialog(null, juego.mostrarAyuda());
+                
             } else if (ae.getSource() == mosEstadisticas) { //muestra un cuadro con las estadisticas
                 JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
+                
             } else if (ae.getSource() == volverJugar && listDesplegable.getSelectedIndex() != 0) {  //reinicia el juego
                 iniciarJuego();
+                
             } else if (ae.getSource() == salirJuego) {  //muestra las estadisticas y luego cierra la aplicacion
                 JOptionPane.showMessageDialog(null, juego.mostrarEstadisticas());
                 System.exit(0);
+                
             } else { //maneja los eventos de los botones del tablero
                 //coordenadas x y y de acuerdo a la matriz en la logica
                 int x = 0;
@@ -241,7 +257,7 @@ public class GUIConcentrese extends JFrame {
         }
 
         /**
-         * espera 4 segundos para luego tapar todas las casillas
+         * Espera 4 segundos para luego tapar todas las casillas
          */
         public void primeraVista() {
             Timer vista = new Timer();
@@ -256,7 +272,7 @@ public class GUIConcentrese extends JFrame {
         }
 
         /**
-         * deja ver las 2 casillas destapadas durante un segundo
+         * Deja visible las 2 casillas destapadas durante un segundo
          */
         public void vistaParejaCasillas() {
             Timer vista = new Timer();
@@ -270,7 +286,7 @@ public class GUIConcentrese extends JFrame {
         }
 
         /**
-         * resetea el juego y muestra las casillas durante 4 segundos
+         * Resetea el juego y deja visible todas las casillas durante 4 segundos
          */
         public void iniciarJuego() {
             juego.iniciarJuego();
