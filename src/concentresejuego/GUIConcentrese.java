@@ -163,9 +163,9 @@ public class GUIConcentrese extends JFrame {
          */
         public void actualizarJuego() {
             //se actualiza los parametros del juego actual
-            lAciertos.setText("Aciertos: " + juego.aciertos);
-            lFallos.setText("Fallos: " + juego.fallos);
-            lVidas.setText("Vidas: " + juego.vidas);
+            lAciertos.setText("Aciertos: " + juego.getAciertos());
+            lFallos.setText("Fallos: " + juego.getFallos());
+            lVidas.setText("Vidas: " + juego.getVidas());
 
             int b = 0;  //para recorrer cada uno de los botones a traves del arreglo
             

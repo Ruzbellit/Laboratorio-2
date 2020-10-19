@@ -17,24 +17,24 @@ import java.util.*;
 public class ConcentreseJuego {
 
     //Variables del estado del juego
-    int vidas;
-    int fallos;
-    int aciertos;
+    private int vidas;
+    private int fallos;
+    private int aciertos;
     
-    int matriz[][] = new int[4][4]; //Matriz que guarda un numero correpondiente a la imagen
-    boolean matrizDestapar[][]; //Matriz que indica si la casilla esta tapada o destapada
-    boolean casillaDestapada;   //Indica si ya se ha destapado 1 casilla
-    boolean parCasillasDestapadas;  //Indica si ya se han destapado 2 casillas diferentes
+    private int matriz[][] = new int[4][4]; //Matriz que guarda un numero correpondiente a la imagen
+    private boolean matrizDestapar[][]; //Matriz que indica si la casilla esta tapada o destapada
+    private boolean casillaDestapada;   //Indica si ya se ha destapado 1 casilla
+    private boolean parCasillasDestapadas;  //Indica si ya se han destapado 2 casillas diferentes
     
     //Guarda las coordenadas en la matriz de las 2 casillas destapadas
-    int casillaDestapada1X;
-    int casillaDestapada1Y;
-    int casillaDestapada2X;
-    int casillaDestapada2Y;
+    private int casillaDestapada1X;
+    private int casillaDestapada1Y;
+    private int casillaDestapada2X;
+    private int casillaDestapada2Y;
     
     //Variables para el conteo de juegos completados
-    int juegosTotales;
-    int juegosGanados;
+    private int juegosTotales;
+    private int juegosGanados;
 
     /**
      * Inicializa el objeto y el conteo de los juegos totales y perdidos
@@ -177,6 +177,30 @@ public class ConcentreseJuego {
         }
 
         return 2;
+    }
+    
+    /**
+     * Numero de aciertos del juego actual
+     * @return aciertos
+     */
+    public int getAciertos(){
+        return aciertos;
+    }
+    
+    /**
+     * Numero de fallos en el juego actual
+     * @return fallos
+     */
+    public int getFallos(){
+        return fallos;
+    }
+    
+    /**
+     * Numero de vidas del juego actual
+     * @return vidas
+     */
+    public int getVidas(){
+        return vidas;
     }
 
     /**
