@@ -232,7 +232,7 @@ public class AgenciaDeViajes {
 
         String datos = "Opciones disponibles de acuerdo a los parametros indicados:\n"
                 + "Ciudad destino: " + ciudadOrigen
-                + "Ciudad destino: " + ciudadDestino
+                + "\nCiudad destino: " + ciudadDestino
                 + "\nRango de precio: " + valorMinimo + " - " + valorMaximo
                 + "\nDias de viaje: " + diasViaje
                 + "\nCantidad de personas a viajar: " + cantidadPersonas + "\n";
@@ -308,7 +308,7 @@ public class AgenciaDeViajes {
             }
         }
         if (datosCompletos.equals(datos)) {
-            return "No se encuentran opciones con los valores ingresados datos";
+          return "No se encuentran opciones con los valores ingresados datos";
         }
         return datosCompletos;
     }
@@ -798,8 +798,8 @@ public class AgenciaDeViajes {
                     break;
                 case "2": // consultar todas las opciones disponibles
                     //el usuario ingresa los parametros para listar las opciones disponibles
-                    String ciudadOrigen = JOptionPane.showInputDialog("Ingrese la ciudad de Origen").trim().toUpperCase();
-                    String ciudadDestino = JOptionPane.showInputDialog("Ingrese la ciudad de destino").trim().toUpperCase();
+                    String ciudadOrigen = JOptionPane.showInputDialog("Ingrese la ciudad de Origen").trim();
+                    String ciudadDestino = JOptionPane.showInputDialog("Ingrese la ciudad de destino").trim();
                     int valorMinimo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor minimo del viaje").trim());
                     int valorMaximo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el valor maximo del viaje").trim());
                     int diasViaje = Integer.parseInt(JOptionPane.showInputDialog("Digite los dias de viaje").trim());
